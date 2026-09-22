@@ -1,0 +1,97 @@
+\documentclass[12pt]{article}
+\usepackage{notes-project}
+\usepackage{braket}
+
+\begin{document}
+
+\begin{center}
+  {\LARGE\bfseries Chapter 6: Symmetries}\\[0.25em]
+  {\large Quantum Mechanics}\\[0.15em]
+\end{center}
+
+\section{Introduction to Symmetry}
+
+\begin{dfn}[Symmetry]{symmetry}
+  A \emph{symmetry} of a system is some transformation, such that the system is invariant before and after the transformation.
+\end{dfn}
+
+\begin{dfn}[Symmetry of Quantum System]{symmetry-qm}
+  A \emph{symmetry} of a quantum system is a transformation that leaves the Hamiltonian invariant.
+\end{dfn}
+
+\begin{dfn}[Types of Symmetry]{symmetry-types}
+  There are several types of symmetries in quantum mechanics, including:
+  \begin{itemize}[nosep]
+    \item \emph{Translation symmetry}: The system is invariant under some spatial translations.
+    \item \emph{Rotation symmetry}: The system is invariant under some rotations.
+    \item \emph{Reflection symmetry}: The system is invariant under reflections on some axis/planes.
+    \item \emph{Inversion symmetry}: The system is invariant under inversion of all coordinates.
+    \item \emph{Time-reversal symmetry}: The system is invariant under the reversal of time.
+  \end{itemize}
+\end{dfn}
+
+\begin{thm}[Symmetry Condition on the Hamiltonian]{symmetry-condition-hamiltonian}
+  An operator $\hat{U}$ realizes a \xref{def:symmetry-qm} of a system with Hamiltonian $\hat{H}$ if and only if $\hat{H}$ is invariant under \xref{ch03::def:conjugation-action}:
+  \[
+    \hat{U}^{\dagger}\hat{H}\hat{U} = \hat{H}, \qquad \text{equivalently (for linear $\hat{U}$)} \qquad [\hat{U}, \hat{H}] = 0.
+  \]
+  For antiunitary $\hat{U}$ (e.g.\ time reversal), the second form must be replaced by the appropriate antilinear condition.
+\end{thm}
+
+
+\section{Translation Operator}
+
+\begin{dfn}[Translation Operator]{translation-operator}
+  Intuitively, a \emph{translation operator} $\hat{T}(\vec{r}_0)$ (translates a state by a vector $\vec{r}_0$) acts on a state $\ket{\psi}$ should let $\ket{\psi}$ be translated by a vector $\vec{r}$, i.e.
+  \[\hat{T}(\vec{r}_0)\ket{\psi} = \ket{\psi(\vec{r} - \vec{r}_0)}\]
+\end{dfn}
+
+\begin{dfn}[Translation Operator (1D)]{translation-operator-1d}
+  In one dimension, the translation operator $\hat{T}(a)$ shifts a state by a real distance $a \in \mathbb{R}$. Its action on a position-space wavefunction is
+  \[
+    \hat{T}(a)\,\psi(x) = \psi(x - a).
+  \]
+\end{dfn}
+
+\begin{thm}[Exponential Form of the Translation Operator]{translation-exponential}
+  The one-dimensional translation operator can be written as:
+  \[\hat{T}(a) = e^{-i a \hat{p}/\hbar}\]
+\end{thm}
+
+\begin{proof}
+  Expand the exponential in a \xref[Taylor series]{ch03::def:operator-function} at $0$ 
+  \begin{align*}
+  \hat{T}(a) &= e^{-i a \hat{p}/\hbar} = \sum_{n=0}^{\infty} \frac{(-ia/\hbar)^n}{n!} \cdot \hat{p}^n = \sum_{n=0}^{\infty} \frac{(-i a \hat{p})^n}{n! \hbar^{n}}
+  \end{align*} 
+
+  According to the \xref[definition of the momentum operator]{ch02::def:momentum-operator-position}, $\hat{p} = -i\hbar \frac{d}{dx}$, so we can substitute this into the series expansion:
+  \begin{align*}
+  \hat{T}(a) &= \sum_{n=0}^{\infty} \frac{(-i a (-i\hbar \frac{d}{dx}))^n}{n! \hbar^{n}} = \sum_{n=0}^{\infty} \frac{(- a ( \frac{d}{dx}))^n}{n!} 
+  \end{align*}
+
+  So, 
+  \[\hat{T}(a) \psi(x) = \sum_{n=0}^{\infty} \frac{(- a ( \frac{d}{dx}))^n}{n!} \psi(x) = \sum_{n=0}^{\infty} \frac{(- a)^n}{n!} \psi^{(n)}(x)\] 
+  
+  Then, we do a Taylor expansion of $\psi(x)$ centered at $x + a$: 
+  \[\psi(x) = \sum_{n=0}^{\infty} \frac{\psi^{(n)}(x + a)}{n!} (x - (x + a))^n = \sum_{n=0}^{\infty} \frac{\psi^{(n)}(x + a)}{n!} (-a)^n = \sum_{n=0}^{\infty} \frac{(-a)^n}{n!} \psi^{(n)}(x + a) \] 
+
+  Substituting $x \to x - a$ in the previous identity,
+  \[\psi(x - a) = \sum_{n=0}^{\infty} \frac{(-a)^n}{n!} \psi^{(n)}((x - a) + a) = \sum_{n=0}^{\infty} \frac{(-a)^n}{n!} \psi^{(n)}(x).\]
+
+  Which means, 
+  \[\hat{T}(a) \psi(x) = \psi(x - a)\] 
+\end{proof}
+
+\begin{thm}[$\hat T(a)$ is a Unitary Operator]{translation-unitary}
+  The translation operator $\hat{T}(a)$ is a \xref[unitary operator]{ch03::def:unitary-operator}, i.e. $\hat{T}^{\dagger}(a) = \hat{T}^{-1}(a) = \hat{T}(-a)$.
+\end{thm}
+
+\begin{rem}[Intuition about ]
+
+\end{rem}
+
+\begin{proof}
+  {\color{blue}\textbf{TODO}: Proof to be written after clarifying preferred approach with the lecturer --- direct from the action definition (\xref{def:translation-operator-1d}), or via the exponential form (\xref{thm:translation-exponential}). Email sent \today.}
+\end{proof}
+
+\end{document}

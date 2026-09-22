@@ -1,0 +1,101 @@
+\documentclass[12pt]{article}
+\usepackage{notes-project}
+\usepackage{braket} 
+
+\begin{document}
+
+\begin{center}
+  {\LARGE\bfseries Chapter 3: Formalism}\\[0.25em]
+  {\large Quantum Mechanics}\\[0.15em]
+\end{center}
+
+% Key definitions from Griffiths Ch. 3 typed as needed for cross-references.
+
+\section{Commutators} 
+
+\section{Hermitian Operators}
+
+\begin{dfn}[Hermition Conjugate] 
+  The \emph{Hermitian conjugate} of an operator $\hat{O}$ is denoted $\hat{O}^{\dagger}$ and is defined by the property
+  \[\forall f, g, \braket{f|\hat{O}g} = \braket{\hat{O}^{\dagger}f|g}\]
+\end{dfn} 
+
+\begin{rem}[Hermitian Conjugate as Matrix Transpose] 
+  If $\hat{O}$ is represented as a matrix, then the Hermitian conjugate is the complex conjugate transpose of that matrix. ie, 
+  \[H^\dagger = \left(H^{\text{T}}\right)^{*}\]
+\end{rem}
+
+\begin{dfn}[Hermitian Operator] 
+  An operator $\hat{O}$ is \emph{Hermitian} if it is equal to its Hermitian conjugate, i.e. $\hat{O}^{\dagger} = \hat{O}$.
+\end{dfn} 
+
+\section{Unitary Operators} 
+
+\begin{dfn}[Unitary Operator]
+  An operator $\hat{U}$ is \emph{unitary} if it satisfies the property $\hat{U}^{\dagger}\hat{U} = \hat{U}\hat{U}^{\dagger} = \hat{I}$, where $\hat{I}$ is the identity operator.
+\end{dfn}
+
+\section{Conjugation and Similarity Transforms}
+
+\begin{dfn}[Conjugation Action]{conjugation-action}
+  The \emph{conjugation action} of an operator $\hat{U}$ on another operator $\hat{A}$ is defined as
+  \[
+    \hat{A} \;\longmapsto\; \hat{U}^{\dagger}\,\hat{A}\,\hat{U}
+  \]
+
+  After applying the operator $\hat U$ to $\ket{\psi}$, the expected value of $\hat{A}$ becomes
+  \[
+   \bra{\hat U \psi}\hat{A}\ket{\hat U \psi} = \bra{\psi}\hat{U}^{\dagger}\hat{A}\hat{U}\ket{\psi}.
+  \]
+
+  So the conjugation action gives the transformed operator $\hat{U}^{\dagger}\hat{A}\hat{U}$ whose expected value on the original state $\ket{\psi}$ matches $\hat{A}$'s expected value on the transformed state $\hat{U}\ket{\psi}$.
+\end{dfn}
+
+\section{Functions of Operators}
+
+\begin{dfn}[Holomorphic Functional Calculus]{operator-function}
+  For every function $f$ analytic in a neighborhood of some center $c \in \mathbb{C}$, with Taylor expansion
+  \[
+    f(z) \;=\; \sum_{n=0}^{\infty} \frac{f^{(n)}(c)}{n!}\,(z - c)^n,
+  \]
+  and every operator $\hat{A}$, define
+  \[
+    f(\hat{A}) \;:=\; \sum_{n=0}^{\infty} \frac{f^{(n)}(c)}{n!}\,(\hat{A} - c\,\hat{I})^n
+  \]
+  (subject to convergence; $\hat{I}$ is the identity operator). This blanket recipe defines a canonical map $f \longmapsto f(\hat{A})$ from analytic scalar functions to operators, known as the \emph{holomorphic functional calculus}.
+\end{dfn}
+
+\begin{ex}[Operator Exponential]{operator-exponential}
+  Take $f(z) = e^z$ with center $c = 0$. Since $(e^z)^{(n)} = e^z$ and $e^0 = 1$, we have $f^{(n)}(0) = 1$ for all $n$, so the scalar Taylor series reads
+  \[
+    e^{z} \;=\; \sum_{n=0}^{\infty} \frac{z^n}{n!}.
+  \]
+  Feed this into the operator recipe. With $c = 0$, the shift $\hat{A} - c\hat{I} = \hat{A}$, giving
+  \[
+    e^{\hat{A}} \;:=\; \sum_{n=0}^{\infty} \frac{f^{(n)}(0)}{n!}\,\hat{A}^n \;=\; \sum_{n=0}^{\infty} \frac{\hat{A}^n}{n!}.
+  \]
+\end{ex}
+
+\begin{rem}[$f(\hat{A})$ Is a Constructed Operator]{operator-function-meaning}
+  $f(\hat{A})$ is not literal function application: $\hat{A}$ is an operator, not a scalar. The symbol names a \emph{new operator} built from $f$'s Taylor coefficients (scalars) and $\hat{A}$'s powers, using only operations that operators support (powers, scalar multiplication, addition).
+\end{rem}
+
+\begin{rem}[$f(\hat{A})$ Is a First-Class Operator]{operator-function-first-class}
+  \begin{itemize}[nosep]
+    \item Once built, $f(\hat{A})$ is an ordinary operator: add, compose, conjugate, or nest as usual. Commutes with $\hat{A}$ and any $g(\hat{A})$; may not commute with operators outside $\{\hat{A}\}$'s commutant.
+    \item The choice of center $c$ is a computational convenience only --- $f(\hat{A})$ is intrinsic, and different centers give the same operator where their series converge.
+  \end{itemize}
+\end{rem}
+
+\begin{thm}[Action on Eigenvectors]{operator-function-eigenvector}
+  If $\hat{A}\ket{\lambda} = \lambda\ket{\lambda}$, then $f(\hat{A})\ket{\lambda} = f(\lambda)\ket{\lambda}$.
+\end{thm}
+
+\begin{proof}
+  Since $\hat{A}^n\ket{\lambda} = \lambda^n\ket{\lambda}$, we have $(\hat{A} - c\hat{I})^n\ket{\lambda} = (\lambda - c)^n\ket{\lambda}$, so
+  \[
+    f(\hat{A})\ket{\lambda} = \sum_{n=0}^{\infty}\frac{f^{(n)}(c)}{n!}(\lambda - c)^n\ket{\lambda} = f(\lambda)\ket{\lambda}.
+  \]
+\end{proof}
+
+\end{document}

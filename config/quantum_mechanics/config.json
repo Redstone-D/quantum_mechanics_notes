@@ -1,0 +1,8 @@
+{
+  "schema_version": 1,
+  "project": "quantum_mechanics",
+  "script": "github-sync",
+  "script_config": {
+    "repo": "https://github.com/Redstone-D/quantum_mechanics_notes.git"
+  }
+}
