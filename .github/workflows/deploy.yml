@@ -10,14 +10,14 @@ on:
   workflow_dispatch:
 
 concurrency:
-  group: deploy-quantum_machines
+  group: deploy-quantum_mechanics
   cancel-in-progress: false
 
 permissions:
   contents: read
 
 env:
-  NOTES_PROJECT: quantum_machines
+  NOTES_PROJECT: quantum_mechanics
   NOTES_SERVER_ROOT: https://notes.rua.rs
 
 jobs:
