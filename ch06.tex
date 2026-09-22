@@ -38,6 +38,65 @@
   For antiunitary $\hat{U}$ (e.g.\ time reversal), the second form must be replaced by the appropriate antilinear condition.
 \end{thm}
 
+\begin{rem}[``$\hat{A}$ Obtained After Applying $\hat{U}$'']{conjugation-vocabulary}
+  The phrase ``$\hat{A}$ obtained after applying $\hat{U}$'' refers to the \xref[conjugation]{ch03::def:conjugation-action} $\hat{U}^{\dagger}\hat{A}\hat{U}$, since this preserves the expectation value.
+\end{rem}
+
+\section{Groups}
+
+\begin{dfn}[Group]{group}
+  A \emph{group} consists of the following data and assumptions:
+  \begin{itemize}[nosep]
+    \item A set $G$.
+    \item A binary operation $\cdot : G \times G \to G$ (the codomain being $G$ bakes in closure).
+    \item An identity element $e \in G$.
+    \item An inverse function $(\cdot)^{-1} : G \to G$, written $g \mapsto g^{-1}$.
+    \item \emph{Associativity}: $(g_1 \cdot g_2) \cdot g_3 = g_1 \cdot (g_2 \cdot g_3)$ for all $g_1, g_2, g_3 \in G$.
+    \item \emph{Identity axiom}: $e \cdot g = g \cdot e = g$ for all $g \in G$.
+    \item \emph{Inverse axiom}: $g \cdot g^{-1} = g^{-1} \cdot g = e$ for all $g \in G$.
+  \end{itemize}
+  A collection with a well-behaved multiplication and inverses.
+\end{dfn}
+
+\begin{ex}[Real Numbers Under Addition]{reals-group}
+  Choose:
+  \begin{itemize}[nosep]
+    \item Set $G := \mathbb{R}$ (the real numbers).
+    \item Operation $\cdot := +$ (ordinary addition).
+    \item Identity $e := 0$.
+    \item Inverse $a^{-1} := -a$.
+  \end{itemize}
+  Associativity, identity, and inverse axioms follow from the usual properties of addition.
+\end{ex}
+
+\begin{ex}[Boolean Set Under XOR]{boolean-group}
+  Choose:
+  \begin{itemize}[nosep]
+    \item Set $G := \{\text{tt}, \text{ff}\}$ (equivalently $\{0, 1\}$).
+    \item Operation $\cdot := \oplus$ (XOR, equivalent to addition mod $2$).
+    \item Identity $e := \text{ff}$ (equivalently $0$).
+    \item Inverse $g^{-1} := g$ (each element is self-inverse).
+  \end{itemize}
+  All axioms hold by direct verification.
+\end{ex}
+
+\begin{dfn}[Continous Group]{continuous-group}
+  A group is \emph{continuous} (a \emph{Lie group}) if its elements are parametrized by a {\color{blue}continuous parameter space}, and multiplication and inversion vary smoothly with the parameters. The \xref[real numbers under addition]{ex:reals-group} is an example.
+\end{dfn}
+
+\begin{dfn}[Discrete Group]{discrete-group}
+  A group is \emph{discrete} if its elements form a {\color{blue}discrete set} (finite or {\color{blue}countable}), with no continuous parameter connecting distinct elements. The \xref[Boolean set under XOR]{ex:boolean-group} is an example.
+\end{dfn}
+
+% \begin{rem}[Why the Distinction Matters]{continuous-discrete-why}
+%   Only continuous groups have \emph{generators} --- Hermitian operators $\hat{G}$ such that group elements can be written as $\hat{U}(a) = e^{-ia\hat{G}/\hbar}$. Discrete groups have no such infinitesimal structure, so a discrete symmetry is defined directly by its operator rather than by a generator.
+% \end{rem}
+
+\begin{dfn}[Continuous Symmetry]{continuous-symmetry}
+\end{dfn}
+
+\begin{dfn}[Discrete Symmetry]{discrete-symmetry}
+\end{dfn}
 
 \section{Translation Operator}
 
@@ -52,6 +111,21 @@
     \hat{T}(a)\,\psi(x) = \psi(x - a).
   \]
 \end{dfn}
+
+\begin{thm}[Translation Operators Form a Symmetry Group]{translation-symmetry-group}
+  Suppose $\hat{T}(a)$ is a \xref[symmetry operator]{def:symmetry-qm} of a Hamiltonian $\hat{H}$ for every $a \in \mathbb{R}$. Then the collection of translation operators forms a group under operator composition:
+  \begin{itemize}[nosep]
+    \item Set $G := \{\hat{T}(a) : a \in \mathbb{R}\}$.
+    \item Operation $\cdot$: operator composition, $\hat{T}(a) \cdot \hat{T}(b) = \hat{T}(a+b)$.
+    \item Identity $e := \hat{T}(0) = \hat{I}$.
+    \item Inverse $\hat{T}(a)^{-1} := \hat{T}(-a)$.
+  \end{itemize}
+  All axioms follow from addition on $\mathbb{R}$.
+\end{thm}
+
+\begin{proof}
+
+\end{proof}
 
 \begin{thm}[Exponential Form of the Translation Operator]{translation-exponential}
   The one-dimensional translation operator can be written as:
@@ -93,5 +167,46 @@
 \begin{proof}
   {\color{blue}\textbf{TODO}: Proof to be written after clarifying preferred approach with the lecturer --- direct from the action definition (\xref{def:translation-operator-1d}), or via the exponential form (\xref{thm:translation-exponential}). Email sent \today.}
 \end{proof}
+
+\begin{thm}[Position Operator After Applying Translation]{position-under-translation}
+  Applying $\hat{T}(a)$ to the position operator $\hat{x}$ (see \xref{rem:conjugation-vocabulary}) gives
+  \[
+    \hat{T}(a)^{\dagger}\,\hat{x}\,\hat{T}(a) \;=\; \hat{x} + a\hat{I}.
+  \]
+\end{thm}
+
+\begin{proof}
+
+\end{proof}
+
+\begin{thm}[Momentum Operator After Applying Translation]{momentum-under-translation}
+  Applying $\hat{T}(a)$ to the momentum operator $\hat{p}$ (see \xref{rem:conjugation-vocabulary}) gives
+  \[
+    \hat{T}(a)^{\dagger}\,\hat{p}\,\hat{T}(a) \;=\; \hat{p}.
+  \]
+\end{thm}
+
+\begin{proof}
+
+\end{proof}
+
+
+
+\section{Rotational Symmetry} 
+
+\section{Parity/Inverse Symmetry}
+
+\begin{ex}[Parity Group]{parity-group}
+  Choose:
+  \begin{itemize}[nosep]
+    \item Set $G := \{\hat{I}, \hat{P}\}$.
+    \item Operation $\cdot$: operator composition.
+    \item Identity $e := \hat{I}$.
+    \item Inverse $\hat{P}^{-1} := \hat{P}$ (since $\hat{P}^2 = \hat{I}$, parity is self-inverse).
+  \end{itemize}
+  A discrete group with two elements.
+\end{ex}
+
+\section{Time-Reversal Symmetry}
 
 \end{document}

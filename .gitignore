@@ -19,3 +19,6 @@
 # Private homework — not deployed to notes.rua.rs
 /homework/
 
+# Manifest is not required by the notes server (deployment works without it)
+/latex_target/manifest.json
+

@@ -54,4 +54,4 @@ jobs:
             --connect-timeout 15 \
             --max-time 30 \
             --output /dev/null \
-            "$NOTES_SERVER_ROOT/$NOTES_PROJECT/lec01.pdf"
+            "$NOTES_SERVER_ROOT/$NOTES_PROJECT/ch01.pdf"
