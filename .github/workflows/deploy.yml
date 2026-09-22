@@ -10,19 +10,19 @@ on:
   workflow_dispatch:
 
 concurrency:
-  group: deploy-quantum_mechanics
+  group: deploy-quantum-mechanics
   cancel-in-progress: false
 
 permissions:
   contents: read
 
 env:
-  NOTES_PROJECT: quantum_mechanics
+  NOTES_PROJECT: quantum-mechanics
   NOTES_SERVER_ROOT: https://notes.rua.rs
 
 jobs:
   deploy:
-    name: Deploy quantum_mechanics
+    name: Deploy quantum-mechanics
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
