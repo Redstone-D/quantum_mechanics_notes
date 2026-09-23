@@ -31,12 +31,25 @@
 \end{dfn}
 
 \begin{thm}[Symmetry Condition on the Hamiltonian]{symmetry-condition-hamiltonian}
-  An operator $\hat{U}$ realizes a \xref{def:symmetry-qm} of a system with Hamiltonian $\hat{H}$ if and only if $\hat{H}$ is invariant under \xref{ch03::def:conjugation-action}:
+  $\hat{U}$ is a \xref{def:symmetry-qm} of $\hat{H}$ iff
   \[
-    \hat{U}^{\dagger}\hat{H}\hat{U} = \hat{H}, \qquad \text{equivalently (for linear $\hat{U}$)} \qquad [\hat{U}, \hat{H}] = 0.
+    \hat{U}^{\dagger}\hat{H}\hat{U} = \hat{H}.
   \]
-  For antiunitary $\hat{U}$ (e.g.\ time reversal), the second form must be replaced by the appropriate antilinear condition.
 \end{thm}
+
+\begin{cor}[Commutator Form]{commutator-form-symmetry}
+  For unitary $\hat{U}$,
+  \[
+    \hat{U}^{\dagger}\hat{H}\hat{U} = \hat{H} \iff \comm{\hat{U}}{\hat{H}} = 0.
+  \]
+\end{cor}
+
+\begin{proof}
+  Left-multiply by $\hat{U}$ and use $\hat{U}\hat{U}^{\dagger} = \hat{I}$:
+  \[
+    \hat{U}^{\dagger}\hat{H}\hat{U} = \hat{H} \iff \hat{H}\hat{U} = \hat{U}\hat{H} \iff \comm{\hat{U}}{\hat{H}} = 0.
+  \]
+\end{proof}
 
 \begin{rem}[``$\hat{A}$ Obtained After Applying $\hat{U}$'']{conjugation-vocabulary}
   The phrase ``$\hat{A}$ obtained after applying $\hat{U}$'' refers to the \xref[conjugation]{ch03::def:conjugation-action} $\hat{U}^{\dagger}\hat{A}\hat{U}$, since this preserves the expectation value.
@@ -185,9 +198,13 @@
   Treat $g(x) = \hat{x}\, \psi(x-a)$, so, $T(a) \, g(x) = g(x) = \hat{x-a}\, \psi((x-a)-a)$. 
 
   Notice that $T(a)$ is a unitary operator, ie $T(a)^\dagger = T(a)^{-1} = T(-a)$, we have 
-  \[\hat{x}' \psi(x) = \hat{T}(-a)^{\dagger}\,(x \, \psi(x-a)) = (x+a) \, \psi((x+a)-a) = (x+a) \, \psi(x)\]
+  \[\hat{x}' \psi(x) = \hat{T}(-a)\,(x \, \psi(x-a)) = (x+a) \, \psi((x+a)-a) = (x+a) \, \psi(x)\]
 
-  Therefore, $\hat{x}' = \hat{x} + a\hat{I}$. 
+  Rewrite the right-hand side in operator form:
+  \[(x+a)\,\psi(x) = x\,\psi(x) + a\,\psi(x) = \hat{x}\,\psi(x) + a\hat{I}\,\psi(x) = (\hat{x} + a\hat{I})\,\psi(x).\]
+
+  So $\hat{x}'\,\psi = (\hat{x} + a\hat{I})\,\psi$ for every $\psi$. Since two operators agreeing on all inputs are equal, we conclude
+  \[\hat{x}' = \hat{x} + a\hat{I}.\]
 \end{proof}
 
 \begin{thm}[Momentum Operator After Applying Translation]{momentum-under-translation}
@@ -198,12 +215,84 @@
 \end{thm}
 
 \begin{proof}
+  Define $\hat{p}' := \hat{T}(a)^{\dagger}\,\hat{p}\,\hat{T}(a)$, and consider its action on a wavefunction $\psi(x)$: 
+  \[\hat{p}' \psi(x) = \hat{T}(a)^{\dagger}\,\hat{p}\,\hat{T}(a) \, \psi(x) = \hat{T}(a)^{\dagger}\,\hat{p}\,\psi(x-a)\]
 
+  According to the definition of \xref{ch02::def:momentum-operator-position}, $\hat p = -i \hbar d/dx $, plug in:
+  \[\hat{p}' \psi(x) = - \hat{T}(a)^{\dagger}\,i \hbar \, \frac{d\psi(x-a)}{dx}\]
+
+  Use $\hat{T}(a)^{\dagger} = \hat T(-a)$,
+  \[\hat{p}' \psi(x) = - \hat{T}(-a)\,i \hbar \, \frac{d\psi(x-a)}{dx} = - i \hbar \, \frac{d\psi(x)}{dx} = \hat p \psi(x)\]
+
+  So $\hat{p}'\,\psi = \hat{p}\,\psi$ for every $\psi$. Since two operators agreeing on all inputs are equal, we conclude
+  \[\hat{p}' = \hat{p}.\]
 \end{proof}
 
+\begin{thm}
+For all operator, which only consists of $\hat x$ and $\hat p$, the conjugation action of $\hat T(a)$ on the operator is equivalent to replacing every $\hat x$ with $\hat x + a\hat I$ and leaving every $\hat p$ unchanged. ie,
+\[Q(\hat x, \hat p) \longmapsto \hat T(a)^\dagger Q(\hat x, \hat p) \hat T(a) = Q(\hat x + a\hat I, \hat p)\]
+\end{thm}
+
+\begin{thm}[Translation Symmetry Condition on the Potential]{translation-condition-potential}
+  Let $\hat{H}$ be a \xref[1D Hamiltonian]{ch02::def:hamiltonian-1d}. If $\hat{T}(a)$ is a \xref[symmetry operator]{def:symmetry-qm} of $\hat{H}$, then the potential is invariant under translation by $a$:
+  \[
+    V(x + a) = V(x) \qquad \text{for all } x.
+  \]
+\end{thm}
+
+\begin{proof}
+  Since $\hat T(a)$ is a unitary symmetry, \xref{cor:commutator-form-symmetry} gives
+  \[\hat T(a)^{\dagger} \hat H \hat T(a) = \hat H \iff \comm{\hat H}{\hat T(a)} = 0.\]
+
+  Notice that $\hat H = \frac{\hat p^2}{2m} + V(\hat x)$, and by \xref{thm:momentum-under-translation} and \xref{thm:position-under-translation}, we have
+  \[\hat T(a)^{\dagger} \hat H \hat T(a) = \hat T(a)^{\dagger} \left(\frac{\hat p^2}{2m} + V(\hat x)\right) \hat T(a) = \frac{\hat p^2}{2m} + V(\hat x + a\hat I).\] 
+
+  Which means, $\hat T(a)$ is a symmetry of $\hat H$ iff
+  \[V(x) = V(x+a)\]
+\end{proof}
+
+\begin{thm}[Continuous Translation Symmetry Forces Constant $V$]{continuous-translation-constant-v}
+  If $\hat{T}(a)$ is a symmetry of $\hat{H}$ for every $a \in \mathbb{R}$, then $V$ is constant.
+\end{thm}
+
+\begin{thm}[Bloch's Theorem]{bloch-theorem}
+  If $T(a)$ is a symmetry of $\hat H$ for some $a \in \mathbb{R}$, stationary states of $\hat H$ have the form 
+  \[\psi(x) = e^{iqx} u(x)\]
+
+  Where 
+  \begin{itemize}[nosep]
+    \item $q$ is called the crystal momentum 
+    \item $u(x)$ is periodic and have a period of $a$ 
+  \end{itemize} 
+\end{thm} 
+
+\begin{rem}[Stationary States may not be Periodic]
+From \xref{thm:bloch-theorem}, we can see that the stationary states $\psi(x)$ is not periodic. However $u(x)$ is periodic with period $a$. 
+\end{rem}
+
+\begin{proof}
+Since $\hat T(a)$ is a symmetry of $\hat H$, we have $\comm{\hat H}{\hat T(a)} = 0$. According to \xref{ch03::thm:commuting-share-eigenvectors}, 
+\[\exists \lambda , \, \hat H \ket{\psi} = E \ket{\psi} \iff \exists \lambda , \, \hat T(a) \ket{\psi} = \lambda \ket{\psi} \] 
+
+Also, we may have 
+\[\braket{\hat T(a) \, \psi \mid \hat T(a) \, \psi} = \braket{\psi \mid \hat T(a)^\dagger \hat T(a) \mid \psi} = \braket{\psi \mid \psi} \]
+\[\braket{\hat T(a) \, \psi \mid \hat T(a) \, \psi} = \braket{\lambda \psi | \lambda \psi} = \lambda^* \lambda \braket{\psi \mid \psi} \]
+
+This means that, 
+\[\lambda^* \lambda = 1 \implies \lambda = e^{i\theta} \text{ for some } \theta \in [0, 2\pi)\] 
+
+So, since $T(a)$ may be written as $e^{-iap/\hbar}$, we can argue that $a \propto \theta$. Where $q = -p/\hbar$ so that $\theta = qa$. 
+
+Then, we have
+\[\hat T(a) \ket{\psi} = e^{iqa} \ket{\psi} \implies \psi(x-a) = e^{iqa} \psi(x)\]
 
 
-\section{Rotational Symmetry} 
+\color{blue}
+We can rewrite it into $\psi(x) = e^{iqx} u(x)$
+\color{black} 
+\end{proof}
+
+\section{Rotational Symmetry}
 
 \section{Parity/Inverse Symmetry}
 
