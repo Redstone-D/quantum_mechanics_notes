@@ -176,7 +176,18 @@
 \end{thm}
 
 \begin{proof}
+  Define $\hat{x}' := \hat{T}(a)^{\dagger}\,\hat{x}\,\hat{T}(a)$, and consider its action on a wavefunction $\psi(x)$: 
+  \[\hat{x}' \psi(x) = \hat{T}(a)^{\dagger}\,\hat{x}\,\hat{T}(a) \, \psi(x)\]
 
+  Since operators are associative, we have 
+  \[\hat{x}' \psi(x) = \hat{T}(a)^{\dagger}\,\hat{x}\,(\hat{T}(a) \, \psi(x)) = \hat{T}(a)^{\dagger}\,(\hat{x}\, \psi(x-a)) = \hat{T}(a)^{\dagger}\,(x \, \psi(x-a))\]
+
+  Treat $g(x) = \hat{x}\, \psi(x-a)$, so, $T(a) \, g(x) = g(x) = \hat{x-a}\, \psi((x-a)-a)$. 
+
+  Notice that $T(a)$ is a unitary operator, ie $T(a)^\dagger = T(a)^{-1} = T(-a)$, we have 
+  \[\hat{x}' \psi(x) = \hat{T}(-a)^{\dagger}\,(x \, \psi(x-a)) = (x+a) \, \psi((x+a)-a) = (x+a) \, \psi(x)\]
+
+  Therefore, $\hat{x}' = \hat{x} + a\hat{I}$. 
 \end{proof}
 
 \begin{thm}[Momentum Operator After Applying Translation]{momentum-under-translation}
