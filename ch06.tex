@@ -106,9 +106,11 @@
 % \end{rem}
 
 \begin{dfn}[Continuous Symmetry]{continuous-symmetry}
+  A symmetry is \emph{continuous} if its operators form a \xref[continuous group]{def:continuous-group}.
 \end{dfn}
 
 \begin{dfn}[Discrete Symmetry]{discrete-symmetry}
+  A symmetry is \emph{discrete} if its operators form a \xref[discrete group]{def:discrete-group}.
 \end{dfn}
 
 \section{Translation Operator}
@@ -251,12 +253,25 @@ For all operator, which only consists of $\hat x$ and $\hat p$, the conjugation 
   \[V(x) = V(x+a)\]
 \end{proof}
 
-\begin{thm}[Continuous Translation Symmetry Forces Constant $V$]{continuous-translation-constant-v}
-  If $\hat{T}(a)$ is a symmetry of $\hat{H}$ for every $a \in \mathbb{R}$, then $V$ is constant.
+\begin{thm}[Eigenvalues of the Translation Operator]{translation-eigenvalues}
+  The eigenvalues of the translation operator $\hat{T}(a)$ have modulus $1$:
+  \[
+    \hat{T}(a)\ket{\psi} = \lambda\ket{\psi} \implies \lambda = e^{i\theta}
+    \quad \text{for some } \theta \in [0, 2\pi).
+  \]
 \end{thm}
 
+\begin{proof}
+  Since $\hat{T}(a)$ is unitary (\xref{thm:translation-unitary}),
+  \[\braket{\hat{T}(a)\,\psi \mid \hat{T}(a)\,\psi} = \braket{\psi \mid \hat{T}(a)^\dagger \hat{T}(a) \mid \psi} = \braket{\psi \mid \psi}.\]
+  On the other hand,
+  \[\braket{\hat{T}(a)\,\psi \mid \hat{T}(a)\,\psi} = \braket{\lambda\psi \mid \lambda\psi} = |\lambda|^2\braket{\psi \mid \psi}.\]
+  Equating and dividing by $\braket{\psi \mid \psi} \neq 0$:
+  \[|\lambda|^2 = 1 \implies \lambda = e^{i\theta} \quad\text{for some } \theta \in [0, 2\pi).\]
+\end{proof}
+
 \begin{thm}[Bloch's Theorem]{bloch-theorem}
-  If $T(a)$ is a symmetry of $\hat H$ for some $a \in \mathbb{R}$, stationary states of $\hat H$ have the form 
+  If $T(a)$ is a symmetry of $\hat H$ for some $a \in \mathbb{R}$, stationary states of $\hat H$ have the form
   \[\psi(x) = e^{iqx} u(x)\]
 
   Where 
@@ -271,42 +286,181 @@ From \xref{thm:bloch-theorem}, we can see that the stationary states $\psi(x)$ i
 \end{rem}
 
 \begin{proof}
-Since $\hat T(a)$ is a symmetry of $\hat H$, we have $\comm{\hat H}{\hat T(a)} = 0$. According to \xref{ch03::thm:commuting-share-eigenvectors}, 
-\[\exists \lambda , \, \hat H \ket{\psi} = E \ket{\psi} \iff \exists \lambda , \, \hat T(a) \ket{\psi} = \lambda \ket{\psi} \] 
+Since $\hat T(a)$ is a symmetry of $\hat H$, we have $\comm{\hat H}{\hat T(a)} = 0$. According to \xref{ch03::thm:commuting-share-eigenvectors}, stationary states of $\hat H$ can be chosen as simultaneous eigenvectors of $\hat T(a)$: $\hat T(a) \ket{\psi} = \lambda \ket{\psi}$.
 
-Also, we may have 
-\[\braket{\hat T(a) \, \psi \mid \hat T(a) \, \psi} = \braket{\psi \mid \hat T(a)^\dagger \hat T(a) \mid \psi} = \braket{\psi \mid \psi} \]
-\[\braket{\hat T(a) \, \psi \mid \hat T(a) \, \psi} = \braket{\lambda \psi | \lambda \psi} = \lambda^* \lambda \braket{\psi \mid \psi} \]
-
-This means that, 
-\[\lambda^* \lambda = 1 \implies \lambda = e^{i\theta} \text{ for some } \theta \in [0, 2\pi)\] 
-
-So, since $T(a)$ may be written as $e^{-iap/\hbar}$, we can argue that $a \propto \theta$. Where $q = -p/\hbar$ so that $\theta = qa$. 
+By \xref{thm:translation-eigenvalues}, $\lambda = e^{i\theta}$ for some $\theta \in [0, 2\pi)$. Since $\hat T(a)$ may be written as $e^{-iap/\hbar}$, we identify $\theta = qa$ where $q = -p/\hbar$.
 
 Then, we have
-\[\hat T(a) \ket{\psi} = e^{iqa} \ket{\psi} \implies \psi(x-a) = e^{iqa} \psi(x)\]
+\[\hat T(a) \ket{\psi} = e^{iqa} \ket{\psi} \implies \psi(x-a) = e^{iqa} \psi(x)\] 
 
+Change $a \to -a$ to rewrite in the standard form:
+\[\psi(x+a) = e^{iqa}\,\psi(x).\]
 
-\color{blue}
-We can rewrite it into $\psi(x) = e^{iqx} u(x)$
-\color{black} 
+Define $u(x) := e^{-iqx}\,\psi(x)$. Then
+\[
+  u(x+a) = e^{-iq(x+a)}\,\psi(x+a) = e^{-iqx}\underbrace{e^{-iqa}e^{iqa}}_{=1}\,\psi(x) = u(x),
+\]
+so $u$ has period $a$, and rearranging gives $\psi(x) = e^{iqx}\,u(x)$.
+
+Although $\hat{H}$ is translation-invariant, the state $\psi$ is \emph{not}:
+\[\psi(x+a) = e^{iqa}\,\psi(x) \neq \psi(x).\]
+
+However, the observable $|\psi|^2$ still respects the symmetry, since $|e^{iqa}| = 1$:
+\[|\psi(x+a)|^2 = |e^{iqa}|^2\,|\psi(x)|^2 = |\psi(x)|^2.\]
 \end{proof}
+
+\begin{thm}[Continuous Translation Symmetry Forces Constant $V$]{continuous-translation-constant-v}
+  If $\hat{T}(a)$ is a symmetry of $\hat{H}$ for every $a \in \mathbb{R}$, then $V$ is constant.
+\end{thm}
+
+TODO 
+
+\section{Vectors and Pseudovectors}
 
 \section{Rotational Symmetry}
 
 \section{Parity/Inverse Symmetry}
 
-\begin{ex}[Parity Group]{parity-group}
-  Choose:
+\begin{dfn}
+[Parity Operator]{parity-operator}
+  The \emph{parity operator} $\Pi$ (also called the \emph{inversion operator}) is defined by
+  \[ \Pi \ket{\psi(\vec r)} = \ket{\psi(-\vec r)} \]
+\end{dfn}
+
+\begin{thm}[Parity Squared is Identity]{parity-squared}
+  $\Pi^2 = \hat{I}$.
+\end{thm}
+
+\begin{proof}
+  Applying $\Pi$ twice to any $\psi$:
+  \[\Pi^2\,\psi(\vec r) = \Pi\,\psi(-\vec r) = \psi(-(-\vec r)) = \psi(\vec r).\]
+  Since this holds for every $\psi$, $\Pi^2 = \hat{I}$.
+\end{proof}
+
+\begin{thm}[Eigenvalues of the Parity Operator]{parity-eigenvalues}
+  The eigenvalues of the parity operator $\Pi$ are $\pm 1$.
+\end{thm}
+
+\begin{proof}
+  If $\Pi\ket{\lambda} = \lambda\ket{\lambda}$, then $\Pi^2\ket{\lambda} = \lambda^2\ket{\lambda}$. By \xref{thm:parity-squared}, $\Pi^2 = \hat{I}$, so $\lambda^2 = 1$, hence $\lambda = \pm 1$.
+\end{proof}
+
+\begin{thm}[Parity Operator is Hermitian]{parity-hermitian}
+  The parity operator $\Pi$ is Hermitian, i.e. $\Pi^{\dagger} = \Pi$.
+\end{thm}
+
+\begin{proof}
+  For any state $\ket{f}$, $\ket{g}$, we have
+  \[\braket{f \mid \Pi g} = \int_{-\infty}^{\infty} f^*(x) \Pi g(x) \, dx = \int_{-\infty}^{\infty} f^*(x) g(-x) \, dx = \int_{-\infty}^{\infty} (f(-x))^* g(x) \, dx = \braket{\Pi f \mid g}\]
+
+  Notice that $\braket{f \mid \Pi g} = \braket{\Pi f \mid g} \implies \Pi = \Pi^{\dagger}$. So $\Pi$ is Hermitian. 
+\end{proof}
+
+\begin{thm}[Parity Operator is Unitary]{parity-unitary}
+  The parity operator $\Pi$ is unitary, i.e. $\Pi^{\dagger} = \Pi^{-1}$.
+\end{thm}
+
+\begin{proof}
+  Since $\Pi^{\dagger} = \Pi$, and according to \xref{thm:parity-squared}, $\Pi \Pi = \Pi \Pi^{\dagger} = \hat{I}$, so $\Pi^{\dagger} = \Pi^{-1}$, and $\Pi$ is unitary. 
+\end{proof}
+
+\begin{thm}[Parity Operator is Discrete Symmetry]{parity-discrete}
+  The parity operator $\Pi$ is a discrete symmetry. 
+\end{thm} 
+
+\begin{proof}
+  The parity operators form a group:
   \begin{itemize}[nosep]
-    \item Set $G := \{\hat{I}, \hat{P}\}$.
+    \item Set $G := \{\hat{I}, \Pi\}$.
     \item Operation $\cdot$: operator composition.
     \item Identity $e := \hat{I}$.
-    \item Inverse $\hat{P}^{-1} := \hat{P}$ (since $\hat{P}^2 = \hat{I}$, parity is self-inverse).
+    \item Inverse $\Pi^{-1} := \Pi$ (by \xref{thm:parity-squared}, parity is self-inverse).
   \end{itemize}
-  A discrete group with two elements.
-\end{ex}
+  This is a \xref[discrete group]{def:discrete-group} with two elements, so parity is a \xref{def:discrete-symmetry}.
+\end{proof}
+
+\begin{thm}[Position Operator After Applying Parity]{position-under-parity}
+  Applying $\Pi$ to the position operator $\hat{x}$ (see \xref{rem:conjugation-vocabulary}) gives
+  \[
+    \Pi^{\dagger}\,\hat{x}\,\Pi = -\hat{x}.
+  \]
+\end{thm}
+
+\begin{proof}
+  {\color{blue}\textbf{TODO}}
+\end{proof}
+
+\begin{thm}[Momentum Operator After Applying Parity]{momentum-under-parity}
+  Applying $\Pi$ to the momentum operator $\hat{p}$ gives
+  \[
+    \Pi^{\dagger}\,\hat{p}\,\Pi = -\hat{p}.
+  \]
+\end{thm}
+
+\begin{proof}
+  {\color{blue}\textbf{TODO}}
+\end{proof}
+
+\begin{thm}[General Operator After Applying Parity]{operator-under-parity}
+  For any operator $Q(\hat{x}, \hat{p})$ built from $\hat{x}$ and $\hat{p}$,
+  \[
+    \Pi^{\dagger}\,Q(\hat{x}, \hat{p})\,\Pi = Q(-\hat{x}, -\hat{p}).
+  \]
+\end{thm}
+
+\begin{thm}[Angular Momentum is Parity-Invariant]{angular-momentum-under-parity}
+  $\Pi^{\dagger}\,\hat{\vec{L}}\,\Pi = \hat{\vec{L}}$.
+\end{thm}
+
+\begin{proof}
+  Apply \xref{thm:operator-under-parity} to $\hat{\vec{L}} = \hat{\vec{r}} \times \hat{\vec{p}}$:
+  \[
+    \Pi^{\dagger}\,(\hat{\vec{r}} \times \hat{\vec{p}})\,\Pi = (-\hat{\vec{r}}) \times (-\hat{\vec{p}}) = \hat{\vec{r}} \times \hat{\vec{p}} = \hat{\vec{L}}.
+  \]
+\end{proof}
+
+\begin{thm}[Parity of Atomic Eigenstates]{parity-atomic-eigenstates}
+  For an \xref{ch04::def:atomic-eigenstate} $\ket{\psi_{n\ell m}}$,
+  \[
+    \Pi \ket{\psi_{n\ell m}} = (-1)^\ell \ket{\psi_{n\ell m}}.
+  \]
+\end{thm}
+
+\begin{proof}
+  {\color{blue}\textbf{TODO}}
+\end{proof}
+
+\begin{thm}[Laporte's Rule]{laporte-rule}
+  For \xref[atomic eigenstates]{ch04::def:atomic-eigenstate}, the electric-dipole matrix element vanishes when $\ell' + \ell$ is even:
+  \[
+    \braket{n'\ell'm' | \vec{r} | n\ell m} = 0 \quad \text{if } \ell' + \ell \text{ is even}.
+  \]
+\end{thm}
+
+\begin{proof}
+  {\color{blue}\textbf{TODO}}
+\end{proof}
 
 \section{Time-Reversal Symmetry}
+
+\begin{dfn}[Time-Reversal Operator]{time-reversal-operator}
+  The \emph{time-reversal operator} $U(t)$ is defined by 
+  \[U(t) \Psi(x, a) = \Psi^*(x, a + t)\] 
+\end{dfn} 
+
+\begin{thm}[Exponential Form of the Time-Reversal Operator]{time-reversal-exponential}
+  The time-reversal operator can be written as:
+  \[U(t) = e^{i t \hat{H}/\hbar} \] 
+
+  Where we assume the $H$ (Hamiltonian) is independent of time. 
+\end{thm} 
+
+\begin{proof}
+  \color{blue}\textbf{TODO} 
+\end{proof} 
+
+\begin{dfn}[Heisenberg Picture]
+
+\end{dfn}
 
 \end{document}
