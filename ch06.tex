@@ -26,7 +26,7 @@
     \item \emph{Rotation symmetry}: The system is invariant under some rotations.
     \item \emph{Reflection symmetry}: The system is invariant under reflections on some axis/planes.
     \item \emph{Inversion symmetry}: The system is invariant under inversion of all coordinates.
-    \item \emph{Time-reversal symmetry}: The system is invariant under the reversal of time.
+    \item \emph{Time-translation symmetry}: The system is invariant under time shifts.
   \end{itemize}
 \end{dfn}
 
@@ -315,9 +315,50 @@ However, the observable $|\psi|^2$ still respects the symmetry, since $|e^{iqa}|
 
 TODO 
 
-\section{Vectors and Pseudovectors}
+\section{Rotational Symmetry in 3D}
 
-\section{Rotational Symmetry}
+\begin{dfn}[Rotation Operator]{rotation-operator}
+  The \emph{rotation operator} $\hat{R}_{\hat{z}}(\varphi)\psi$ rotates a state $\psi$ about the $z$-axis by an angle $\varphi$:
+  \[\hat{R}_{\hat{z}}(\varphi)\psi(r, \theta, \phi) = \psi(r, \theta, \phi - \varphi)\] 
+\end{dfn}
+
+\begin{rem}
+  We may also define rotation operators about the $x$-axis and $y$-axis, $\hat{R}_{\hat{x}}(\varphi)$ and $\hat{R}_{\hat{y}}(\varphi)$, in a similar manner. 
+\end{rem}
+
+\begin{thm}[Exponential Form of the Rotational Operator]{rotation-exponential}
+  The rotation operator about the $z$-axis can be written as:
+  \[\hat{R}_z(\varphi) = \exp\!\left[-\frac{i\varphi}{\hbar}\,\hat{L}_z\right]\] 
+\end{thm} 
+
+\begin{proof}
+  Do taylor's expansion on the exponential function:
+  \[\hat{R}_z(\varphi) = \sum_{n=0}^{\infty} \frac{1}{n!} \left(-\frac{i\varphi}{\hbar}\,\hat{L}_z\right)^n\]
+
+  According to \xref{ch04::def:angular-momentum}, the angular momentum operator about the $z$-axis is defined as
+  \[\hat{L}_z = \hat x \hat p_y - \hat y \hat p_x\]. 
+
+  Which means that $\hat{R}_z(\varphi) \psi(r, \theta, \phi)$ is 
+\[\hat{R}_z(\varphi) \psi(r, \theta, \phi) = \sum_{n=0}^{\infty} \frac{1}{n!} \left(-\frac{i\varphi}{\hbar}\,(\hat x \hat p_y - \hat y \hat p_x)\right)^n \psi(r, \theta, \phi)\] 
+
+  Plug in the definition of $\hat p_x$ and $\hat p_y$ from \xref{ch02::def:momentum-operator-position}, we have
+  \begin{align*}
+    \hat{R}_z(\varphi) \psi(r, \theta, \phi) &= \sum_{n=0}^{\infty} \frac{1}{n!} \left(-\frac{i\varphi}{\hbar}\bigl(\hat x (-i\hbar \tfrac{\partial}{\partial y}) - \hat y (-i\hbar \tfrac{\partial}{\partial x})\bigr)\right)^n \psi(r, \theta, \phi)\\
+    &= \sum_{n=0}^{\infty} \frac{1}{n!} \bigl(-\varphi\,(\hat x \tfrac{\partial}{\partial y} - \hat y \tfrac{\partial}{\partial x})\bigr)^n \psi(r, \theta, \phi).
+  \end{align*}
+
+  {\color{blue}In cylindrical/spherical coordinates the chain rule gives $\hat x \tfrac{\partial}{\partial y} - \hat y \tfrac{\partial}{\partial x} = \tfrac{\partial}{\partial \phi}$ (multivariable calculus prerequisite --- TODO: prove separately),} so
+  \[
+    \hat{R}_z(\varphi) \psi(r, \theta, \phi) = \sum_{n=0}^{\infty} \frac{(-\varphi)^n}{n!}\,\frac{\partial^n \psi}{\partial \phi^n}(r, \theta, \phi).
+  \]
+
+  This is the Taylor expansion of $\psi(r, \theta, \phi - \varphi)$ around $\phi$:
+  \[
+    \psi(r, \theta, \phi - \varphi) = \sum_{n=0}^{\infty} \frac{(-\varphi)^n}{n!}\,\frac{\partial^n \psi}{\partial \phi^n}(r, \theta, \phi).
+  \]
+
+  Therefore $\hat{R}_z(\varphi)\,\psi(r,\theta,\phi) = \psi(r,\theta,\phi-\varphi)$, matching \xref{def:rotation-operator}.
+\end{proof}
 
 \section{Parity/Inverse Symmetry}
 
@@ -387,7 +428,11 @@ TODO
 \end{thm}
 
 \begin{proof}
-  {\color{blue}\textbf{TODO}}
+  Consider $\Pi^{\dagger}\hat{x}\Pi$ acting on a test function $f(x)$:
+  \[\Pi^{\dagger}\hat{x}\Pi\, f(x) = \Pi^{\dagger}\hat{x}\,f(-x) = \Pi^{\dagger}\bigl(x\,f(-x)\bigr).\]
+  Since $\Pi$ is \xref[hermitian]{thm:parity-hermitian} and \xref[unitary]{thm:parity-unitary}, we have $\Pi^{\dagger} = \Pi$. Define $g(x) := x\,f(-x)$; then
+  \[\Pi^{\dagger}\hat{x}\Pi\, f(x) = \Pi\, g(x) = g(-x) = -x\,f(x).\]
+  So $\Pi^{\dagger}\hat{x}\Pi\, f = -\hat{x}\, f$ for every $f$, giving $\Pi^{\dagger}\hat{x}\Pi = -\hat{x}$.
 \end{proof}
 
 \begin{thm}[Momentum Operator After Applying Parity]{momentum-under-parity}
@@ -398,7 +443,11 @@ TODO
 \end{thm}
 
 \begin{proof}
-  {\color{blue}\textbf{TODO}}
+  Consider $\Pi^{\dagger}\hat{p}\Pi$ acting on a test function $f(x)$:
+  \[\Pi^{\dagger}\hat{p}\Pi\, f(x) = \Pi^{\dagger}\hat{p}\,f(-x) = \Pi^{\dagger}\left(-i\hbar\,\frac{d}{dx}f(-x)\right).\]
+  Since $\Pi$ is \xref[hermitian]{thm:parity-hermitian} and \xref[unitary]{thm:parity-unitary}, we have $\Pi^{\dagger} = \Pi$. Define $g(x) := -i\hbar\,\frac{d}{dx}f(-x)$; then
+  \[\Pi^{\dagger}\hat{p}\Pi\, f(x) = \Pi\, g(x) = g(-x) = i\hbar\,\frac{d}{dx}f(x).\]
+  So $\Pi^{\dagger}\hat{p}\Pi\, f = -\hat{p}\, f$ for every $f$, giving $\Pi^{\dagger}\hat{p}\Pi = -\hat{p}$.
 \end{proof}
 
 \begin{thm}[General Operator After Applying Parity]{operator-under-parity}
@@ -441,26 +490,56 @@ TODO
   {\color{blue}\textbf{TODO}}
 \end{proof}
 
-\section{Time-Reversal Symmetry}
+\section{Time-Translation Symmetry}
 
-\begin{dfn}[Time-Reversal Operator]{time-reversal-operator}
-  The \emph{time-reversal operator} $U(t)$ is defined by 
-  \[U(t) \Psi(x, a) = \Psi^*(x, a + t)\] 
-\end{dfn} 
+\begin{dfn}[Time-Translation Operator]{time-translation-operator}
+  The \emph{time-translation operator} $U(t)$ is defined by
+  \[U(t)\,\Psi(x, a) = \Psi(x, a + t).\]
+\end{dfn}
 
-\begin{thm}[Exponential Form of the Time-Reversal Operator]{time-reversal-exponential}
-  The time-reversal operator can be written as:
-  \[U(t) = e^{i t \hat{H}/\hbar} \] 
-
-  Where we assume the $H$ (Hamiltonian) is independent of time. 
-\end{thm} 
+\begin{thm}[Exponential Form of the Time-Translation Operator]{time-translation-exponential}
+  The time-translation operator can be written as
+  \[U(t) = e^{i t \hat{H}/\hbar},\]
+  where we assume the Hamiltonian $\hat{H}$ is independent of time.
+\end{thm}
 
 \begin{proof}
   \color{blue}\textbf{TODO} 
 \end{proof} 
 
-\begin{dfn}[Heisenberg Picture]
+\section{Pictures}
 
+\begin{dfn}[Pictures]{pictures}
+  In quantum mechanics, a \emph{picture} is a convention for how to distribute the time dependence between states and 
+  operators
+\end{dfn} 
+
+\begin{dfn}[Schr\"odinger Picture]{schrodinger-picture}
+  The \emph{Schr\"odinger picture} keeps the state dependent on time, while the operators are time-independent. ie, 
+  \[\text{state:} \, \ket{S(t)}, \, \text{expected value:} \, \braket{Q} = \braket{S(t) | Q | S(t)}\]
 \end{dfn}
+
+\begin{dfn}[Heisenberg Picture]{heisenberg-picture}
+  The \emph{Heisenberg picture} keeps the state independent of time. Instead, the time dependence is transferred to the operators. 
+  \[
+    \text{state:} \, \ket{H}, \, \text{expected value:} \, \braket{Q_H(t)} = \braket{H | Q_H(t) | H}
+  \]
+  where $U(t)$ is the \xref[time-translation operator]{def:time-translation-operator}. 
+\end{dfn}
+
+\begin{rem}[Pictures Are Conjugation Actions]{pictures-are-conjugation}
+  The Heisenberg operator $Q_H(t) = U^{\dagger}(t)\,Q\,U(t)$ is the \xref[conjugation action]{ch03::def:conjugation-action} of $U(t)$ on $Q$. Expectation values agree between the Schr\"odinger and Heisenberg pictures because that is exactly what the conjugation action preserves.
+\end{rem}
+
+\begin{thm}[Heisenberg Equation of Motion]{heisenberg-equation}
+  Assuming $\hat{Q}$ and $\hat{H}$ are independent of time,
+  \[
+    \frac{d}{dt}\hat{Q}_H(t) \;=\; \frac{1}{i\hbar}\,\comm{\hat{Q}_H(t)}{\hat{H}}.
+  \]
+\end{thm}
+
+\begin{proof}
+  {\color{blue}\textbf{TODO}}
+\end{proof}
 
 \end{document}
