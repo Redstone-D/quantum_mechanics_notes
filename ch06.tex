@@ -180,7 +180,7 @@
 \end{rem}
 
 \begin{proof}
-  {\color{blue}\textbf{TODO}: Proof to be written after clarifying preferred approach with the lecturer --- direct from the action definition (\xref{def:translation-operator-1d}), or via the exponential form (\xref{thm:translation-exponential}). Email sent \today.}
+  {\color{blue}\textbf{TODO}: Proof to be written after clarifying preferred approach with the lecturer, direct from the action definition (\xref{def:translation-operator-1d}), or via the exponential form (\xref{thm:translation-exponential}). Email sent \today.}
 \end{proof}
 
 \begin{thm}[Position Operator After Applying Translation]{position-under-translation}
@@ -347,7 +347,7 @@ TODO
     &= \sum_{n=0}^{\infty} \frac{1}{n!} \bigl(-\varphi\,(\hat x \tfrac{\partial}{\partial y} - \hat y \tfrac{\partial}{\partial x})\bigr)^n \psi(r, \theta, \phi).
   \end{align*}
 
-  {\color{blue}In cylindrical/spherical coordinates the chain rule gives $\hat x \tfrac{\partial}{\partial y} - \hat y \tfrac{\partial}{\partial x} = \tfrac{\partial}{\partial \phi}$ (multivariable calculus prerequisite --- TODO: prove separately),} so
+  {\color{blue}In cylindrical/spherical coordinates the chain rule gives $\hat x \tfrac{\partial}{\partial y} - \hat y \tfrac{\partial}{\partial x} = \tfrac{\partial}{\partial \phi}$ (multivariable calculus prerequisite, TODO: prove separately),} so
   \[
     \hat{R}_z(\varphi) \psi(r, \theta, \phi) = \sum_{n=0}^{\infty} \frac{(-\varphi)^n}{n!}\,\frac{\partial^n \psi}{\partial \phi^n}(r, \theta, \phi).
   \]
@@ -505,7 +505,29 @@ TODO
 
 \begin{proof}
   \color{blue}\textbf{TODO} 
-\end{proof} 
+\end{proof}
+
+\begin{thm}[Hermitian Conjugate of $U(t)$]{time-translation-hermitian-conjugate}
+  The Hermitian conjugate of the time-translation operator is
+  \[
+    U^{\dagger}(t) = U(-t).
+  \]
+\end{thm}
+
+\begin{proof}
+  {\color{blue}\textbf{TODO}}
+\end{proof}
+
+\begin{thm}[Time Derivative of $U(t)$]{time-translation-derivative}
+  The time derivative of the time-translation operator satisfies
+  \[
+    \frac{d}{dt}U(t) = \frac{i\hat{H}}{\hbar}\,U(t).
+  \]
+\end{thm}
+
+\begin{proof}
+  {\color{blue}\textbf{TODO}}
+\end{proof}
 
 \section{Pictures}
 
@@ -531,12 +553,53 @@ TODO
   The Heisenberg operator $Q_H(t) = U^{\dagger}(t)\,Q\,U(t)$ is the \xref[conjugation action]{ch03::def:conjugation-action} of $U(t)$ on $Q$. Expectation values agree between the Schr\"odinger and Heisenberg pictures because that is exactly what the conjugation action preserves.
 \end{rem}
 
+\begin{ex}
+Consider $H = \frac{p^2}{2m} + V(x)$, find in the Heisenberg picture, the $x_H{\delta}$ operator where $\delta$ is infinitesimal. 
+
+Since $\delta$ is small, we may do taylor's expansion and only keep the first order term (at t = 0), and we know that $e^{it \hat H}{\hbar}' = \frac{i \hat H}{\hbar}$
+
+\[x_H(\delta) = \hat U^{\dagger}(\delta) \hat x \hat U(\delta) \approx \left( 1 + \frac{i}{\hbar} \delta \hat H \right) \hat x \left( 1 - \frac{i}{\hbar} \delta \hat H \right) \]
+
+Expand and omitting the second order term, we have
+\[x_H(\delta) \approx \hat x + \frac{i}{\hbar} \comm{\hat H}{\hat x} \delta\]
+
+Apply \xref[Hamiltonian Commutators]{ch03::thm:hamiltonian-commutators} to substitute $\comm{\hat H}{\hat x} = -\dfrac{i\hbar}{m}\hat p$:
+\[
+  x_H(\delta) \approx \hat x + \frac{i}{\hbar}\cdot\left(-\frac{i\hbar}{m}\hat p\right)\delta = \hat x + \frac{\hat p}{m}\,\delta.
+\]
+\end{ex}
+
+\begin{rem}
+This matches the classical equation of motion $v = p/m$: the infinitesimal time-evolution of $\hat x$ in the Heisenberg picture reproduces the classical relation of $x = x_0 + vt$. 
+\end{rem}
+
 \begin{thm}[Heisenberg Equation of Motion]{heisenberg-equation}
-  Assuming $\hat{Q}$ and $\hat{H}$ are independent of time,
+  Assuming $\hat{Q}$ and $\hat{H}$ are independent of time 
   \[
     \frac{d}{dt}\hat{Q}_H(t) \;=\; \frac{1}{i\hbar}\,\comm{\hat{Q}_H(t)}{\hat{H}}.
   \]
 \end{thm}
+
+\begin{proof}
+  By the definition of the Heisenberg picture, $\hat{Q}_H(t) = U^{\dagger}(t)\,\hat{Q}\,U(t)$. 
+
+  From the \xref[Generalized Ehrenfest's Theorem]{ch03::thm:ehrenfest}, we have 
+  \[
+    \frac{d}{dt}\hat{Q}_H(t) = \frac{1}{i\hbar}\,\comm{U^{\dagger}(t)\, \hat{Q}\,U(t)}{\hat{H}} + \frac{\partial U^{\dagger}(t)\, \hat{Q}\,U(t)}{\partial t} 
+  \] 
+
+  Since $\frac{d}{dt}U(t) = \frac{i\hat{H}}{\hbar}\,U(t)$, then apply the product rule to the second term:
+  \begin{align*}
+  \frac{d}{dt}\hat{Q}_H(t) &= \frac{1}{i\hbar}\,\comm{U^{\dagger}(t)\, \hat{Q}\,U(t)}{\hat{H}} + \frac{\partial U^{\dagger}(t)}{\partial t} \hat{Q}\,U(t) + U^{\dagger}(t) \frac{\partial \hat{Q} }{\partial t} U(t) + U^{\dagger}(t) \hat{Q} \frac{\partial U(t)}{\partial t} \\ 
+    &= \frac{1}{i\hbar}\,\comm{U^{\dagger}(t)\, \hat{Q}\,U(t)}{\hat{H}} + \frac{-i\hat{H}}{\hbar} U^{\dagger}(t) \hat{Q} U(t) + U^{\dagger}(t) \hat{Q} \frac{i\hat{H}}{\hbar} U(t) 
+  \end{align*}
+
+  Since if $\hat{Q}$ is independent of time, then $\frac{\partial \hat{Q} }{\partial t} = 0$. 
+\end{proof}
+
+\begin{corollary}[Energy Conservation in Heisenberg Picture]{energy-conservation-heisenberg}
+  If $\hat{H}$ is independent of time, then $\frac{d \hat H}{dt} = 0$.
+\end{corollary}
 
 \begin{proof}
   {\color{blue}\textbf{TODO}}
