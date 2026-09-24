@@ -298,9 +298,9 @@ Change $a \to -a$ to rewrite in the standard form:
 
 Define $u(x) := e^{-iqx}\,\psi(x)$. Then
 \[
-  u(x+a) = e^{-iq(x+a)}\,\psi(x+a) = e^{-iqx}\underbrace{e^{-iqa}e^{iqa}}_{=1}\,\psi(x) = u(x),
+  u(x+a) = e^{-iq(x+a)}\,\psi(x+a) = e^{-iqx}\,e^{-iqa}\,e^{iqa}\,\psi(x) = u(x),
 \]
-so $u$ has period $a$, and rearranging gives $\psi(x) = e^{iqx}\,u(x)$.
+where $e^{-iqa}\,e^{iqa} = 1$. So $u$ has period $a$, and rearranging gives $\psi(x) = e^{iqx}\,u(x)$.
 
 Although $\hat{H}$ is translation-invariant, the state $\psi$ is \emph{not}:
 \[\psi(x+a) = e^{iqa}\,\psi(x) \neq \psi(x).\]
@@ -529,6 +529,21 @@ TODO
   {\color{blue}\textbf{TODO}}
 \end{proof}
 
+\begin{thm}[$U(t)$ Commutes with $\hat{H}$]{time-translation-commutes-with-h}
+  The time-translation operator commutes with the Hamiltonian:
+  \[
+    \comm{U(t)}{\hat{H}} = 0.
+  \]
+\end{thm}
+
+\begin{proof}
+  {\color{blue}\textbf{TODO}}
+\end{proof}
+
+% \begin{proof}
+%   Since $U(t) = e^{it\hat{H}/\hbar}$ is a function of $\hat{H}$ (\xref{ch03::def:operator-function}), it commutes with $\hat{H}$ by \xref{ch03::rem:operator-function-first-class}.
+% \end{proof}
+
 \section{Pictures}
 
 \begin{dfn}[Pictures]{pictures}
@@ -570,8 +585,19 @@ Apply \xref[Hamiltonian Commutators]{ch03::thm:hamiltonian-commutators} to subst
 \end{ex}
 
 \begin{rem}
-This matches the classical equation of motion $v = p/m$: the infinitesimal time-evolution of $\hat x$ in the Heisenberg picture reproduces the classical relation of $x = x_0 + vt$. 
+This matches the classical equation of motion $v = p/m$: the infinitesimal time-evolution of $\hat x$ in the Heisenberg picture reproduces the classical relation of $x = x_0 + vt$.
 \end{rem}
+
+\begin{lem}[Conjugation Preserves Commutator with a Commuting Operator]{conjugation-preserves-commutator}
+  If $\comm{\hat{A}}{\hat{C}} = 0$, then for any operator $\hat{X}$,
+  \[
+    \hat{A}^{\dagger}\,\comm{\hat{X}}{\hat{C}}\,\hat{A} \;=\; \comm{\hat{A}^{\dagger}\hat{X}\hat{A}}{\hat{C}}.
+  \]
+\end{lem}
+
+\begin{proof}
+  {\color{blue}\textbf{TODO}}
+\end{proof}
 
 \begin{thm}[Heisenberg Equation of Motion]{heisenberg-equation}
   Assuming $\hat{Q}$ and $\hat{H}$ are independent of time 
@@ -590,11 +616,18 @@ This matches the classical equation of motion $v = p/m$: the infinitesimal time-
 
   Since $\frac{d}{dt}U(t) = \frac{i\hat{H}}{\hbar}\,U(t)$, then apply the product rule to the second term:
   \begin{align*}
-  \frac{d}{dt}\hat{Q}_H(t) &= \frac{1}{i\hbar}\,\comm{U^{\dagger}(t)\, \hat{Q}\,U(t)}{\hat{H}} + \frac{\partial U^{\dagger}(t)}{\partial t} \hat{Q}\,U(t) + U^{\dagger}(t) \frac{\partial \hat{Q} }{\partial t} U(t) + U^{\dagger}(t) \hat{Q} \frac{\partial U(t)}{\partial t} \\ 
-    &= \frac{1}{i\hbar}\,\comm{U^{\dagger}(t)\, \hat{Q}\,U(t)}{\hat{H}} + \frac{-i\hat{H}}{\hbar} U^{\dagger}(t) \hat{Q} U(t) + U^{\dagger}(t) \hat{Q} \frac{i\hat{H}}{\hbar} U(t) 
+  \frac{d}{dt}\hat{Q}_H(t) &= \frac{1}{i\hbar}\,\comm{U^{\dagger}(t)\, \hat{Q}\,U(t)}{\hat{H}} + \frac{\partial U^{\dagger}(t)}{\partial t} \hat{Q}\,U(t) + U^{\dagger}(t) \frac{\partial \hat{Q} }{\partial t} U(t) + U^{\dagger}(t) \hat{Q} \frac{\partial U(t)}{\partial t} \\
+    &= \frac{1}{i\hbar}\,\comm{U^{\dagger}(t)\, \hat{Q}\,U(t)}{\hat{H}} + \frac{-i\hat{H}}{\hbar} U^{\dagger}(t) \hat{Q} U(t) + U^{\dagger}(t) \hat{Q} \frac{i\hat{H}}{\hbar} U(t)
   \end{align*}
 
-  Since if $\hat{Q}$ is independent of time, then $\frac{\partial \hat{Q} }{\partial t} = 0$. 
+  Since if $\hat{Q}$ is independent of time, then $\frac{\partial \hat{Q} }{\partial t} = 0$.
+
+  Applying \xref{lem:conjugation-preserves-commutator} with $\hat{A} = U(t)$, $\hat{X} = \hat{Q}$, $\hat{C} = \hat{H}$ (since $\comm{U(t)}{\hat{H}} = 0$ by \xref{thm:time-translation-commutes-with-h}), we can simplify
+  \[
+    \comm{U^{\dagger}(t)\,\hat{Q}\,U(t)}{\hat{H}}
+    \;=\; U^{\dagger}(t)\,\comm{\hat{Q}}{\hat{H}}\,U(t)
+    \;=\; \comm{\hat{Q}_H(t)}{\hat{H}}.
+  \]
 \end{proof}
 
 \begin{corollary}[Energy Conservation in Heisenberg Picture]{energy-conservation-heisenberg}
