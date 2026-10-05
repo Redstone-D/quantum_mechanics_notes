@@ -1,0 +1,19 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{qm-notations}[2026/09/28 Custom notation macros (portable across courses)]
+
+% =============================================================================
+% Function-style commutator: \comm{A}{B} renders as comm(A, B).
+% We use a function-style macro instead of the raw [ ] brackets to avoid
+% overloading the ambiguous [ , ] notation (intervals, floor, lists, etc.).
+% Clicking the operator name jumps to the definition target set by
+% \commutatorRef (default: quantum-mechanics::ch03::def:commutator). Override
+% it in the calling project's notes-project.sty before loading this package if
+% the definition lives elsewhere. Only the operator name is linked so
+% arguments may safely contain other linked notation.
+% =============================================================================
+\providecommand*{\commutatorRef}{quantum-mechanics::ch03::def:commutator}
+\newcommand{\comm}[2]{%
+  \ensuremath{%
+    \xref[\operatorname{comm}]{\commutatorRef}\!\left(#1,\, #2\right)%
+  }%
+}

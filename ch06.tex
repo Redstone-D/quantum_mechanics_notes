@@ -71,7 +71,7 @@
   A collection with a well-behaved multiplication and inverses.
 \end{dfn}
 
-\begin{ex}[Real Numbers Under Addition]{reals-group}
+\begin{eg}[Real Numbers Under Addition]{reals-group}
   Choose:
   \begin{itemize}[nosep]
     \item Set $G := \mathbb{R}$ (the real numbers).
@@ -80,9 +80,9 @@
     \item Inverse $a^{-1} := -a$.
   \end{itemize}
   Associativity, identity, and inverse axioms follow from the usual properties of addition.
-\end{ex}
+\end{eg}
 
-\begin{ex}[Boolean Set Under XOR]{boolean-group}
+\begin{eg}[Boolean Set Under XOR]{boolean-group}
   Choose:
   \begin{itemize}[nosep]
     \item Set $G := \{\text{tt}, \text{ff}\}$ (equivalently $\{0, 1\}$).
@@ -91,14 +91,14 @@
     \item Inverse $g^{-1} := g$ (each element is self-inverse).
   \end{itemize}
   All axioms hold by direct verification.
-\end{ex}
+\end{eg}
 
 \begin{dfn}[Continous Group]{continuous-group}
-  A group is \emph{continuous} (a \emph{Lie group}) if its elements are parametrized by a {\color{blue}continuous parameter space}, and multiplication and inversion vary smoothly with the parameters. The \xref[real numbers under addition]{ex:reals-group} is an example.
+  A group is \emph{continuous} (a \emph{Lie group}) if its elements are parametrized by a {\color{blue}continuous parameter space}, and multiplication and inversion vary smoothly with the parameters. The \xref[real numbers under addition]{eg:reals-group} is an example.
 \end{dfn}
 
 \begin{dfn}[Discrete Group]{discrete-group}
-  A group is \emph{discrete} if its elements form a {\color{blue}discrete set} (finite or {\color{blue}countable}), with no continuous parameter connecting distinct elements. The \xref[Boolean set under XOR]{ex:boolean-group} is an example.
+  A group is \emph{discrete} if its elements form a \xref[discrete set]{real-analysis::lec02::def:discrete-set} (finite or \xref[countable]{real-analysis::lec02::def:countable}), with no continuous parameter connecting distinct elements. The \xref[Boolean set under XOR]{eg:boolean-group} is an example.
 \end{dfn}
 
 % \begin{rem}[Why the Distinction Matters]{continuous-discrete-why}
@@ -568,8 +568,8 @@ TODO
   The Heisenberg operator $Q_H(t) = U^{\dagger}(t)\,Q\,U(t)$ is the \xref[conjugation action]{ch03::def:conjugation-action} of $U(t)$ on $Q$. Expectation values agree between the Schr\"odinger and Heisenberg pictures because that is exactly what the conjugation action preserves.
 \end{rem}
 
-\begin{ex}
-Consider $H = \frac{p^2}{2m} + V(x)$, find in the Heisenberg picture, the $x_H{\delta}$ operator where $\delta$ is infinitesimal. 
+\begin{eg}
+Consider $H = \frac{p^2}{2m} + V(x)$, find in the Heisenberg picture, the $x_H{\delta}$ operator where $\delta$ is infinitesimal.
 
 Since $\delta$ is small, we may do taylor's expansion and only keep the first order term (at t = 0), and we know that $e^{it \hat H}{\hbar}' = \frac{i \hat H}{\hbar}$
 
@@ -582,7 +582,7 @@ Apply \xref[Hamiltonian Commutators]{ch03::thm:hamiltonian-commutators} to subst
 \[
   x_H(\delta) \approx \hat x + \frac{i}{\hbar}\cdot\left(-\frac{i\hbar}{m}\hat p\right)\delta = \hat x + \frac{\hat p}{m}\,\delta.
 \]
-\end{ex}
+\end{eg}
 
 \begin{rem}
 This matches the classical equation of motion $v = p/m$: the infinitesimal time-evolution of $\hat x$ in the Heisenberg picture reproduces the classical relation of $x = x_0 + vt$.
@@ -599,6 +599,14 @@ This matches the classical equation of motion $v = p/m$: the infinitesimal time-
   {\color{blue}\textbf{TODO}}
 \end{proof}
 
+% Reference proof (leave the block above as TODO for now):
+% Expand and slide C past A and A^dagger using [A,C] = 0 (and [A^dagger, C] = 0 which follows when C is Hermitian or A is unitary):
+%   A^dagger [X, C] A = A^dagger (X C - C X) A
+%                    = A^dagger X (C A) - (A^dagger C) X A     % pull C outward
+%                    = A^dagger X (A C) - (C A^dagger) X A     % use [A,C] = 0 and [A^dagger, C] = 0
+%                    = (A^dagger X A) C - C (A^dagger X A)
+%                    = [A^dagger X A, C].
+
 \begin{thm}[Heisenberg Equation of Motion]{heisenberg-equation}
   Assuming $\hat{Q}$ and $\hat{H}$ are independent of time 
   \[
@@ -607,26 +615,23 @@ This matches the classical equation of motion $v = p/m$: the infinitesimal time-
 \end{thm}
 
 \begin{proof}
-  By the definition of the Heisenberg picture, $\hat{Q}_H(t) = U^{\dagger}(t)\,\hat{Q}\,U(t)$. 
-
-  From the \xref[Generalized Ehrenfest's Theorem]{ch03::thm:ehrenfest}, we have 
+  By the definition of the Heisenberg picture, $\hat{Q}_H(t) = U^{\dagger}(t)\,\hat{Q}\,U(t)$. Take the total time derivative using the product rule:
   \[
-    \frac{d}{dt}\hat{Q}_H(t) = \frac{1}{i\hbar}\,\comm{U^{\dagger}(t)\, \hat{Q}\,U(t)}{\hat{H}} + \frac{\partial U^{\dagger}(t)\, \hat{Q}\,U(t)}{\partial t} 
-  \] 
-
-  Since $\frac{d}{dt}U(t) = \frac{i\hat{H}}{\hbar}\,U(t)$, then apply the product rule to the second term:
-  \begin{align*}
-  \frac{d}{dt}\hat{Q}_H(t) &= \frac{1}{i\hbar}\,\comm{U^{\dagger}(t)\, \hat{Q}\,U(t)}{\hat{H}} + \frac{\partial U^{\dagger}(t)}{\partial t} \hat{Q}\,U(t) + U^{\dagger}(t) \frac{\partial \hat{Q} }{\partial t} U(t) + U^{\dagger}(t) \hat{Q} \frac{\partial U(t)}{\partial t} \\
-    &= \frac{1}{i\hbar}\,\comm{U^{\dagger}(t)\, \hat{Q}\,U(t)}{\hat{H}} + \frac{-i\hat{H}}{\hbar} U^{\dagger}(t) \hat{Q} U(t) + U^{\dagger}(t) \hat{Q} \frac{i\hat{H}}{\hbar} U(t)
-  \end{align*}
-
-  Since if $\hat{Q}$ is independent of time, then $\frac{\partial \hat{Q} }{\partial t} = 0$.
-
-  Applying \xref{lem:conjugation-preserves-commutator} with $\hat{A} = U(t)$, $\hat{X} = \hat{Q}$, $\hat{C} = \hat{H}$ (since $\comm{U(t)}{\hat{H}} = 0$ by \xref{thm:time-translation-commutes-with-h}), we can simplify
+    \frac{d\hat{Q}_H}{dt} = \frac{dU^{\dagger}}{dt}\,\hat{Q}\,U + U^{\dagger}\,\frac{d\hat{Q}}{dt}\,U + U^{\dagger}\,\hat{Q}\,\frac{dU}{dt}.
+  \]
+  Since $\hat{Q}$ is time-independent, $d\hat{Q}/dt = 0$. From \xref{thm:time-translation-derivative}, $\dot{U}(t) = \frac{i\hat{H}}{\hbar}U(t)$, and taking the adjoint, $\dot{U}^{\dagger}(t) = -\frac{i\hat{H}}{\hbar}U^{\dagger}(t)$. Substituting:
   \[
-    \comm{U^{\dagger}(t)\,\hat{Q}\,U(t)}{\hat{H}}
-    \;=\; U^{\dagger}(t)\,\comm{\hat{Q}}{\hat{H}}\,U(t)
-    \;=\; \comm{\hat{Q}_H(t)}{\hat{H}}.
+    \frac{d\hat{Q}_H}{dt} = -\frac{i\hat{H}}{\hbar}\,U^{\dagger}\,\hat{Q}\,U + U^{\dagger}\,\hat{Q}\,\frac{i\hat{H}}{\hbar}\,U.
+  \]
+
+  From \xref{thm:time-translation-commutes-with-h}, $\comm{U(t)}{\hat{H}} = 0$, so $\hat{H}$ passes through both $U$ and $U^{\dagger}$ freely. Rearranging:
+  \[
+    \frac{d\hat{Q}_H}{dt} = -\frac{i}{\hbar}\,\hat{H}\,(U^{\dagger}\,\hat{Q}\,U) + \frac{i}{\hbar}\,(U^{\dagger}\,\hat{Q}\,U)\,\hat{H}.
+  \]
+
+  Recognize $U^{\dagger}\,\hat{Q}\,U = \hat{Q}_H$:
+  \[
+    \frac{d\hat{Q}_H}{dt} = -\frac{i}{\hbar}\,\hat{H}\,\hat{Q}_H + \frac{i}{\hbar}\,\hat{Q}_H\,\hat{H} = \frac{i}{\hbar}\comm{\hat{Q}_H}{\hat{H}} = \frac{1}{i\hbar}\comm{\hat{H}}{\hat{Q}_H}.
   \]
 \end{proof}
 

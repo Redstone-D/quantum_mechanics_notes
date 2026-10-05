@@ -1,0 +1,50 @@
+\documentclass[12pt]{article}
+\usepackage{notes-project}
+\usepackage{braket}
+
+\begin{document}
+
+\begin{center}
+  {\LARGE\bfseries Chapter 4: Quantum Mechanics in 3D}\\[0.25em]
+  {\large Quantum Mechanics}\\[0.15em]
+\end{center}
+
+% Key definitions from Griffiths Ch. 4 typed as needed for cross-references.
+
+\section{Angular Momentum}
+
+\begin{dfn}[Angular Momentum Operator]{angular-momentum}
+  The \emph{angular momentum operator} is
+  \[
+    \hat{\vec{L}} \;:=\; \hat{\vec{r}} \times \hat{\vec{p}},
+  \]
+  with components
+  \[
+    \hat{L}_x = \hat{y}\hat{p}_z - \hat{z}\hat{p}_y, \quad
+    \hat{L}_y = \hat{z}\hat{p}_x - \hat{x}\hat{p}_z, \quad
+    \hat{L}_z = \hat{x}\hat{p}_y - \hat{y}\hat{p}_x.
+  \]
+\end{dfn}
+
+\section{Atomic Eigenstates}
+
+\begin{dfn}[Atomic Eigenstate]{atomic-eigenstate}
+  An \emph{atomic eigenstate} $\ket{\psi_{n\ell m}}$ (also written $\ket{n,\ell,m}$) is the simultaneous eigenstate of $\hat{H}$, $\hat{L}^2$, and $\hat{L}_z$ with eigenvalues $E_n$, $\ell(\ell+1)\hbar^2$, and $m\hbar$ respectively. Its position-space wavefunction separates as
+  \[
+    \psi_{n\ell m}(r, \theta, \phi) = R_{n\ell}(r)\, Y_\ell^m(\theta, \phi),
+  \]
+  where $R_{n\ell}$ is the radial function and $Y_\ell^m$ is the spherical harmonic.
+\end{dfn}
+
+\begin{thm}[Parity of Spherical Harmonics]{spherical-harmonic-parity}
+  Under $(\theta, \phi) \to (\pi - \theta,\, \phi + \pi)$,
+  \[
+    Y_\ell^m(\pi - \theta,\, \phi + \pi) = (-1)^\ell\, Y_\ell^m(\theta, \phi).
+  \]
+\end{thm}
+
+\begin{proof}
+  {\color{blue}\textbf{TODO}}
+\end{proof}
+
+\end{document}

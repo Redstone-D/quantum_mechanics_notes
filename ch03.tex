@@ -126,7 +126,7 @@
   (subject to convergence; $\hat{I}$ is the identity operator). This blanket recipe defines a canonical map $f \longmapsto f(\hat{A})$ from analytic scalar functions to operators, known as the \emph{holomorphic functional calculus}.
 \end{dfn}
 
-\begin{ex}[Operator Exponential]{operator-exponential}
+\begin{eg}[Operator Exponential]{operator-exponential}
   Take $f(z) = e^z$ with center $c = 0$. Since $(e^z)^{(n)} = e^z$ and $e^0 = 1$, we have $f^{(n)}(0) = 1$ for all $n$, so the scalar Taylor series reads
   \[
     e^{z} \;=\; \sum_{n=0}^{\infty} \frac{z^n}{n!}.
@@ -135,7 +135,7 @@
   \[
     e^{\hat{A}} \;:=\; \sum_{n=0}^{\infty} \frac{f^{(n)}(0)}{n!}\,\hat{A}^n \;=\; \sum_{n=0}^{\infty} \frac{\hat{A}^n}{n!}.
   \]
-\end{ex}
+\end{eg}
 
 \begin{rem}[$f(\hat{A})$ Is a Constructed Operator]{operator-function-meaning}
   $f(\hat{A})$ is not literal function application: $\hat{A}$ is an operator, not a scalar. The symbol names a \emph{new operator} built from $f$'s Taylor coefficients (scalars) and $\hat{A}$'s powers, using only operations that operators support (powers, scalar multiplication, addition).
