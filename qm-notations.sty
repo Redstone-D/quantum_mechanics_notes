@@ -1,6 +1,14 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{qm-notations}[2026/09/28 Custom notation macros (portable across courses)]
 
+\RequirePackage{mathrsfs}
+
+% Operator type; the domain and codomain are supplied by the surrounding setup.
+\providecommand*{\operatorTypeRef}{quantum-mechanics::ch03::def:operator-type}
+\newcommand*{\OP}{%
+  \ensuremath{\xref[\mathscr{O}]{\operatorTypeRef}}%
+}
+
 % =============================================================================
 % Function-style commutator: \comm{A}{B} renders as comm(A, B).
 % We use a function-style macro instead of the raw [ ] brackets to avoid

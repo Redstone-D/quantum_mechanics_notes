@@ -19,6 +19,9 @@
 # Private homework — not deployed to notes.rua.rs
 /homework/
 
+# Teacher's lecture slides — local reference only, not committed
+/lecture_slides/
+
 # Manifest is not required by the notes server (deployment works without it)
 /latex_target/manifest.json
 

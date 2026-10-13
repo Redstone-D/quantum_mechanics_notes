@@ -1,5 +1,6 @@
 \documentclass[12pt]{article}
 \usepackage{notes-project}
+\usepackage{braket}
 
 \begin{document}
 
@@ -8,21 +9,278 @@
   {\large Quantum Mechanics}\\[0.15em]
 \end{center}
 
-\section{Perturbation Equation} 
+\section{Perturbation Equation}
 
-\begin{dfn}[Unperturbed State]{unperturbed-state}
-  For a Hamiltonian $\hat{H}$ where we have a known solution to the time independent Schrodinger equation, $\hat{H}\ket{\psi_n} = E_n\ket{\psi_n}$, the \emph{unperturbed state} is the state $\ket{\psi_n}$ with energy $E_n$. Such $\hat H$ is called the \emph{unperturbed Hamiltonian}. 
+\begingroup
+\color{notesmissingprereq}
+\begin{rem}[Working Treatment of Operator Domains]{operator-domain-convention}
+  Fix a \xref[Hilbert space]{ch03::def:hilbert-space} $\mathcal H$. Throughout this chapter, formally write $A : \mathcal H \to \mathcal H$ for an operator $A \in \OP$.
+  This notation is literal for finite-dimensional matrix operators. For differential operators, it suppresses domain restrictions: all expressions are understood on a suitable common domain where the indicated operations are defined.
+  Detailed operator domains and self-adjointness will be addressed when revising Chapters 2 and 3 rigorously.
+\end{rem}
+\endgroup
+
+\begin{dfn}[Unperturbed Hamiltonian]{unperturbed-hamiltonian}
+  An \emph{unperturbed Hamiltonian} $\hat H_0 \in \OP$ is a reference time-independent \missingprereq{Hamiltonian, quantum-mechanics} whose eigenstates and corresponding energies are taken as known for the perturbation calculation.
 \end{dfn}
 
-\begin{dfn}[Perturb Expansion]{perturb-expansion}
-  For a Hamiltonian $\hat{H} = \hat{H}_0 + \lambda \hat{H}'$, 
-
+\begin{dfn}[Perturbation Operator]{perturbation}
+  Given an \xref[unperturbed Hamiltonian]{def:unperturbed-hamiltonian} $\hat H_0$ and the physical time-independent Hamiltonian $\hat H \in \OP$ on the same state space $\mathcal H$, the \emph{perturbation operator} is their difference:
+  \[
+    \hat H' \defeq \hat H - \hat H_0.
+  \]
 \end{dfn}
+
+\begin{dfn}[Perturbation Family]{perturbation-family}
+  Fix an \xref[unperturbed Hamiltonian]{def:unperturbed-hamiltonian} $\hat H_0$ and its \xref[perturbation operator]{def:perturbation} $\hat H'$. Let $I \subseteq \mathbb R$ be an \xref[interval]{real-analysis::lec02::def:interval} containing $0$ and $1$.
+  The \emph{perturbation family} determined by these operators is the function
+  \[
+    \hat H_{\mathrm{fam}} : I \to \OP \defeq \lambda \map \hat H_0 + \lambda \cdot \hat H'.
+  \]
+  Require each $\hat H_{\mathrm{fam}}(\lambda)$ to be \xref[Hermitian]{ch03::def:hermitian-operator}, with domain restrictions suppressed as in the \xref[working treatment of operator domains]{rem:operator-domain-convention}.
+\end{dfn}
+
+\begin{conv}[Perturbation Terminology]{perturbation-terminology}
+  For the \xref[perturbation family]{def:perturbation-family}, use the following terminology:
+  \begin{description}[nosep]
+    \item[$\hat H$:] the full physical Hamiltonian, also called the \emph{perturbed Hamiltonian}.
+    \item[$\hat H_0$:] the \xref[unperturbed Hamiltonian]{def:unperturbed-hamiltonian}, whose eigenstates and energies are taken as known.
+    \item[$\hat H'$:] the \xref[perturbation operator]{def:perturbation}, equal to $\hat H - \hat H_0$.
+    \item[$\lambda$:] the dimensionless \emph{perturbation parameter}, treated as small when deriving corrections. The value $0$ gives the reference Hamiltonian, and $1$ gives the full physical Hamiltonian.
+  \end{description}
+\end{conv}
+
+\begin{rem}[Prime on $\hat{H}'$ Is a Label, Not a Derivative]{perturbation-prime-notation}
+\end{rem}
+
+\begin{dfn}[Reference Eigenpair]{reference-eigenpair}
+  A \emph{reference eigenpair} of an \xref[unperturbed Hamiltonian]{def:unperturbed-hamiltonian} $\hat H_0$ is a known pair $(\psi_n^{(0)}, E_n^{(0)}) \in \mathcal H \times \mathbb R$ satisfying
+  \[
+    \psi_n^{(0)} \ne 0,
+    \qquad
+    \hat H_0\bigl(\psi_n^{(0)}\bigr) = E_n^{(0)} \cdot \psi_n^{(0)}.
+  \]
+\end{dfn}
+
+\begin{dfn}[Eigenvector Branch]{eigenvector-branch}
+  Given a \xref[perturbation family]{def:perturbation-family} and a \xref[reference eigenpair]{def:reference-eigenpair} $(\psi_n^{(0)}, E_n^{(0)})$, an \emph{eigenvector branch} is a continuous function $\phi : I \to \mathcal H$ with $\phi(0) = \psi_n^{(0)}$ and, for every $\lambda \in I$,
+  \[
+    \phi(\lambda) \ne 0,
+    \qquad
+    \exists e \in \mathbb R,\quad
+    \hat H_{\mathrm{fam}}(\lambda)\bigl(\phi(\lambda)\bigr)
+    = e \cdot \phi(\lambda).
+  \]
+\end{dfn}
+
+\begin{dfn}[Eigenvalue Branch]{eigenvalue-branch}
+  For a chosen \xref[eigenvector branch]{def:eigenvector-branch} $\phi_n$, its \emph{eigenvalue branch} is the function $\varepsilon_n : I \to \mathbb R$ satisfying
+  \[
+    \hat H_{\mathrm{fam}}(\lambda)\bigl(\phi_n(\lambda)\bigr)
+    = \varepsilon_n(\lambda) \cdot \phi_n(\lambda)
+    \qquad (\lambda \in I).
+  \]
+\end{dfn}
+
+\begin{rem}[Choosing a Branch]{eigenvector-branch-choice}
+  The \xref[eigenvector-branch definition]{def:eigenvector-branch} specifies possible functions without asserting existence or uniqueness. If one exists, fix a choice $\phi_n$; the index $n$ labels its reference eigenpair.
+  For this choice, each $\varepsilon_n(\lambda)$ exists and is unique: two candidate eigenvalues $e,f$ satisfy $(e-f) \cdot \phi_n(\lambda) = 0$, so $e=f$. In particular, $\varepsilon_n(0) = E_n^{(0)}$.
+\end{rem}
+
+\begin{conv}[State and Energy Notation]{eigenpair-notation}
+  \[
+    \psi_n^{(0)} = \phi_n(0),
+    \qquad
+    E_n^{(0)} = \varepsilon_n(0).
+  \]
+  \[
+    \psi_n^{\mathrm{phys}} \defeq \phi_n(1),
+    \qquad
+    E_n^{\mathrm{phys}} \defeq \varepsilon_n(1).
+  \]
+\end{conv}
+
+\begin{dfn}[State Coefficient Sequence]{perturbative-expansion}
+  \[
+    \psi_n : \mathbb N_0 \to \mathcal H \defeq k \map \psi_n^{(k)}.
+  \]
+\end{dfn}
+
+\begin{dfn}[Energy Coefficient Sequence]{energy-perturbative-expansion}
+  \[
+    E_n : \mathbb N_0 \to \mathbb R \defeq k \map E_n^{(k)}.
+  \]
+\end{dfn}
+
+\begin{hypo}[Existence of a Perturbative Expansion]{perturbative-expansion-existence}
+  For a chosen \xref[eigenvector branch]{def:eigenvector-branch} $\phi_n$ and its \xref[eigenvalue branch]{def:eigenvalue-branch} $\varepsilon_n$, assume there exist a \xref[state coefficient sequence]{def:perturbative-expansion} $\psi_n$ and an \xref[energy coefficient sequence]{def:energy-perturbative-expansion} $E_n$ such that, for every $\lambda \in I$ sufficiently close to $0$,
+  \[
+    \phi_n(\lambda)
+    = \sum_{0}^{\infty}\left(k \map \lambda^k \cdot \psi_n(k)\right).
+  \]
+  \[
+    \varepsilon_n(\lambda)
+    = \sum_{0}^{\infty}\left(k \map \lambda^k \cdot E_n(k)\right).
+  \]
+  Moreover, for each $A \in \{\hat H_0,\hat H'\}$, all indicated operator applications are defined and
+  \[
+    A\bigl(\phi_n(\lambda)\bigr)
+    = \sum_{0}^{\infty}\left(k \map \lambda^k \cdot A\bigl(\psi_n(k)\bigr)\right).
+  \]
+  All vector series above converge in the norm of $\mathcal H$, and the scalar series converges in $\mathbb R$.
+\end{hypo}
+
+\begin{rem}[Scope of the Expansion Hypothesis]{expansion-convergence}
+  The \xref[expansion hypothesis]{hypo:perturbative-expansion-existence} assumes convergence near $\lambda = 0$; matching coefficients alone does not prove convergence. Validity at the physical endpoint $\lambda = 1$ requires separate justification.
+\end{rem}
+
+\begin{thm}[Perturbation Equation (Summation Form)]{perturbation-equation}
+  Under the \xref[expansion hypothesis]{hypo:perturbative-expansion-existence}, for $\lambda \in I$ sufficiently close to $0$,
+  \[
+    \begin{aligned}
+      &\left(\hat H_0 + \lambda \cdot \hat H'\right)
+      \left(\sum_{0}^{\infty}\left(k \map \lambda^k \cdot \psi_n(k)\right)\right) \\
+      &\quad =
+      \left(\sum_{0}^{\infty}\left(j \map \lambda^j \cdot E_n(j)\right)\right)
+      \cdot
+      \left(\sum_{0}^{\infty}\left(k \map \lambda^k \cdot \psi_n(k)\right)\right).
+    \end{aligned}
+  \]
+\end{thm}
+
+\begin{proof}
+  Substitute $\hat H_{\mathrm{fam}}(\lambda) = \hat H_0 + \lambda \cdot \hat H'$ and the \xref[assumed expansions]{hypo:perturbative-expansion-existence} into the TISE.
+\end{proof}
+
+\begin{conv}[$k$-th-Order Coefficient and Correction Notation]{order-k-correction}
+  We call $\psi_n^{(k)}$ the \emph{$k$-th-order state correction} and $E_n^{(k)}$ the \emph{$k$-th-order energy correction}. The $0$-th-order terms are the reference eigenpair: $\psi_n^{(0)} = \phi_n(0)$ and $E_n^{(0)} = \varepsilon_n(0)$. 
+\end{conv}
+
+\begin{dfn}[Order-by-Order Perturbation System]{order-matched-system}
+  For coefficient sequences $\psi_n,E_n$, the \emph{order-by-order perturbation system} consists of
+  \[
+    \hat H_0\bigl(\psi_n(0)\bigr) = E_n(0) \cdot \psi_n(0)
+  \]
+  and, for every $k \in \mathbb N_{>0}$,
+  \[
+    \hat H_0\bigl(\psi_n(k)\bigr) + \hat H'\bigl(\psi_n(k-1)\bigr)
+    = \sum_{0}^{k}\left(j \map E_n(j) \cdot \psi_n(k-j)\right).
+  \]
+\end{dfn}
+
+\begin{thm}[Equivalence of Perturbation Equations]{order-matched-equations}
+  Under the \xref[expansion hypothesis]{hypo:perturbative-expansion-existence}, the sequences $\psi_n \defeq i \map \psi_n^{(i)}$ and $E_n \defeq i \map E_n^{(i)}$ satisfy all equations of the \xref[order-by-order system]{def:order-matched-system} if and only if $(\phi_n,\varepsilon_n)$ solves the \xref[summation-form equation]{thm:perturbation-equation} for every $\lambda \in I$ sufficiently close to $0$.
+\end{thm}
+
+\begin{proof}
+  \todo
+\end{proof}
+
+\begin{rem}[Recovering the Summation Equation]{recovering-summation-equation}
+  Multiply the order-$k$ equation by $\lambda^k$ and sum its left-hand and right-hand sides separately over all orders. Here $k$ is the correction order, while $n$ labels the reference state. The shifted perturbation sum becomes
+  \[
+    \sum_{1}^{\infty}\left(k \map \lambda^k \cdot \hat H'\bigl(\psi_n(k-1)\bigr)\right)
+    = \lambda \cdot \hat H'\bigl(\phi_n(\lambda)\bigr),
+  \]
+  and the summed right-hand side becomes $\varepsilon_n(\lambda) \cdot \phi_n(\lambda)$. Thus
+  \[
+    \left(\hat H_0 + \lambda \cdot \hat H'\right)\bigl(\phi_n(\lambda)\bigr)
+    = \varepsilon_n(\lambda) \cdot \phi_n(\lambda).
+  \]
+\end{rem}
+
+\begin{cor}[Zeroth-, First-, and Second-Order Equations]{equations-through-second-order}
+  \[
+    \begin{aligned}
+      \hat H_0\bigl(\psi_n^{(0)}\bigr)
+      &= E_n^{(0)} \cdot \psi_n^{(0)}, \\
+      \hat H_0\bigl(\psi_n^{(1)}\bigr) + \hat H'\bigl(\psi_n^{(0)}\bigr)
+      &= E_n^{(0)} \cdot \psi_n^{(1)} + E_n^{(1)} \cdot \psi_n^{(0)}, \\
+      \hat H_0\bigl(\psi_n^{(2)}\bigr) + \hat H'\bigl(\psi_n^{(1)}\bigr)
+      &= E_n^{(0)} \cdot \psi_n^{(2)} + E_n^{(1)} \cdot \psi_n^{(1)}
+      + E_n^{(2)} \cdot \psi_n^{(0)}.
+    \end{aligned}
+  \]
+\end{cor}
+
+\begin{proof}
+  Take orders $0,1,2$ in the \xref[order-by-order system]{def:order-matched-system}.
+\end{proof}
+
+\begin{dfn}[$k$-th-Order Approximation]{perturbative-approximation}
+  Let $\psi_n^{(k)}$ and $E_n^{(k)}$ be the solution for the \xref[order-by-order system]{def:order-matched-system} at order $k$. 
+
+  The \emph{$k$-th-order perturbative approximation} to the eigenpair $(\phi_n(\lambda),\varepsilon_n(\lambda))$ is
+  \[
+    \phi_n^{(k)} \defeq \sum_{0}^{k}\left(i \map \psi_n^{(i)}\right),
+    \qquad
+    \varepsilon_n^{(k)} \defeq \sum_{0}^{k}\left(i \map E_n^{(i)}\right).
+  \] 
+\end{dfn}
+
+\begin{rem}[Validity of the Approximation]{perturbative-validity}
+  Since the equation works at $\lambda$ sufficiently close to $0$, the $k$-th-order approximation shall be significant small when $k$ is bigger. 
+\end{rem}
 
 \section{First-Order Perturbation Theory} 
 
+\begin{thm}[First Order Energy Correction]{first-order-energy-correction}
+
+\end{thm} 
+
+\begin{proof}
+  According to the \xref[first order equation]{cor:equations-through-second-order}, we have 
+  \[\hat H_0 \ket{\psi_n^{(1)}} + \hat H' \ket{\psi_n^{(0)}} = E_n^{(0)} \ket{\psi_n^{(1)}} + E_n^{(1)} \ket{\psi_n^{(0)}} \]
+
+  Since $\psi_n^{(0)}$ is a non-zero eigenvector, we can multiply its bra vector to both sides, ie 
+  \[\bra{\psi_n^{(0)}} \hat H_0 \ket{\psi_n^{(1)}} + \bra{\psi_n^{(0)}} \hat H' \ket{\psi_n^{(0)}} = \bra{\psi_n^{(0)}} E_n^{(0)} \ket{\psi_n^{(1)}} + \bra{\psi_n^{(0)}} E_n^{(1)} \ket{\psi_n^{(0)}} \]
+
+  Notice $E_n^{(0)}$ is an real number, and according to the normalization axiom, 
+  \[\bra{\psi_n^{(0)}} E_n^{(1)} \ket{\psi_n^{(0)}} = E_n^{(1)} \braket{\psi_n^{(0)} \mid \psi_n^{(0)}} = E_n^{(1)} \] 
+
+  According to the TISE, $H \ket{\psi} = E \ket{\psi}$, we subsitute that relationship into $\bra{\psi_n^{(0)}} \hat H_0$ 
+  \[\bra{\psi_n^{(0)}} \hat H_0 \ket{\psi_n^{(1)}} = \bra{\psi_n^{(0)}} \hat E_0 \ket{\psi_n^{(1)}} = E_0 \braket{\psi_n^{(0)} \mid \psi_n^{(1)}} \]
+
+  Subsitute back, we can get 
+  \[E_0 \braket{\psi_n^{(0)} \mid \psi_n^{(1)}} + \bra{\psi_n^{(0)}} \hat H' \ket{\psi_n^{(0)}} = \bra{\psi_n^{(0)}} E_n^{(0)} \ket{\psi_n^{(1)}} + E_n^{(1)} \]
+
+  Notice that $E_0 \braket{\psi_n^{(0)} \mid \psi_n^{(1)}} = \bra{\psi_n^{(0)}} E_n^{(0)} \ket{\psi_n^{(1)}} $, cancel out the term, 
+  \[E_n^{(1)}  = \bra{\psi_n^{(0)}} \hat H' \ket{\psi_n^{(0)}} \] 
+\end{proof}
+
+\begin{thm}[First Order State Correction]{first-order-state-correction}
+
+\end{thm} 
+
+\begin{proof}
+  According to the \xref[first order equation]{cor:equations-through-second-order}, we have 
+  \[\hat H_0 \ket{\psi_n^{(1)}} + \hat H' \ket{\psi_n^{(0)}} = E_n^{(0)} \ket{\psi_n^{(1)}} + E_n^{(1)} \ket{\psi_n^{(0)}} \]
+
+  Rearranging the equation, we can get 
+  \[\left(\hat H_0 - E_n^{(0)} \cdot \hat I\right) \ket{\psi_n^{(1)}} = \left(E_n^{(1)} \cdot \hat I - \hat H'\right) \ket{\psi_n^{(0)}}\]
+
+  
+\end{proof}
+
+\begin{rem}[Normalization and Phase]{eigenpair-choices}
+  An \xref[eigenvector branch]{def:eigenvector-branch} is not unique: for any continuous function $c : I \to \mathbb C \setminus \{0\}$ with $c(0) = 1$, the branch
+  \[
+    \widetilde\phi_n : I \to \mathcal H \defeq \lambda \map c(\lambda) \cdot \phi_n(\lambda)
+  \]
+  has the same starting vector and \xref[eigenvalue branch]{def:eigenvalue-branch} by linearity.
+  Unit normalization leaves a parameter-dependent phase undetermined.
+\end{rem}
+
 \section{Second-Order Perturbation Theory} 
 
+\begin{thm}[Second Order Energy Correction]{second-order-energy-correction}
+
+\end{thm}
+
 \section{Degenerate Perturbation Theory}
+
+\begin{rem}[Choice of Degenerate Reference States]{degenerate-reference-states}
+  Degenerate energies allow different directions within the same eigenspace. The appropriate starting states for \xref[eigenvector branches]{def:eigenvector-branch} must be selected within that eigenspace.
+\end{rem}
 
 \end{document}
