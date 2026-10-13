@@ -54,16 +54,16 @@
 \end{rem}
 
 \begin{dfn}[Reference Eigenpair]{reference-eigenpair}
-  A \emph{reference eigenpair} of an \xref[unperturbed Hamiltonian]{def:unperturbed-hamiltonian} $\hat H_0$ is a known pair $(\psi_n^{(0)}, E_n^{(0)}) \in \mathcal H \times \mathbb R$ satisfying
+  A \emph{reference eigenpair} of an \xref[unperturbed Hamiltonian]{def:unperturbed-hamiltonian} $\hat H_0$ is a known pair $(\psi_n^{\porder{0}}, E_n^{\porder{0}}) \in \mathcal H \times \mathbb R$ satisfying
   \[
-    \psi_n^{(0)} \ne 0,
+    \psi_n^{\porder{0}} \ne 0,
     \qquad
-    \hat H_0\bigl(\psi_n^{(0)}\bigr) = E_n^{(0)} \cdot \psi_n^{(0)}.
+    \hat H_0\bigl(\psi_n^{\porder{0}}\bigr) = E_n^{\porder{0}} \cdot \psi_n^{\porder{0}}.
   \]
 \end{dfn}
 
 \begin{dfn}[Eigenvector Branch]{eigenvector-branch}
-  Given a \xref[perturbation family]{def:perturbation-family} and a \xref[reference eigenpair]{def:reference-eigenpair} $(\psi_n^{(0)}, E_n^{(0)})$, an \emph{eigenvector branch} is a continuous function $\phi : I \to \mathcal H$ with $\phi(0) = \psi_n^{(0)}$ and, for every $\lambda \in I$,
+  Given a \xref[perturbation family]{def:perturbation-family} and a \xref[reference eigenpair]{def:reference-eigenpair} $(\psi_n^{\porder{0}}, E_n^{\porder{0}})$, an \emph{eigenvector branch} is a continuous function $\phi : I \to \mathcal H$ with $\phi(0) = \psi_n^{\porder{0}}$ and, for every $\lambda \in I$,
   \[
     \phi(\lambda) \ne 0,
     \qquad
@@ -84,14 +84,14 @@
 
 \begin{rem}[Choosing a Branch]{eigenvector-branch-choice}
   The \xref[eigenvector-branch definition]{def:eigenvector-branch} specifies possible functions without asserting existence or uniqueness. If one exists, fix a choice $\phi_n$; the index $n$ labels its reference eigenpair.
-  For this choice, each $\varepsilon_n(\lambda)$ exists and is unique: two candidate eigenvalues $e,f$ satisfy $(e-f) \cdot \phi_n(\lambda) = 0$, so $e=f$. In particular, $\varepsilon_n(0) = E_n^{(0)}$.
+  For this choice, each $\varepsilon_n(\lambda)$ exists and is unique: two candidate eigenvalues $e,f$ satisfy $(e-f) \cdot \phi_n(\lambda) = 0$, so $e=f$. In particular, $\varepsilon_n(0) = E_n^{\porder{0}}$.
 \end{rem}
 
 \begin{conv}[State and Energy Notation]{eigenpair-notation}
   \[
-    \psi_n^{(0)} = \phi_n(0),
+    \psi_n^{\porder{0}} = \phi_n(0),
     \qquad
-    E_n^{(0)} = \varepsilon_n(0).
+    E_n^{\porder{0}} = \varepsilon_n(0).
   \]
   \[
     \psi_n^{\mathrm{phys}} \defeq \phi_n(1),
@@ -102,32 +102,32 @@
 
 \begin{dfn}[State Coefficient Sequence]{perturbative-expansion}
   \[
-    \psi_n : \mathbb N_0 \to \mathcal H \defeq k \map \psi_n^{(k)}.
+    \psi_n : \mathbb N_0 \to \mathcal H \defeq k \map \psi_n^{\porder{k}}.
   \]
 \end{dfn}
 
 \begin{dfn}[Energy Coefficient Sequence]{energy-perturbative-expansion}
   \[
-    E_n : \mathbb N_0 \to \mathbb R \defeq k \map E_n^{(k)}.
+    E_n : \mathbb N_0 \to \mathbb R \defeq k \map E_n^{\porder{k}}.
   \]
 \end{dfn}
 
 \begin{hypo}[Existence of a Perturbative Expansion]{perturbative-expansion-existence}
-  For a chosen \xref[eigenvector branch]{def:eigenvector-branch} $\phi_n$ and its \xref[eigenvalue branch]{def:eigenvalue-branch} $\varepsilon_n$, assume there exist a \xref[state coefficient sequence]{def:perturbative-expansion} $\psi_n$ and an \xref[energy coefficient sequence]{def:energy-perturbative-expansion} $E_n$ such that, for every $\lambda \in I$ sufficiently close to $0$,
+  For a chosen \xref[eigenvector branch]{def:eigenvector-branch} $\phi_n$ and its \xref[eigenvalue branch]{def:eigenvalue-branch} $\varepsilon_n$, assume there exist a \xref[state coefficient sequence]{def:perturbative-expansion} $\psi_n$, an \xref[energy coefficient sequence]{def:energy-perturbative-expansion} $E_n$, and a neighborhood $J$ of $0$ in $I$ such that the following local function rules hold for $\lambda \in J$:
   \[
-    \phi_n(\lambda)
-    = \sum_{0}^{\infty}\left(k \map \lambda^k \cdot \psi_n(k)\right).
+    \phi_n : I \to \mathcal H,
+    \qquad \lambda \map \sum_{0}^{\infty}\left(k \map \lambda^k \cdot \psi_n(k)\right).
   \]
   \[
-    \varepsilon_n(\lambda)
-    = \sum_{0}^{\infty}\left(k \map \lambda^k \cdot E_n(k)\right).
+    \varepsilon_n : I \to \mathbb R,
+    \qquad \lambda \map \sum_{0}^{\infty}\left(k \map \lambda^k \cdot E_n(k)\right).
   \]
   Moreover, for each $A \in \{\hat H_0,\hat H'\}$, all indicated operator applications are defined and
   \[
-    A\bigl(\phi_n(\lambda)\bigr)
-    = \sum_{0}^{\infty}\left(k \map \lambda^k \cdot A\bigl(\psi_n(k)\bigr)\right).
+    A\circ\phi_n : I \to \mathcal H,
+    \qquad \lambda \map \sum_{0}^{\infty}\left(k \map \lambda^k \cdot A\bigl(\psi_n(k)\bigr)\right).
   \]
-  All vector series above converge in the norm of $\mathcal H$, and the scalar series converges in $\mathbb R$.
+  For every $\lambda \in J$, all vector series above converge in the norm of $\mathcal H$, and the scalar series converges in $\mathbb R$.
 \end{hypo}
 
 \begin{rem}[Scope of the Expansion Hypothesis]{expansion-convergence}
@@ -152,8 +152,19 @@
   Substitute $\hat H_{\mathrm{fam}}(\lambda) = \hat H_0 + \lambda \cdot \hat H'$ and the \xref[assumed expansions]{hypo:perturbative-expansion-existence} into the TISE.
 \end{proof}
 
-\begin{conv}[$k$-th-Order Coefficient and Correction Notation]{order-k-correction}
-  We call $\psi_n^{(k)}$ the \emph{$k$-th-order state correction} and $E_n^{(k)}$ the \emph{$k$-th-order energy correction}. The $0$-th-order terms are the reference eigenpair: $\psi_n^{(0)} = \phi_n(0)$ and $E_n^{(0)} = \varepsilon_n(0)$. 
+\begin{conv}[Perturbation Order Notation]{order-k-correction}
+  Parenthesized superscripts denote perturbative order:
+  \[
+    \psi_n^{\porder{k}} \defeq \psi_n(k),
+    \qquad
+    E_n^{\porder{k}} \defeq E_n(k).
+  \]
+  For $k \geq 1$, these are the \emph{$k$-th-order state and energy correction coefficients}. The zeroth-order terms form the reference eigenpair:
+  \[
+    \psi_n^{\porder{0}} = \phi_n(0),
+    \qquad
+    E_n^{\porder{0}} = \varepsilon_n(0).
+  \]
 \end{conv}
 
 \begin{dfn}[Order-by-Order Perturbation System]{order-matched-system}
@@ -169,7 +180,7 @@
 \end{dfn}
 
 \begin{thm}[Equivalence of Perturbation Equations]{order-matched-equations}
-  Under the \xref[expansion hypothesis]{hypo:perturbative-expansion-existence}, the sequences $\psi_n \defeq i \map \psi_n^{(i)}$ and $E_n \defeq i \map E_n^{(i)}$ satisfy all equations of the \xref[order-by-order system]{def:order-matched-system} if and only if $(\phi_n,\varepsilon_n)$ solves the \xref[summation-form equation]{thm:perturbation-equation} for every $\lambda \in I$ sufficiently close to $0$.
+  Under the \xref[expansion hypothesis]{hypo:perturbative-expansion-existence}, the sequences $\psi_n \defeq i \map \psi_n^{\porder{i}}$ and $E_n \defeq i \map E_n^{\porder{i}}$ satisfy all equations of the \xref[order-by-order system]{def:order-matched-system} if and only if $(\phi_n,\varepsilon_n)$ solves the \xref[summation-form equation]{thm:perturbation-equation} for every $\lambda \in I$ sufficiently close to $0$.
 \end{thm}
 
 \begin{proof}
@@ -192,13 +203,13 @@
 \begin{cor}[Zeroth-, First-, and Second-Order Equations]{equations-through-second-order}
   \[
     \begin{aligned}
-      \hat H_0\bigl(\psi_n^{(0)}\bigr)
-      &= E_n^{(0)} \cdot \psi_n^{(0)}, \\
-      \hat H_0\bigl(\psi_n^{(1)}\bigr) + \hat H'\bigl(\psi_n^{(0)}\bigr)
-      &= E_n^{(0)} \cdot \psi_n^{(1)} + E_n^{(1)} \cdot \psi_n^{(0)}, \\
-      \hat H_0\bigl(\psi_n^{(2)}\bigr) + \hat H'\bigl(\psi_n^{(1)}\bigr)
-      &= E_n^{(0)} \cdot \psi_n^{(2)} + E_n^{(1)} \cdot \psi_n^{(1)}
-      + E_n^{(2)} \cdot \psi_n^{(0)}.
+      \hat H_0\bigl(\psi_n^{\porder{0}}\bigr)
+      &= E_n^{\porder{0}} \cdot \psi_n^{\porder{0}}, \\
+      \hat H_0\bigl(\psi_n^{\porder{1}}\bigr) + \hat H'\bigl(\psi_n^{\porder{0}}\bigr)
+      &= E_n^{\porder{0}} \cdot \psi_n^{\porder{1}} + E_n^{\porder{1}} \cdot \psi_n^{\porder{0}}, \\
+      \hat H_0\bigl(\psi_n^{\porder{2}}\bigr) + \hat H'\bigl(\psi_n^{\porder{1}}\bigr)
+      &= E_n^{\porder{0}} \cdot \psi_n^{\porder{2}} + E_n^{\porder{1}} \cdot \psi_n^{\porder{1}}
+      + E_n^{\porder{2}} \cdot \psi_n^{\porder{0}}.
     \end{aligned}
   \]
 \end{cor}
@@ -208,13 +219,13 @@
 \end{proof}
 
 \begin{dfn}[$k$-th-Order Approximation]{perturbative-approximation}
-  Let $\psi_n^{(k)}$ and $E_n^{(k)}$ be the solution for the \xref[order-by-order system]{def:order-matched-system} at order $k$. 
+  Let $\psi_n^{\porder{k}}$ and $E_n^{\porder{k}}$ be the solution for the \xref[order-by-order system]{def:order-matched-system} at order $k$.
 
   The \emph{$k$-th-order perturbative approximation} to the eigenpair $(\phi_n(\lambda),\varepsilon_n(\lambda))$ is
   \[
-    \phi_n^{(k)} \defeq \sum_{0}^{k}\left(i \map \psi_n^{(i)}\right),
+    \phi_n^{\porder{k}} \defeq \sum_{0}^{k}\left(i \map \psi_n^{\porder{i}}\right),
     \qquad
-    \varepsilon_n^{(k)} \defeq \sum_{0}^{k}\left(i \map E_n^{(i)}\right).
+    \varepsilon_n^{\porder{k}} \defeq \sum_{0}^{k}\left(i \map E_n^{\porder{i}}\right).
   \] 
 \end{dfn}
 
@@ -225,41 +236,105 @@
 \section{First-Order Perturbation Theory} 
 
 \begin{thm}[First Order Energy Correction]{first-order-energy-correction}
-
+  Under the \xref[expansion hypothesis]{hypo:perturbative-expansion-existence}, let the \xref[reference eigenstate]{def:reference-eigenpair} be normalized: $\braket{\psi_n^{\porder{0}}|\psi_n^{\porder{0}}} = 1$. Then
+  \[
+    E_n^{\porder{1}} = \bra{\psi_n^{\porder{0}}}\hat H'\ket{\psi_n^{\porder{0}}}.
+  \]
 \end{thm} 
 
 \begin{proof}
   According to the \xref[first order equation]{cor:equations-through-second-order}, we have 
-  \[\hat H_0 \ket{\psi_n^{(1)}} + \hat H' \ket{\psi_n^{(0)}} = E_n^{(0)} \ket{\psi_n^{(1)}} + E_n^{(1)} \ket{\psi_n^{(0)}} \]
+  \[\hat H_0 \ket{\psi_n^{\porder{1}}} + \hat H' \ket{\psi_n^{\porder{0}}} = E_n^{\porder{0}} \ket{\psi_n^{\porder{1}}} + E_n^{\porder{1}} \ket{\psi_n^{\porder{0}}} \]
 
-  Since $\psi_n^{(0)}$ is a non-zero eigenvector, we can multiply its bra vector to both sides, ie 
-  \[\bra{\psi_n^{(0)}} \hat H_0 \ket{\psi_n^{(1)}} + \bra{\psi_n^{(0)}} \hat H' \ket{\psi_n^{(0)}} = \bra{\psi_n^{(0)}} E_n^{(0)} \ket{\psi_n^{(1)}} + \bra{\psi_n^{(0)}} E_n^{(1)} \ket{\psi_n^{(0)}} \]
+  Since $\psi_n^{\porder{0}}$ is a non-zero eigenvector, we can multiply its bra vector to both sides, ie 
+  \[\bra{\psi_n^{\porder{0}}} \hat H_0 \ket{\psi_n^{\porder{1}}} + \bra{\psi_n^{\porder{0}}} \hat H' \ket{\psi_n^{\porder{0}}} = \bra{\psi_n^{\porder{0}}} E_n^{\porder{0}} \ket{\psi_n^{\porder{1}}} + \bra{\psi_n^{\porder{0}}} E_n^{\porder{1}} \ket{\psi_n^{\porder{0}}} \]
 
-  Notice $E_n^{(0)}$ is an real number, and according to the normalization axiom, 
-  \[\bra{\psi_n^{(0)}} E_n^{(1)} \ket{\psi_n^{(0)}} = E_n^{(1)} \braket{\psi_n^{(0)} \mid \psi_n^{(0)}} = E_n^{(1)} \] 
+  Notice $E_n^{\porder{0}}$ is an real number, and according to the normalization axiom, 
+  \[\bra{\psi_n^{\porder{0}}} E_n^{\porder{1}} \ket{\psi_n^{\porder{0}}} = E_n^{\porder{1}} \braket{\psi_n^{\porder{0}} \mid \psi_n^{\porder{0}}} = E_n^{\porder{1}} \] 
 
-  According to the TISE, $H \ket{\psi} = E \ket{\psi}$, we subsitute that relationship into $\bra{\psi_n^{(0)}} \hat H_0$ 
-  \[\bra{\psi_n^{(0)}} \hat H_0 \ket{\psi_n^{(1)}} = \bra{\psi_n^{(0)}} \hat E_0 \ket{\psi_n^{(1)}} = E_0 \braket{\psi_n^{(0)} \mid \psi_n^{(1)}} \]
+  According to the TISE, $H \ket{\psi} = E \ket{\psi}$, we subsitute that relationship into $\bra{\psi_n^{\porder{0}}} \hat H_0$ 
+  \[\bra{\psi_n^{\porder{0}}} \hat H_0 \ket{\psi_n^{\porder{1}}} = \bra{\psi_n^{\porder{0}}} \hat E_0 \ket{\psi_n^{\porder{1}}} = E_0 \braket{\psi_n^{\porder{0}} \mid \psi_n^{\porder{1}}} \]
 
   Subsitute back, we can get 
-  \[E_0 \braket{\psi_n^{(0)} \mid \psi_n^{(1)}} + \bra{\psi_n^{(0)}} \hat H' \ket{\psi_n^{(0)}} = \bra{\psi_n^{(0)}} E_n^{(0)} \ket{\psi_n^{(1)}} + E_n^{(1)} \]
+  \[E_0 \braket{\psi_n^{\porder{0}} \mid \psi_n^{\porder{1}}} + \bra{\psi_n^{\porder{0}}} \hat H' \ket{\psi_n^{\porder{0}}} = \bra{\psi_n^{\porder{0}}} E_n^{\porder{0}} \ket{\psi_n^{\porder{1}}} + E_n^{\porder{1}} \]
 
-  Notice that $E_0 \braket{\psi_n^{(0)} \mid \psi_n^{(1)}} = \bra{\psi_n^{(0)}} E_n^{(0)} \ket{\psi_n^{(1)}} $, cancel out the term, 
-  \[E_n^{(1)}  = \bra{\psi_n^{(0)}} \hat H' \ket{\psi_n^{(0)}} \] 
+  Notice that $E_0 \braket{\psi_n^{\porder{0}} \mid \psi_n^{\porder{1}}} = \bra{\psi_n^{\porder{0}}} E_n^{\porder{0}} \ket{\psi_n^{\porder{1}}} $, cancel out the term, 
+  \[E_n^{\porder{1}}  = \bra{\psi_n^{\porder{0}}} \hat H' \ket{\psi_n^{\porder{0}}} \] 
 \end{proof}
 
 \begin{thm}[First Order State Correction]{first-order-state-correction}
-
+  Under the \xref[expansion hypothesis]{hypo:perturbative-expansion-existence}, suppose the reference eigenstates are orthonormal and $\psi_n^{\porder{1}}$ admits a norm-convergent expansion in them. Let $E_n^{\porder{0}}$ be nondegenerate, and choose $\braket{\psi_n^{\porder{0}}|\psi_n^{\porder{1}}}=0$. Then
+  \[
+    \psi_n^{\porder{1}}
+    = \sum_{m\ne n}\left(m \map
+      \frac{\bra{\psi_m^{\porder{0}}}\hat H'\ket{\psi_n^{\porder{0}}}}
+      {E_n^{\porder{0}}-E_m^{\porder{0}}}
+      \cdot\psi_m^{\porder{0}}\right),
+  \]
+  where the sum runs over $m\in\mathbb N_1$ with $m\ne n$.
 \end{thm} 
 
 \begin{proof}
-  According to the \xref[first order equation]{cor:equations-through-second-order}, we have 
-  \[\hat H_0 \ket{\psi_n^{(1)}} + \hat H' \ket{\psi_n^{(0)}} = E_n^{(0)} \ket{\psi_n^{(1)}} + E_n^{(1)} \ket{\psi_n^{(0)}} \]
+  According to the \xref[first order equation]{cor:equations-through-second-order}, and multiply $\bra{\psi_m^{\porder{0}}}$ (the bra of a reference eigenstate) on both sides, we have
+  \[
+    \begin{aligned}
+      &\bra{\psi_m^{\porder{0}}}\hat H_0\ket{\psi_n^{\porder{1}}}
+      + \bra{\psi_m^{\porder{0}}}\hat H'\ket{\psi_n^{\porder{0}}} \\
+      &\quad = \bra{\psi_m^{\porder{0}}}E_n^{\porder{0}}\ket{\psi_n^{\porder{1}}}
+      + \bra{\psi_m^{\porder{0}}}E_n^{\porder{1}}\ket{\psi_n^{\porder{0}}}.
+    \end{aligned}
+  \]
 
   Rearranging the equation, we can get 
-  \[\left(\hat H_0 - E_n^{(0)} \cdot \hat I\right) \ket{\psi_n^{(1)}} = \left(E_n^{(1)} \cdot \hat I - \hat H'\right) \ket{\psi_n^{(0)}}\]
+  \[
+      \bra{\psi_m^{\porder{0}}}\hat H_0\ket{\psi_n^{\porder{1}}}
+      - E_n^{\porder{0}}\cdot\braket{\psi_m^{\porder{0}}|\psi_n^{\porder{1}}} 
+       = E_n^{\porder{1}}\cdot\braket{\psi_m^{\porder{0}}|\psi_n^{\porder{0}}}
+      - \bra{\psi_m^{\porder{0}}}\hat H'\ket{\psi_n^{\porder{0}}}
+  \]
 
-  
+  Apply Hermiticity and the reference eigenvalue equation, we get 
+  \[\bra{\psi_m^{\porder{0}}}\hat H_0\ket{\psi_n^{\porder{1}}} = \braket{ \hat H_0 \psi_m^{\porder{0}} \mid \psi_n^{\porder{1}}} = E_m^{\porder{0}}\braket{\psi_m^{\porder{0}} \mid \psi_n^{\porder{1}}}\] 
+
+  Also, according \missingprereq{orthonormality}, 
+  \[E_n^{\porder{1}}\cdot\braket{\psi_m^{\porder{0}}|\psi_n^{\porder{0}}} = E_n^{\porder{1}}\cdot\delta_{n, m}\]
+
+  Let $\{\psi_m^{\porder{0}} : m \in \mathbb N_1\}$ be linearly independent reference solutions. For fixed $n$, assume there exists a coefficient function $c_n : \mathbb N_1 \to \mathbb C$ such that
+  \[
+    \psi_n^{\porder{1}}
+    = \sum^{\infty}\left(m \map c_n(m)\cdot\psi_m^{\porder{0}}\right) 
+  \]
+  with convergence in the norm of $\mathcal H$. Which means that 
+  \[c_m \defeq c_n(m) = \braket{\psi_m^{\porder{0}} \mid \psi_n^{\porder{1}}}\]
+
+  Plug back in, we get 
+  \[
+  E_m^{\porder{0}} \cdot c_m 
+      - E_n^{\porder{0}}\cdot c_m 
+       = E_n^{\porder{1}}\cdot \delta_{n, m}
+      - \bra{\psi_m^{\porder{0}}}\hat H'\ket{\psi_n^{\porder{0}}}\] 
+
+  Choose $c_n(n)=0$. \todo: justify this normalization and phase choice.
+
+    For $m\ne n$ with $E_m^{\porder{0}}\ne E_n^{\porder{0}}$, solve for $c_m$, we have
+    \[c_m = \frac{E_n^{\porder{1}}\cdot \delta_{n, m} - \bra{\psi_m^{\porder{0}}}\hat H'\ket{\psi_n^{\porder{0}}}}{E_m^{\porder{0}} - E_n^{\porder{0}}} \] 
+
+  Since $m\ne n$, $\delta_{n,m}=0$. Hence
+  \[
+    c_m
+    = -\frac{\bra{\psi_m^{\porder{0}}}\hat H'\ket{\psi_n^{\porder{0}}}}
+      {E_m^{\porder{0}}-E_n^{\porder{0}}}
+    = \frac{\bra{\psi_m^{\porder{0}}}\hat H'\ket{\psi_n^{\porder{0}}}}
+      {E_n^{\porder{0}}-E_m^{\porder{0}}}.
+  \]
+  Substituting these coefficients into the expansion and using $c_n(n)=0$ gives
+  \[
+    \psi_n^{\porder{1}}
+    = \sum_{m\ne n}\left(m \map
+      \frac{\bra{\psi_m^{\porder{0}}}\hat H'\ket{\psi_n^{\porder{0}}}}
+      {E_n^{\porder{0}}-E_m^{\porder{0}}}
+      \cdot\psi_m^{\porder{0}}\right).
+  \]
 \end{proof}
 
 \begin{rem}[Normalization and Phase]{eigenpair-choices}
@@ -274,13 +349,47 @@
 \section{Second-Order Perturbation Theory} 
 
 \begin{thm}[Second Order Energy Correction]{second-order-energy-correction}
-
+  Under the assumptions and normalization choice of the \xref[first-order state correction]{thm:first-order-state-correction}, with $\hat H'$ \xref[Hermitian]{ch03::def:hermitian-operator},
+  \[
+    E_n^{\porder{2}}
+    = \sum_{m\ne n}\left(m \map
+      \frac{\left\lvert\bra{\psi_m^{\porder{0}}}\hat H'\ket{\psi_n^{\porder{0}}}\right\rvert^2}
+      {E_n^{\porder{0}}-E_m^{\porder{0}}}\right) 
+  \]
+  where the sum runs over $m\in\mathbb N_1$ with $m\ne n$.
 \end{thm}
+
+\begin{proof}
+\todo 
+\end{proof}
 
 \section{Degenerate Perturbation Theory}
 
+\begin{dfn}[Good Basis]{good-basis}
+  Let the degenerate eigenspace of the \xref[unperturbed Hamiltonian]{def:unperturbed-hamiltonian} be
+  \[
+    V_{E_0} \defeq \{\psi\in\mathcal H : \hat H_0(\psi)=E_0\cdot\psi\},
+    \qquad \dim V_{E_0}=d\geq2.
+  \]
+  A \emph{good basis} is an orthonormal basis $B=\{\psi_i^{\porder{0}} : i\in\{1,\ldots,d\}\}$ of $V_{E_0}$, where for each $i$ there exists an \xref[eigenvector branch]{def:eigenvector-branch} $\phi_i$, satisfying the \xref[expansion hypothesis]{hypo:perturbative-expansion-existence}, with corresponding \xref[eigenvalue branch]{def:eigenvalue-branch} $\varepsilon_i$ such that
+  \[
+    \phi_i(0)=\psi_i^{\porder{0}},
+    \qquad \varepsilon_i(0)=E_0.
+  \]
+\end{dfn}
+
+\begin{dfn}[Good States]{good-states}
+  The \emph{good states} are the states in a \xref[good basis]{def:good-basis} $B$, ie, each $\psi_i^{\porder{0}}\in B$ is a good state.
+\end{dfn}
+
 \begin{rem}[Choice of Degenerate Reference States]{degenerate-reference-states}
   Degenerate energies allow different directions within the same eigenspace. The appropriate starting states for \xref[eigenvector branches]{def:eigenvector-branch} must be selected within that eigenspace.
+  All states in a \xref[good basis]{def:good-basis} have the same reference energy: $\varepsilon_i(0)=E_0$. If, for every sufficiently small nonzero $\lambda\in I$,
+  \[
+    \forall i,j\in\{1,\ldots,d\},\, i\ne j,
+    \qquad \varepsilon_i(\lambda)\ne\varepsilon_j(\lambda),
+  \]
+  the degeneracy is \emph{completely lifted}.
 \end{rem}
 
 \end{document}

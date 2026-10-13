@@ -9,6 +9,15 @@
   \ensuremath{\xref[\mathscr{O}]{\operatorTypeRef}}%
 }
 
+% Perturbation-order superscript; differentiation uses the D operator.
+\providecommand*{\perturbationOrderRef}{quantum-mechanics::ch07::conv:order-k-correction}
+\newcommand*{\porder}[1]{%
+  \ensuremath{\xref[(#1)]{\perturbationOrderRef}}%
+}
+
+% Purple prerequisite until differentiation / chosen primitives are defined.
+\newcommand*{\DiffOp}{\ensuremath{\missingprereq{\mathrm D}}}
+
 % =============================================================================
 % Function-style commutator: \comm{A}{B} renders as comm(A, B).
 % We use a function-style macro instead of the raw [ ] brackets to avoid
