@@ -416,20 +416,40 @@
 
 \missingprereq{Infinite-dimensional extension: state the additional spectral and operator-domain assumptions and justify existence of the branches, functional-analysis}. \todo
 
-\begin{thm}
+\begin{dfn}[Perturbation Matrix]{perturbation-matrix}
+  Given a \xref[good basis]{def:good-basis} $B=\{\chi_r^{\porder{0}} : r\in\{1,\ldots,d\}\}$ of $V_{E_0}$, the \emph{perturbation matrix} $W\in\mathbb C^{d\times d}$ is defined by its entries:
+  \[
+    W_{rs}\defeq\bra{\chi_r^{\porder{0}}}\hat H'\ket{\chi_s^{\porder{0}}},
+    \qquad r,s\in\{1,\ldots,d\}.
+  \]
+\end{dfn}
 
+\begin{thm}[Degenerate First-Order Equation]{degenerate-first-order-equation}
+  Let $B=\{\chi_r^{\porder{0}} : r\in\{1,\ldots,d\}\}$ be a \xref[good basis]{def:good-basis} of $V_{E_0}$, and let $W$ be its \xref[perturbation matrix]{def:perturbation-matrix}. Suppose a chosen \xref[eigenvector branch]{def:eigenvector-branch} starts at $\psi_i^{\porder{0}}\in V_{E_0}$ and satisfies the \xref[expansion hypothesis]{hypo:perturbative-expansion-existence}, with first-order energy correction $E_i^{\porder{1}}$.
+  Write
+  \[
+    \psi_i^{\porder{0}}
+    = \sum_1^d\left(s\map c(s)\cdot\chi_s^{\porder{0}}\right),
+    \qquad c : \{1,\ldots,d\}\to\mathbb C.
+  \]
+  Then its coefficient column satisfies
+  \[
+    W\mathbf c=E_i^{\porder{1}}\cdot\mathbf c,
+    \qquad \mathbf c\ne0.
+  \]
+  Thus $E_i^{\porder{1}}$ is an eigenvalue of $W$, and $\mathbf c$ is a corresponding eigenvector.
 \end{thm}
 
 \begin{proof}
 Given a degenerate eigenspace $V_{E_0}$ of dimension $d\geq2$, we have the unperturbed orthonormal degenerate eigenstates $\{\psi_i^{\porder{0}} : i\in\{1,\ldots,d\}\}$ with the same eigenvalue $E_0$. 
 
-Given a good basis $B$, for any of the degenerate eigenstates $\psi_i^{\porder{0}}$, there exists a coefficient function $c_i : \{1,\ldots,d\}\to\mathbb C$ such that
-\[\psi_i^{\porder{0}} = \sum_1^d\left(r \map c_i(r)\cdot\chi_r^{\porder{0}}\right)\] 
+Given a good basis $B$, for the chosen reference eigenstate $\psi_i^{\porder{0}}$, there exists a coefficient function $c : \{1,\ldots,d\}\to\mathbb C$ such that
+\[\psi_i^{\porder{0}} = \sum_1^d\left(s \map c(s)\cdot\chi_s^{\porder{0}}\right)\] 
 
 Where we get the original first order equation and multiply $\bra{\chi_r^{\porder{0}}}$ on both sides, we have
 \[\bra{\chi_r^{\porder{0}}}\hat H_0\ket{\psi_i^{\porder{1}}} + \bra{\chi_r^{\porder{0}}}\hat H'\ket{\psi_i^{\porder{0}}} = \bra{\chi_r^{\porder{0}}}E_i^{\porder{0}}\ket{\psi_i^{\porder{1}}} + \bra{\chi_r^{\porder{0}}}E_i^{\porder{1}}\ket{\psi_i^{\porder{0}}}\] 
 
-Notice that all good states have the same unperturbed energy $E_0$ as the degenerate eigenstates, we can obtain: 
+Notice that all states in $B$ have the same unperturbed energy $E_0$ as the degenerate eigenstates, we can obtain: 
 \[\bra{\chi_r^{\porder{0}}}\hat H_0\ket{\psi_i^{\porder{1}}} = \braket{\hat H_0 \chi_r^{\porder{0}} \mid \psi_i^{\porder{1}}} = E_i^{\porder{0}} \braket{\chi_r^{\porder{0}} \mid \psi_i^{\porder{1}}} \] 
 
 Plug in and extract the real number out, we have: 
@@ -442,16 +462,66 @@ Which means
 \[\bra{\chi_r^{\porder{0}}}\hat H'\ket{\psi_i^{\porder{0}}} = 
 E_i^{\porder{1}} \braket{\chi_r^{\porder{0}} \mid \psi_i^{\porder{0}}}\] 
 
+Plug in the expansion of $\psi_i^{\porder{0}}$, we have 
+\[\bra{\chi_r^{\porder{0}}}\hat H'\ket{\sum_1^d\left(s \map c(s)\cdot\chi_s^{\porder{0}}\right)} = 
+E_i^{\porder{1}} \braket{\chi_r^{\porder{0}} \mid \sum_1^d\left(s \map c(s)\cdot\chi_s^{\porder{0}}\right)}\] 
+
+Due to linearity, 
+\begin{align*}
+\sum_1^d\left(s \map \bra{\chi_r^{\porder{0}}}\hat H'\ket{ c(s)\cdot\chi_s^{\porder{0}}} \right) &= 
+E_i^{\porder{1}} \sum_1^d\left( s \map \braket{\chi_r^{\porder{0}} \mid c(s)\cdot\chi_s^{\porder{0}}}\right) \\ 
+\sum_1^d\left(s \map c(s) \bra{\chi_r^{\porder{0}}}\hat H'\ket{ \chi_s^{\porder{0}}} \right) &= 
+E_i^{\porder{1}} \sum_1^d\left( s \map c(s) \braket{\chi_r^{\porder{0}} \mid \chi_s^{\porder{0}}}\right)  
+\end{align*}
+Notice that $\braket{\chi_r^{\porder{0}} \mid \chi_s^{\porder{0}}} = \delta_{r,s}$, we have
+\begin{align*}
+\sum_1^d\left(s \map c(s) \bra{\chi_r^{\porder{0}}}\hat H'\ket{ \chi_s^{\porder{0}}} \right) &= 
+E_i^{\porder{1}} c(r) 
+\end{align*}
+
+We treat each $c(r), r \in \{1, 2, ..., d\}$ as a variable, then we can assemble a linear system of equations, to solve $c$ pointwise. 
+\begin{align*}
+\begin{bmatrix}
+\bra{\chi_1^{\porder{0}}}\hat H'\ket{\chi_1^{\porder{0}}} & \bra{\chi_1^{\porder{0}}}\hat H'\ket{\chi_2^{\porder{0}}} & \cdots & \bra{\chi_1^{\porder{0}}}\hat H'\ket{\chi_d^{\porder{0}}} \\
+\bra{\chi_2^{\porder{0}}}\hat H'\ket{\chi_1^{\porder{0}}} & \bra{\chi_2^{\porder{0}}}\hat H'\ket{\chi_2^{\porder{0}}} & \cdots & \bra{\chi_2^{\porder{0}}}\hat H'\ket{\chi_d^{\porder{0}}} \\
+\vdots & \vdots & \ddots & \vdots \\
+\bra{\chi_d^{\porder{0}}}\hat H'\ket{\chi_1^{\porder{0}}} & \bra{\chi_d^{\porder{0}}}\hat H'\ket{\chi_2^{\porder{0}}} & \cdots & \bra{\chi_d^{\porder{0}}}\hat H'\ket{\chi_d^{\porder{0}}}
+\end{bmatrix}
+\begin{bmatrix}
+c(1) \\
+c(2) \\
+\vdots \\
+c(d)
+\end{bmatrix}
+=
+E_i^{\porder{1}} \begin{bmatrix}
+c(1) \\
+c(2) \\
+\vdots \\
+c(d)
+\end{bmatrix}
+\end{align*}
+
+According to the \xref[definition of the perturbation matrix]{def:perturbation-matrix}, let
+\[
+  \mathbf c\defeq\begin{bmatrix}c(1)\\c(2)\\\vdots\\c(d)\end{bmatrix}.
+\]
+Then the linear system becomes
+\[
+  W\mathbf c=E_i^{\porder{1}}\cdot\mathbf c.
+\]
+Since $\psi_i^{\porder{0}}\ne0$, $\mathbf c\ne0$. Thus $E_i^{\porder{1}}$ is an eigenvalue of $W$, and $\mathbf c$ is a corresponding eigenvector.
+Finding $\mathbf c$ is equivalent to finding $c$, since its $r$-th entry is $c(r)$.
 \end{proof}
 
-\begin{rem}[Choice of Degenerate Reference States]{degenerate-reference-states}
-  Degenerate energies allow different directions within the same eigenspace. The appropriate starting states for \xref[eigenvector branches]{def:eigenvector-branch} must be selected within that eigenspace.
-  All states in a \xref[good basis]{def:good-basis} have the same reference energy: $\varepsilon_r(0)=E_0$. If, for every sufficiently small nonzero $\lambda\in I$,
-  \[
-    \forall r,s\in\{1,\ldots,d\},\, r\ne s,
-    \qquad \varepsilon_r(\lambda)\ne\varepsilon_s(\lambda),
-  \]
-  the degeneracy is \emph{completely lifted}.
-\end{rem}
+% \begin{rem}[Choice of Degenerate Reference States]{degenerate-reference-states}
+%   Degenerate energies allow different directions within the same eigenspace. The appropriate starting states for \xref[eigenvector branches]{def:eigenvector-branch} must be selected within that eigenspace.
+%   All states in a \xref[good basis]{def:good-basis} have the same reference energy: $\varepsilon_r(0)=E_0$. If, for every sufficiently small nonzero $\lambda\in I$,
+%   \[
+%     \forall r,s\in\{1,\ldots,d\},\, r\ne s,
+%     \qquad \varepsilon_r(\lambda)\ne\varepsilon_s(\lambda),
+%   \]
+%   the degeneracy is \emph{completely lifted}.
+% \end{rem}
 
 \end{document}
