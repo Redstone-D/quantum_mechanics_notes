@@ -429,13 +429,17 @@ Given a good basis $B$, for any of the degenerate eigenstates $\psi_i^{\porder{0
 Where we get the original first order equation and multiply $\bra{\chi_r^{\porder{0}}}$ on both sides, we have
 \[\bra{\chi_r^{\porder{0}}}\hat H_0\ket{\psi_i^{\porder{1}}} + \bra{\chi_r^{\porder{0}}}\hat H'\ket{\psi_i^{\porder{0}}} = \bra{\chi_r^{\porder{0}}}E_i^{\porder{0}}\ket{\psi_i^{\porder{1}}} + \bra{\chi_r^{\porder{0}}}E_i^{\porder{1}}\ket{\psi_i^{\porder{0}}}\] 
 
-Notice that 
-\[\bra{\chi_r^{\porder{0}}}\hat H_0\ket{\psi_i^{\porder{0}}} = E_i^{\porder{0}} \braket{\chi_r^{\porder{0}} \mid \psi_i^{\porder{0}}} \] 
+Notice that all good states have the same unperturbed energy $E_0$ as the degenerate eigenstates, we can obtain: 
+\[\bra{\chi_r^{\porder{0}}}\hat H_0\ket{\psi_i^{\porder{1}}} = \braket{\hat H_0 \chi_r^{\porder{0}} \mid \psi_i^{\porder{1}}} = E_i^{\porder{0}} \braket{\chi_r^{\porder{0}} \mid \psi_i^{\porder{1}}} \] 
 
 Plug in and extract the real number out, we have: 
-\[\bra{\chi_r^{\porder{0}}}\hat H_0\ket{\psi_i^{\porder{1}}} + 
-E_i^{\porder{0}} \braket{\chi_r^{\porder{0}} \mid \psi_i^{\porder{0}}} = 
+\[E_i^{\porder{0}} \braket{\chi_r^{\porder{0}} \mid \psi_i^{\porder{1}}} + 
+\bra{\chi_r^{\porder{0}}}\hat H'\ket{\psi_i^{\porder{0}}} = 
 E_i^{\porder{0}} \braket{\chi_r^{\porder{0}} \mid \psi_i^{\porder{1}}} + 
+E_i^{\porder{1}} \braket{\chi_r^{\porder{0}} \mid \psi_i^{\porder{0}}}\] 
+
+Which means 
+\[\bra{\chi_r^{\porder{0}}}\hat H'\ket{\psi_i^{\porder{0}}} = 
 E_i^{\porder{1}} \braket{\chi_r^{\porder{0}} \mid \psi_i^{\porder{0}}}\] 
 
 \end{proof}
