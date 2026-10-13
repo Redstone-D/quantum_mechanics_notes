@@ -371,23 +371,81 @@
     V_{E_0} \defeq \{\psi\in\mathcal H : \hat H_0(\psi)=E_0\cdot\psi\},
     \qquad \dim V_{E_0}=d\geq2.
   \]
-  A \emph{good basis} is an orthonormal basis $B=\{\psi_i^{\porder{0}} : i\in\{1,\ldots,d\}\}$ of $V_{E_0}$, where for each $i$ there exists an \xref[eigenvector branch]{def:eigenvector-branch} $\phi_i$, satisfying the \xref[expansion hypothesis]{hypo:perturbative-expansion-existence}, with corresponding \xref[eigenvalue branch]{def:eigenvalue-branch} $\varepsilon_i$ such that
+  A \emph{good basis} is an orthonormal basis $B=\{\chi_r^{\porder{0}} : r\in\{1,\ldots,d\}\}$ of $V_{E_0}$, where for each $r$ there exists an \xref[eigenvector branch]{def:eigenvector-branch} $\phi_r$, satisfying the \xref[expansion hypothesis]{hypo:perturbative-expansion-existence}, with corresponding \xref[eigenvalue branch]{def:eigenvalue-branch} $\varepsilon_r$ such that
   \[
-    \phi_i(0)=\psi_i^{\porder{0}},
-    \qquad \varepsilon_i(0)=E_0.
+    \phi_r(0)=\chi_r^{\porder{0}},
+    \qquad \varepsilon_r(0)=E_0.
   \]
 \end{dfn}
 
 \begin{dfn}[Good States]{good-states}
-  The \emph{good states} are the states in a \xref[good basis]{def:good-basis} $B$, ie, each $\psi_i^{\porder{0}}\in B$ is a good state.
+  The \emph{good states} are the states in a \xref[good basis]{def:good-basis} $B$, ie, each $\chi_r^{\porder{0}}\in B$ is a good state.
 \end{dfn}
+
+\begin{cor}[Common Unperturbed Energy]{good-states-common-energy}
+  Given a \xref[good basis]{def:good-basis} $B$ of $V_{E_0}$ and a coefficient function $c : \{1,\ldots,d\}\to\mathbb C$, let
+  \[
+    \psi \defeq \sum_1^d\left(r \map c(r)\cdot\chi_r^{\porder{0}}\right).
+  \]
+  If $\psi\ne0$, it is an eigenstate of $\hat H_0$ with energy $E_0$:
+  \[
+    \hat H_0(\psi)=E_0\cdot\psi.
+  \]
+  Thus all good states and their nonzero linear combinations have the same unperturbed energy.
+\end{cor}
+
+\begin{proof}
+  Since each $\chi_r^{\porder{0}}\in V_{E_0}$, we have $\hat H_0(\chi_r^{\porder{0}})=E_0\cdot\chi_r^{\porder{0}}$. By linearity,
+  \[
+    \begin{aligned}
+      \hat H_0(\psi)
+      &= \sum_1^d\left(r \map c(r)\cdot\hat H_0(\chi_r^{\porder{0}})\right) \\
+      &= E_0\cdot\sum_1^d\left(r \map c(r)\cdot\chi_r^{\porder{0}}\right)
+      = E_0\cdot\psi.
+    \end{aligned}
+  \]
+\end{proof}
+
+\begin{thm}[Existence of a Good Basis]{good-basis-existence}
+  Suppose $\mathcal H$ is finite-dimensional and $\hat H_0,\hat H'$ are \xref[Hermitian]{ch03::def:hermitian-operator}. Then every degenerate eigenspace $V_{E_0}$ of $\hat H_0$ has a \xref[good basis]{def:good-basis} for the \xref[perturbation family]{def:perturbation-family}.
+\end{thm}
+
+\begin{proof}
+  \todo\quad\missingprereq{Rellich's theorem for analytic Hermitian matrix families, operator theory}.
+\end{proof}
+
+\missingprereq{Infinite-dimensional extension: state the additional spectral and operator-domain assumptions and justify existence of the branches, functional-analysis}. \todo
+
+\begin{thm}
+
+\end{thm}
+
+\begin{proof}
+Given a degenerate eigenspace $V_{E_0}$ of dimension $d\geq2$, we have the unperturbed orthonormal degenerate eigenstates $\{\psi_i^{\porder{0}} : i\in\{1,\ldots,d\}\}$ with the same eigenvalue $E_0$. 
+
+Given a good basis $B$, for any of the degenerate eigenstates $\psi_i^{\porder{0}}$, there exists a coefficient function $c_i : \{1,\ldots,d\}\to\mathbb C$ such that
+\[\psi_i^{\porder{0}} = \sum_1^d\left(r \map c_i(r)\cdot\chi_r^{\porder{0}}\right)\] 
+
+Where we get the original first order equation and multiply $\bra{\chi_r^{\porder{0}}}$ on both sides, we have
+\[\bra{\chi_r^{\porder{0}}}\hat H_0\ket{\psi_i^{\porder{1}}} + \bra{\chi_r^{\porder{0}}}\hat H'\ket{\psi_i^{\porder{0}}} = \bra{\chi_r^{\porder{0}}}E_i^{\porder{0}}\ket{\psi_i^{\porder{1}}} + \bra{\chi_r^{\porder{0}}}E_i^{\porder{1}}\ket{\psi_i^{\porder{0}}}\] 
+
+Notice that 
+\[\bra{\chi_r^{\porder{0}}}\hat H_0\ket{\psi_i^{\porder{0}}} = E_i^{\porder{0}} \braket{\chi_r^{\porder{0}} \mid \psi_i^{\porder{0}}} \] 
+
+Plug in and extract the real number out, we have: 
+\[\bra{\chi_r^{\porder{0}}}\hat H_0\ket{\psi_i^{\porder{1}}} + 
+E_i^{\porder{0}} \braket{\chi_r^{\porder{0}} \mid \psi_i^{\porder{0}}} = 
+E_i^{\porder{0}} \braket{\chi_r^{\porder{0}} \mid \psi_i^{\porder{1}}} + 
+E_i^{\porder{1}} \braket{\chi_r^{\porder{0}} \mid \psi_i^{\porder{0}}}\] 
+
+\end{proof}
 
 \begin{rem}[Choice of Degenerate Reference States]{degenerate-reference-states}
   Degenerate energies allow different directions within the same eigenspace. The appropriate starting states for \xref[eigenvector branches]{def:eigenvector-branch} must be selected within that eigenspace.
-  All states in a \xref[good basis]{def:good-basis} have the same reference energy: $\varepsilon_i(0)=E_0$. If, for every sufficiently small nonzero $\lambda\in I$,
+  All states in a \xref[good basis]{def:good-basis} have the same reference energy: $\varepsilon_r(0)=E_0$. If, for every sufficiently small nonzero $\lambda\in I$,
   \[
-    \forall i,j\in\{1,\ldots,d\},\, i\ne j,
-    \qquad \varepsilon_i(\lambda)\ne\varepsilon_j(\lambda),
+    \forall r,s\in\{1,\ldots,d\},\, r\ne s,
+    \qquad \varepsilon_r(\lambda)\ne\varepsilon_s(\lambda),
   \]
   the degeneracy is \emph{completely lifted}.
 \end{rem}
