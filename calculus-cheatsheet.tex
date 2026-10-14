@@ -1,0 +1,220 @@
+\documentclass[10pt]{article}
+\usepackage{notes-project}
+\usepackage{array,tabularx}
+\geometry{margin=13mm}
+
+\newcolumntype{Y}{>{\centering\arraybackslash}X}
+\renewcommand{\arraystretch}{1.9}
+\setlength{\tabcolsep}{4pt}
+\setlength{\abovedisplayskip}{5pt}
+\setlength{\belowdisplayskip}{5pt}
+\DeclareMathOperator{\arcsec}{arcsec}
+\DeclareMathOperator{\arccsc}{arccsc}
+\DeclareMathOperator{\arccot}{arccot}
+\DeclareMathOperator{\csch}{csch}
+
+% The tables list function objects, not values at one chosen input.
+% Left entries are convenient primitive representatives; constants are handled
+% once in the reading guide. D remains a purple prerequisite via \DiffOp.
+
+\begin{document}
+\begin{center}
+  {\Large\bfseries Differentiation and Integration Cheatsheet}\\[2pt]
+  Function notation: $\DiffOp^n(f)$ and $\DiffOp^{-1}(f)$
+\end{center}
+
+\textbf{Reading the sheet.}
+Functions have a real input and real or complex values. Each $x\map\cdots$ is
+a whole function. $\DiffOp(f)$ is its derivative function;
+$\DiffOp^0(f)=f$ and $\DiffOp^{n+1}(f)=\DiffOp(\DiffOp^n(f))$.
+Formal definitions of \missingprereq{differentiation and antiderivatives, real-analysis} are still owed.
+
+\textbf{Constants and endpoint evaluation.}
+The left column gives one primitive $F=\DiffOp^{-1}(f)$, with $\DiffOp(F)=f$.
+All primitives on an interval form the family
+\[
+  \mathcal F\defeq C\map\left(x\map F(x)+C\right).
+\]
+The endpoint notation means $[F]_a^b\defeq F(b)-F(a)$; for this family,
+$[\mathcal F]_a^b\defeq F(b)-F(a)$, since every member has that difference.
+Primitive identities below hold up to an additive constant. At infinite endpoints,
+use the corresponding limits, when they exist.
+
+\textbf{Pointwise operations.}
+For example, $f\cdot g\defeq x\map f(x)\cdot g(x)$ and
+$f\circ g\defeq x\map f(g(x))$. All formulas are used on intervals where the
+functions and indicated operations are defined.
+
+\section*{Basic rules}
+Here $a,b$ are constants. In the quotient rule, $g(x)\ne0$.
+\begin{align*}
+  \DiffOp(a\cdot f+b\cdot g)
+    &=a\cdot\DiffOp(f)+b\cdot\DiffOp(g),\\
+  \DiffOp(f\cdot g)
+    &=\DiffOp(f)\cdot g+f\cdot\DiffOp(g),\\
+  \DiffOp(f/g)
+    &=\frac{\DiffOp(f)\cdot g-f\cdot\DiffOp(g)}{g^2},\\
+  \DiffOp(f\circ g)
+    &=(\DiffOp(f)\circ g)\cdot\DiffOp(g),\\
+  \DiffOp^{-1}(a\cdot f+b\cdot g)
+    &=a\cdot\DiffOp^{-1}(f)+b\cdot\DiffOp^{-1}(g),\\
+  \DiffOp^{-1}(f\cdot\DiffOp(g))
+    &=f\cdot g-\DiffOp^{-1}(\DiffOp(f)\cdot g)
+      &&\text{(integration by parts)},\\
+  \DiffOp^{-1}((f\circ g)\cdot\DiffOp(g))
+    &=\DiffOp^{-1}(f)\circ g
+      &&\text{(substitution)}.
+\end{align*}
+
+\section*{Power, exponential and logarithmic functions}
+For real $p$, use $x>0$ in the power row; integer powers extend wherever defined.
+For logarithms use $x\ne0$; $k\ne0$, $b>0$, and $b\ne1$ where it is a logarithm base.
+
+\begin{tabularx}{\textwidth}{|Y|Y|Y|}
+\hline
+$\DiffOp^{-1}(f)$ & $f$ & $\DiffOp(f)$ \\ \hline
+$\displaystyle x\map c\cdot x$ & $x\map c$ & $x\map0$ \\ \hline
+$\displaystyle x\map\frac{x^{p+1}}{p+1}$ & $x\map x^p\quad(p\ne-1)$ & $x\map p\cdot x^{p-1}$ \\ \hline
+$x\map\ln|x|$ & $\displaystyle x\map\frac1x$ & $\displaystyle x\map-\frac1{x^2}$ \\ \hline
+$\displaystyle x\map\frac{e^{k\cdot x}}k$ & $x\map e^{k\cdot x}$ & $x\map k\cdot e^{k\cdot x}$ \\ \hline
+$\displaystyle x\map\frac{b^x}{\ln b}$ & $x\map b^x$ & $x\map\ln b\cdot b^x$ \\ \hline
+$x\map x\cdot\ln|x|-x$ & $x\map\ln|x|$ & $\displaystyle x\map\frac1x$ \\ \hline
+$x\map x\cdot\ln|k\cdot x|-x$ & $x\map\ln|k\cdot x|$ & $\displaystyle x\map\frac1x$ \\ \hline
+$\displaystyle x\map\frac{x\cdot\ln x-x}{\ln b}$ & $x\map\log_b x\quad(x>0)$ & $\displaystyle x\map\frac1{x\cdot\ln b}$ \\ \hline
+\end{tabularx}
+
+\clearpage
+\section*{Trigonometric functions}
+Throughout this page, $k\in\mathbb R\setminus\{0\}$. Avoid poles and logarithm zeros.
+
+\begin{tabularx}{\textwidth}{|Y|Y|Y|}
+\hline
+$\DiffOp^{-1}(f)$ & $f$ & $\DiffOp(f)$ \\ \hline
+$\displaystyle x\map-\frac{\cos(k\cdot x)}k$ & $x\map\sin(k\cdot x)$ & $x\map k\cdot\cos(k\cdot x)$ \\ \hline
+$\displaystyle x\map\frac{\sin(k\cdot x)}k$ & $x\map\cos(k\cdot x)$ & $x\map-k\cdot\sin(k\cdot x)$ \\ \hline
+$\displaystyle x\map-\frac{\ln|\cos(k\cdot x)|}k$ & $x\map\tan(k\cdot x)$ & $x\map k\cdot\sec^2(k\cdot x)$ \\ \hline
+$\displaystyle x\map\frac{\ln|\sin(k\cdot x)|}k$ & $x\map\cot(k\cdot x)$ & $x\map-k\cdot\csc^2(k\cdot x)$ \\ \hline
+$\displaystyle x\map\frac{\ln|\sec(k\cdot x)+\tan(k\cdot x)|}k$ & $x\map\sec(k\cdot x)$ & $x\map k\cdot\sec(k\cdot x)\cdot\tan(k\cdot x)$ \\ \hline
+$\displaystyle x\map-\frac{\ln|\csc(k\cdot x)+\cot(k\cdot x)|}k$ & $x\map\csc(k\cdot x)$ & $x\map-k\cdot\csc(k\cdot x)\cdot\cot(k\cdot x)$ \\ \hline
+\end{tabularx}
+
+\section*{Hyperbolic functions}
+
+\begin{tabularx}{\textwidth}{|Y|Y|Y|}
+\hline
+$\DiffOp^{-1}(f)$ & $f$ & $\DiffOp(f)$ \\ \hline
+$\displaystyle x\map\frac{\cosh(k\cdot x)}k$ & $x\map\sinh(k\cdot x)$ & $x\map k\cdot\cosh(k\cdot x)$ \\ \hline
+$\displaystyle x\map\frac{\sinh(k\cdot x)}k$ & $x\map\cosh(k\cdot x)$ & $x\map k\cdot\sinh(k\cdot x)$ \\ \hline
+$\displaystyle x\map\frac{\ln(\cosh(k\cdot x))}k$ & $x\map\tanh(k\cdot x)$ & $\displaystyle x\map\frac{k}{\cosh^2(k\cdot x)}$ \\ \hline
+$\displaystyle x\map\frac{\ln|\sinh(k\cdot x)|}k$ & $x\map\coth(k\cdot x)$ & $x\map-k\cdot\csch^2(k\cdot x)$ \\ \hline
+\end{tabularx}
+
+\section*{Products and squares}
+
+\begin{tabularx}{\textwidth}{|Y|Y|}
+\hline
+$\DiffOp^{-1}(f)$ & $f$ \\ \hline
+$\displaystyle x\map\frac{\tan(k\cdot x)}k$ & $x\map\sec^2(k\cdot x)$ \\ \hline
+$\displaystyle x\map-\frac{\cot(k\cdot x)}k$ & $x\map\csc^2(k\cdot x)$ \\ \hline
+$\displaystyle x\map\frac{\sec(k\cdot x)}k$ & $x\map\sec(k\cdot x)\cdot\tan(k\cdot x)$ \\ \hline
+$\displaystyle x\map-\frac{\csc(k\cdot x)}k$ & $x\map\csc(k\cdot x)\cdot\cot(k\cdot x)$ \\ \hline
+$\displaystyle x\map\frac x2-\frac{\sin(2k\cdot x)}{4k}$ & $x\map\sin^2(k\cdot x)$ \\ \hline
+$\displaystyle x\map\frac x2+\frac{\sin(2k\cdot x)}{4k}$ & $x\map\cos^2(k\cdot x)$ \\ \hline
+\end{tabularx}
+
+\clearpage
+\section*{Inverse trigonometric functions}
+Use $|x|<1$ for $\arcsin$ and $\arccos$. Here
+$\arccot x\defeq\pi/2-\arctan x$;
+$\arcsec x\defeq\arccos(1/x)$ and $\arccsc x\defeq\arcsin(1/x)$ are listed for $x>1$.
+
+\begin{tabularx}{\textwidth}{|Y|Y|Y|}
+\hline
+$\DiffOp^{-1}(f)$ & $f$ & $\DiffOp(f)$ \\ \hline
+$x\map x\cdot\arcsin x+\sqrt{1-x^2}$ & $x\map\arcsin x$ & $\displaystyle x\map\frac1{\sqrt{1-x^2}}$ \\ \hline
+$x\map x\cdot\arccos x-\sqrt{1-x^2}$ & $x\map\arccos x$ & $\displaystyle x\map-\frac1{\sqrt{1-x^2}}$ \\ \hline
+$\displaystyle x\map x\cdot\arctan x-\frac{\ln(1+x^2)}2$ & $x\map\arctan x$ & $\displaystyle x\map\frac1{1+x^2}$ \\ \hline
+$\displaystyle x\map x\cdot\arccot x+\frac{\ln(1+x^2)}2$ & $x\map\arccot x$ & $\displaystyle x\map-\frac1{1+x^2}$ \\ \hline
+$x\map x\cdot\arcsec x-\ln(x+\sqrt{x^2-1})$ & $x\map\arcsec x$ & $\displaystyle x\map\frac1{x\cdot\sqrt{x^2-1}}$ \\ \hline
+$x\map x\cdot\arccsc x+\ln(x+\sqrt{x^2-1})$ & $x\map\arccsc x$ & $\displaystyle x\map-\frac1{x\cdot\sqrt{x^2-1}}$ \\ \hline
+\end{tabularx}
+
+\section*{Quadratic expressions}
+Here $a>0$. Use $|x|<a$ for $\sqrt{a^2-x^2}$, $|x|>a$ for
+$\sqrt{x^2-a^2}$, and $x\ne\pm a$ for $1/(x^2-a^2)$.
+
+\begin{tabularx}{\textwidth}{|Y|Y|}
+\hline
+$\DiffOp^{-1}(f)$ & $f$ \\ \hline
+$\displaystyle x\map\frac1a\cdot\arctan\left(\frac xa\right)$ & $\displaystyle x\map\frac1{x^2+a^2}$ \\ \hline
+$\displaystyle x\map\frac1{2a}\cdot\ln\left|\frac{x-a}{x+a}\right|$ & $\displaystyle x\map\frac1{x^2-a^2}$ \\ \hline
+$\displaystyle x\map\arcsin\left(\frac xa\right)$ & $\displaystyle x\map\frac1{\sqrt{a^2-x^2}}$ \\ \hline
+$x\map\ln|x+\sqrt{x^2+a^2}|$ & $\displaystyle x\map\frac1{\sqrt{x^2+a^2}}$ \\ \hline
+$x\map\ln|x+\sqrt{x^2-a^2}|$ & $\displaystyle x\map\frac1{\sqrt{x^2-a^2}}$ \\ \hline
+$\displaystyle x\map\frac{x}{a^2\cdot\sqrt{x^2+a^2}}$ & $\displaystyle x\map\frac1{(x^2+a^2)^{3/2}}$ \\ \hline
+$\displaystyle x\map\frac x2\cdot\sqrt{a^2-x^2}+\frac{a^2}{2}\cdot\arcsin\left(\frac xa\right)$ & $x\map\sqrt{a^2-x^2}$ \\ \hline
+$\displaystyle x\map\frac x2\cdot\sqrt{x^2+a^2}+\frac{a^2}{2}\cdot\ln|x+\sqrt{x^2+a^2}|$ & $x\map\sqrt{x^2+a^2}$ \\ \hline
+\end{tabularx}
+
+\clearpage
+\section*{Substitution as a function}
+Choose $x=\phi(\theta)$. Apply the substitution rule to
+$(f\circ\phi)\cdot\DiffOp(\phi)$, including the derivative factor.
+For $a>0$:
+
+\begin{tabularx}{\textwidth}{|Y|Y|Y|}
+\hline
+Expression in $x$ & $\phi$ & $\DiffOp(\phi)$ \\ \hline
+$\sqrt{a^2-x^2}$ & $\theta\map a\cdot\sin\theta$ & $\theta\map a\cdot\cos\theta$ \\ \hline
+$\sqrt{x^2+a^2}$ & $\theta\map a\cdot\tan\theta$ & $\theta\map a\cdot\sec^2\theta$ \\ \hline
+$\sqrt{x^2-a^2}$ & $\theta\map a\cdot\sec\theta$ & $\theta\map a\cdot\sec\theta\cdot\tan\theta$ \\ \hline
+\end{tabularx}
+The first two substitutions use $-\pi/2<\theta<\pi/2$; the third uses
+$0<\theta<\pi/2$ and covers $x>a$. The respective square roots become
+$a\cdot\cos\theta$, $a\cdot\sec\theta$, and $a\cdot\tan\theta$.
+
+For a linear substitution $\phi\defeq x\map k\cdot x+q$, with $k\ne0$,
+\begin{align*}
+  \DiffOp^{-1}(f\circ\phi)
+    &=\frac1k\cdot\left(\DiffOp^{-1}(f)\circ\phi\right),\\
+  \left[\DiffOp^{-1}(f\circ\phi)\right]_a^b
+    &=\frac1k\cdot\left[\DiffOp^{-1}(f)\right]_{\phi(a)}^{\phi(b)}.
+\end{align*}
+
+\section*{Product-to-sum identities}
+\begin{align*}
+  \sin A\cdot\sin B&=\tfrac12\left(\cos(A-B)-\cos(A+B)\right),\\
+  \cos A\cdot\cos B&=\tfrac12\left(\cos(A-B)+\cos(A+B)\right),\\
+  \sin A\cdot\cos B&=\tfrac12\left(\sin(A+B)+\sin(A-B)\right).
+\end{align*}
+For $\alpha\ne\beta$ and $\alpha\ne-\beta$,
+\[
+  \DiffOp^{-1}\left(x\map\sin(\alpha\cdot x)\cdot\sin(\beta\cdot x)\right)
+  =x\map\frac{\sin((\alpha-\beta)\cdot x)}{2(\alpha-\beta)}
+       -\frac{\sin((\alpha+\beta)\cdot x)}{2(\alpha+\beta)}.
+\]
+For equal frequencies, use the $\sin^2(k\cdot x)$ row instead.
+
+\section*{Gaussian formulas and symmetric intervals}
+For $a>0$, $b\in\mathbb R$ and $n\in\mathbb N_0$,
+\begin{align*}
+  \left[\DiffOp^{-1}\left(x\map e^{-a\cdot x^2}\right)\right]_{-\infty}^{\infty}
+    &=\sqrt{\frac\pi a},\\
+  \left[\DiffOp^{-1}\left(x\map x^2\cdot e^{-a\cdot x^2}\right)\right]_{-\infty}^{\infty}
+    &=\frac1{2a}\sqrt{\frac\pi a},\\
+  \left[\DiffOp^{-1}\left(x\map x^{2n+1}\cdot e^{-a\cdot x^2}\right)\right]_{-\infty}^{\infty}
+    &=0,\\
+  \left[\DiffOp^{-1}\left(x\map e^{-a\cdot x^2}\cdot e^{i\cdot b\cdot x}\right)\right]_{-\infty}^{\infty}
+    &=\sqrt{\frac\pi a}\cdot e^{-b^2/(4a)}.
+\end{align*}
+For a continuous function on $[-L,L]$ with $L>0$,
+\[
+  \left[\DiffOp^{-1}(f)\right]_{-L}^{L}
+  =\begin{cases}
+    0, & f(-x)=-f(x)\quad\text{(odd)},\\[2pt]
+    2\cdot\left[\DiffOp^{-1}(f)\right]_0^L,
+       & f(-x)=f(x)\quad\text{(even)}.
+  \end{cases}
+\]
+
+\end{document}

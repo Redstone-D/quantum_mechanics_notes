@@ -18,6 +18,12 @@
 % Purple prerequisite until differentiation / chosen primitives are defined.
 \newcommand*{\DiffOp}{\ensuremath{\missingprereq{\mathrm D}}}
 
+% Function-style constructor from an ordered basis to its perturbation matrix.
+\providecommand*{\perturbationMatrixConstructorRef}{quantum-mechanics::ch07::def:perturbation-matrix-constructor}
+\newcommand*{\pertmat}{%
+  \ensuremath{\xref[\operatorname{pertmat}]{\perturbationMatrixConstructorRef}}%
+}
+
 % =============================================================================
 % Function-style commutator: \comm{A}{B} renders as comm(A, B).
 % We use a function-style macro instead of the raw [ ] brackets to avoid
