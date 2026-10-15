@@ -1,47 +1,10 @@
----
-name: rs-notes
-description: Rua's personal conventions for authoring mathematical notes with the Academy Notes Toolchain. Covers function-definition style (Lean 4 type-theoretic), syntactic sugar via `\conv` blocks, equality symbols (`\defeq` as `\equiv`), the partial-operator three-piece pattern, proof formatting, macro linking rules, and juxtaposition conventions. Activate when editing `.tex` or `.sty` files in a math-notes project that uses `notes-common.sty` / `notes-project.sty`, or when the user mentions "my notes" / "rs-notes" / "math notes authoring".
----
+# Authoring Conventions
 
-# Rua's Math Notes Authoring Conventions
+Cross-project conventions for mathematical notes written in this style. Rules
+that are specific to one course, generic LaTeX layout, or already covered by
+the Academy Notes Toolchain are intentionally omitted.
 
-## Preserving homework calculations
-
-Keep the user's correct intermediate homework steps, including calculations
-that could be shortened or omitted. Add the next step and make local
-corrections without replacing the derivation with a condensed proof. When the
-user chooses a different method, superseded intermediate steps may be removed.
-
-## QM perturbation-order notation
-
-Parenthesized superscripts denote perturbation order.
-Use `\psi_n^{\porder{k}}` and `E_n^{\porder{k}}` for perturbation-order
-coefficients. The `\porder` macro renders parentheses and links to
-`quantum-mechanics::ch07::conv:order-k-correction`. The same bracketed order
-marks a truncated perturbative approximation. Define this notation in a
-`conv` block; do not use it for differentiation.
-
-Use `\DiffOp^k(f)` for differentiation and `\DiffOp^{-1}(f)` for a
-chosen antiderivative. The `\DiffOp` macro renders upright D in prerequisite
-purple until its definition is available. An antiderivative is unique only
-after fixing its additive constant; endpoint differences do not depend on it.
-
-Personal cross-project conventions for mathematical notes. Scope:
-- **Covers:** authoring style, notation choices, macro-link routing, proof formatting.
-- **Does not cover:** toolchain mechanics (see `academy-notes-toolchain` skill), per-course identity (`notes-project.sty`), generic LaTeX typesetting.
-
-## LaTeX library: `rs-notes.sty`
-
-Projects using these conventions should load the companion package `rs-notes.sty` (shipped with this skill). It defines the style-specific macros:
-
-- `\defeq` — renders as `\equiv`, used for definitional/notational equality.
-- (Add more as the style evolves.)
-
-Install into a course repo by copying `rs-notes.sty` next to `notes-project.sty`, then adding `\RequirePackage{rs-notes}` to `notes-project.sty`.
-
-## Conventions
-
-### 1. Function definitions (Lean 4 / type-theoretic style)
+## 1. Function definitions (Lean 4 / type-theoretic style)
 
 Format: `name : type \defeq term` on one line (if it fits).
 
@@ -54,11 +17,12 @@ Format: `name : type \defeq term` on one line (if it fits).
 ```
 
 - Use `\map` for the rule (function-object style).
-- **Multi-argument** functions may use the **product type** if clearer: `f : A \times B \to C,\; (a, b) \map \ldots`
+- **Multi-argument** functions may use the **product type** if clearer:
+  `f : A \times B \to C,\; (a, b) \map \ldots`
 - Usually no currying unless partial application is actually used.
 - Function identity is `\mathrm{name}` (upright): `\mathrm{abs}`, `\mathrm{dist}`, `\mathrm{nbhd}`.
 
-### 2. Syntactic sugar lives in `\conv`, not `\dfn`
+## 2. Syntactic sugar lives in `\conv`, not `\dfn`
 
 - `\begin{dfn}` defines the mathematical **function/object** — *what it IS*.
 - `\begin{conv}` defines the **notation sugar** — *how we WRITE it*.
@@ -73,9 +37,10 @@ Format: `name : type \defeq term` on one line (if it fits).
     $\mathrm{abs}$ is defined in \xref{def:absolute-value}.
   \end{conv}
   ```
-- A reader clicking the sugared form lands on the convention; one more click reaches the function definition.
+- A reader clicking the sugared form lands on the convention; one more click
+  reaches the function definition.
 
-### 3. Equality symbols
+## 3. Equality symbols
 
 | Symbol | Meaning | Example |
 |---|---|---|
@@ -85,7 +50,7 @@ Format: `name : type \defeq term` on one line (if it fits).
 
 No `:=` or `\coloneqq` — replaced by `\defeq` (which renders as `\equiv`).
 
-### 4. Partial operators (three-piece pattern)
+## 4. Partial operators (three-piece pattern)
 
 Any operator defined only on a restricted domain gets three pieces:
 
@@ -98,53 +63,85 @@ Any operator defined only on a restricted domain gets three pieces:
 
 Applied uniformly to `\seqlim`, `\sup`, `\inf`, and any future partial operators.
 
-### 5. Quantifier style
+## 5. Quantifier style
 
-- Restricted type goes **inside** the type: `\forall \varepsilon \in F_{>0}` (not `\forall \varepsilon \in F, \varepsilon > 0`).
-- Dependent bounds **stay separate**: `\forall n \in \NN_1,\, n \geq N` (not folded into type).
+- Restricted type goes **inside** the type: `\forall \varepsilon \in F_{>0}`
+  (not `\forall \varepsilon \in F, \varepsilon > 0`).
+- Dependent bounds **stay separate**: `\forall n \in \NN_1,\, n \geq N`
+  (not folded into type).
 - Thin space `\,` between quantifier restrictions.
 
-### 6. Proofs
+## 6. Proofs
 
-- Two-direction (iff) proofs: `\noindent\textbf{($\Rightarrow$)}` and `\noindent\textbf{($\Leftarrow$)}` headers.
+- Two-direction (iff) proofs: `\noindent\textbf{($\Rightarrow$)}` and
+  `\noindent\textbf{($\Leftarrow$)}` headers.
 - **One QED per proof** — let `\end{proof}` auto-insert it. No manual `\qed`.
-- Each direction should fit in 1–3 sentences with display math for the key equation chain.
-- **Rename bound variables** to avoid collision (e.g., use `\gamma` for an internal variable when `\varepsilon` is the goal's variable).
-- **Avoid citing section/theorem numbers** in `\xref` prose — use descriptive text: `\xref[definition of convergent sequence]{def:convergent-sequence}`, not `\xref[Dfn 1.1]{...}`.
+- Each direction should fit in 1–3 sentences with display math for the key
+  equation chain.
+- **Rename bound variables** to avoid collision (e.g., use `\gamma` for an
+  internal variable when `\varepsilon` is the goal's variable).
+- **Avoid citing section/theorem numbers** in `\xref` prose — use descriptive
+  text: `\xref[definition of convergent sequence]{def:convergent-sequence}`,
+  not `\xref[Dfn 1.1]{...}`.
 
-### 7. Macros for linked notation
+## 7. Macros for linked notation
 
 Live in the per-project notation package (e.g., `real-analysis-notations.sty`).
 
 **Rule:** The following must be linked via a macro:
-- **Any function reused many times across the project** — define a macro so references update if the function moves.
-- **Any syntactic sugar** — the macro must link to the **convention block** that defines the sugar (not the underlying function definition).
+- **Any function reused many times across the project** — define a macro so
+  references update if the function moves.
+- **Any syntactic sugar** — the macro must link to the **convention block**
+  that defines the sugar (not the underlying function definition).
 
 **Link target depends on what the macro renders as:**
 
 | Macro type     | Renders as                                     | Links to                                 |
 |----------------|------------------------------------------------|------------------------------------------|
 | Function-style | `\mathrm{comm}(A, B)` — operator name + parens | `def:...` directly                       |
-| Sugar          | `[A, B]` or `|a|` — alternative shorthand      | `conv:...` → which then links to the def |
+| Sugar          | `[A, B]` or `\|a\|` — alternative shorthand      | `conv:...` → which then links to the def |
 
-Pattern:
+The function-style macro points **straight at the function definition**, since
+there is no distinct notation to document. The sugar macro points at the
+**convention block**, which in turn hyperlinks back to the function definition.
+A reader clicking the sugar form takes exactly one extra hop to reach the
+mathematical content.
+
+Pattern: a `\xxxRef` providecommand pointing at the target semantic ID, plus a
+`\xxx` display macro that wraps the rendering in `\xref`.
+
 ```latex
 \providecommand*{\absoluteValueRef}{project::lec01::conv:absolute-value-notation}
 \newcommand*{\abs}[1]{\xref[\lvert#1\rvert]{\absoluteValueRef}}
 ```
 
-Operator macros use `\mathop{...}` for correct spacing (as with `\sup`, `\seqlim`).
+Operator macros use `\mathop{...}` for correct spacing (as with `\sup`,
+`\seqlim`), so subscripts and spacing match the native `\lim`-style operators.
 
-### 8. Juxtaposition
+## 8. Juxtaposition
 
 **Multiplication should use an explicit operator:**
 
 - Variable × variable: write `c \cdot \varepsilon`, never `c\varepsilon`.
-- Literal number × variable: `2x`, `3n`, `10^{-k}` tolerated where unambiguous. `\cdot` recommended.
+  (Either side could in principle be a function; `\cdot` kills the ambiguity.)
+- Literal number × variable: `2x`, `3n`, `10^{-k}` are tolerated where
+  unambiguous (where literal numbers obviously aren't functions). `\cdot` is still
+  recommended but not required.
 - When in doubt, use `\cdot`.
 
 **Function application preferably uses parentheses:**
 
-- `f(x)`, `d(x, y)`, `\seqlim(a)` — preferred form.
-- Bare juxtaposition for application (e.g., `fx`, or `gf` for composition) tolerated where context is unambiguous and matches related areas (type theory, abstract algebra).
-- When juxtaposing without parens, **always insert a small separator**: `f\,x`, not `fx`.
+- `f(x)`, `d(x, y)`, `\seqlim(a)` — preferred form, matches analysis and type
+  theory textbook conventions.
+- Bare juxtaposition for application (e.g., `fx`, or `gf` for composition
+  `g \circ f`) is tolerated where context is unambiguous and the convention
+  matches related areas (type theory, abstract algebra).
+- When juxtaposing without parens, **always insert a small separator** so the
+  function and argument are visually distinct: `f\,x`, not `fx`. The thin space
+  `\,` prevents the two symbols from being read as one token.
+
+## 9. Paragraph endings
+
+- Omit the sentence-ending period (`.`) at the end of a paragraph
+- This also applies to punctuation after a displayed formula that ends the paragraph
+- Keep periods between sentences within the same paragraph

@@ -16,18 +16,18 @@
 \begin{rem}[Working Treatment of Operator Domains]{operator-domain-convention}
   Fix a \xref[Hilbert space]{ch03::def:hilbert-space} $\mathcal H$. Throughout this chapter, formally write $A : \mathcal H \to \mathcal H$ for an operator $A \in \OP$.
   This notation is literal for finite-dimensional matrix operators. For differential operators, it suppresses domain restrictions: all expressions are understood on a suitable common domain where the indicated operations are defined.
-  Detailed operator domains and self-adjointness will be addressed when revising Chapters 2 and 3 rigorously.
+  Detailed operator domains and self-adjointness will be addressed when revising Chapters 2 and 3 rigorously
 \end{rem}
 \endgroup
 
 \begin{dfn}[Unperturbed Hamiltonian]{unperturbed-hamiltonian}
-  An \emph{unperturbed Hamiltonian} $\hat H_0 \in \OP$ is a reference time-independent \missingprereq{Hamiltonian, quantum-mechanics} whose eigenstates and corresponding energies are taken as known for the perturbation calculation.
+  An \emph{unperturbed Hamiltonian} $\hat H_0 \in \OP$ is a reference time-independent \missingprereq{Hamiltonian, quantum-mechanics} whose eigenstates and corresponding energies are taken as known for the perturbation calculation
 \end{dfn}
 
 \begin{dfn}[Perturbation Operator]{perturbation}
   Given an \xref[unperturbed Hamiltonian]{def:unperturbed-hamiltonian} $\hat H_0$ and the physical time-independent Hamiltonian $\hat H \in \OP$ on the same state space $\mathcal H$, the \emph{perturbation operator} is their difference:
   \[
-    \hat H' \defeq \hat H - \hat H_0.
+    \hat H' \defeq \hat H - \hat H_0
   \]
 \end{dfn}
 
@@ -37,7 +37,7 @@
   \[
     \hat H_{\mathrm{fam}} : I \to \OP \defeq \lambda \map \hat H_0 + \lambda \cdot \hat H'.
   \]
-  Require each $\hat H_{\mathrm{fam}}(\lambda)$ to be \xref[Hermitian]{ch03::def:hermitian-operator}, with domain restrictions suppressed as in the \xref[working treatment of operator domains]{rem:operator-domain-convention}.
+  Require each $\hat H_{\mathrm{fam}}(\lambda)$ to be \xref[Hermitian]{ch03::def:hermitian-operator}, with domain restrictions suppressed as in the \xref[working treatment of operator domains]{rem:operator-domain-convention}
 \end{dfn}
 
 \begin{conv}[Perturbation Terminology]{perturbation-terminology}
@@ -46,7 +46,7 @@
     \item[$\hat H$:] the full physical Hamiltonian, also called the \emph{perturbed Hamiltonian}.
     \item[$\hat H_0$:] the \xref[unperturbed Hamiltonian]{def:unperturbed-hamiltonian}, whose eigenstates and energies are taken as known.
     \item[$\hat H'$:] the \xref[perturbation operator]{def:perturbation}, equal to $\hat H - \hat H_0$.
-    \item[$\lambda$:] the dimensionless \emph{perturbation parameter}, treated as small when deriving corrections. The value $0$ gives the reference Hamiltonian, and $1$ gives the full physical Hamiltonian.
+    \item[$\lambda$:] the dimensionless \emph{perturbation parameter}, treated as small when deriving corrections. The value $0$ gives the reference Hamiltonian, and $1$ gives the full physical Hamiltonian
   \end{description}
 \end{conv}
 
@@ -58,7 +58,7 @@
   \[
     \psi_n^{\porder{0}} \ne 0,
     \qquad
-    \hat H_0\bigl(\psi_n^{\porder{0}}\bigr) = E_n^{\porder{0}} \cdot \psi_n^{\porder{0}}.
+    \hat H_0\bigl(\psi_n^{\porder{0}}\bigr) = E_n^{\porder{0}} \cdot \psi_n^{\porder{0}}
   \]
 \end{dfn}
 
@@ -69,7 +69,7 @@
     \qquad
     \exists e \in \mathbb R,\quad
     \hat H_{\mathrm{fam}}(\lambda)\bigl(\phi(\lambda)\bigr)
-    = e \cdot \phi(\lambda).
+    = e \cdot \phi(\lambda)
   \]
 \end{dfn}
 
@@ -78,13 +78,13 @@
   \[
     \hat H_{\mathrm{fam}}(\lambda)\bigl(\phi_n(\lambda)\bigr)
     = \varepsilon_n(\lambda) \cdot \phi_n(\lambda)
-    \qquad (\lambda \in I).
+    \qquad (\lambda \in I)
   \]
 \end{dfn}
 
 \begin{rem}[Choosing a Branch]{eigenvector-branch-choice}
   The \xref[eigenvector-branch definition]{def:eigenvector-branch} specifies possible functions without asserting existence or uniqueness. If one exists, fix a choice $\phi_n$; the index $n$ labels its reference eigenpair.
-  For this choice, each $\varepsilon_n(\lambda)$ exists and is unique: two candidate eigenvalues $e,f$ satisfy $(e-f) \cdot \phi_n(\lambda) = 0$, so $e=f$. In particular, $\varepsilon_n(0) = E_n^{\porder{0}}$.
+  For this choice, each $\varepsilon_n(\lambda)$ exists and is unique: two candidate eigenvalues $e,f$ satisfy $(e-f) \cdot \phi_n(\lambda) = 0$, so $e=f$. In particular, $\varepsilon_n(0) = E_n^{\porder{0}}$
 \end{rem}
 
 \begin{conv}[State and Energy Notation]{eigenpair-notation}
@@ -96,19 +96,19 @@
   \[
     \psi_n^{\mathrm{phys}} \defeq \phi_n(1),
     \qquad
-    E_n^{\mathrm{phys}} \defeq \varepsilon_n(1).
+    E_n^{\mathrm{phys}} \defeq \varepsilon_n(1)
   \]
 \end{conv}
 
 \begin{dfn}[State Coefficient Sequence]{perturbative-expansion}
   \[
-    \psi_n : \mathbb N_0 \to \mathcal H \defeq k \map \psi_n^{\porder{k}}.
+    \psi_n : \mathbb N_0 \to \mathcal H \defeq k \map \psi_n^{\porder{k}}
   \]
 \end{dfn}
 
 \begin{dfn}[Energy Coefficient Sequence]{energy-perturbative-expansion}
   \[
-    E_n : \mathbb N_0 \to \mathbb R \defeq k \map E_n^{\porder{k}}.
+    E_n : \mathbb N_0 \to \mathbb R \defeq k \map E_n^{\porder{k}}
   \]
 \end{dfn}
 
@@ -127,11 +127,11 @@
     A\circ\phi_n : I \to \mathcal H,
     \qquad \lambda \map \sum_{0}^{\infty}\left(k \map \lambda^k \cdot A\bigl(\psi_n(k)\bigr)\right).
   \]
-  For every $\lambda \in J$, all vector series above converge in the norm of $\mathcal H$, and the scalar series converges in $\mathbb R$.
+  For every $\lambda \in J$, all vector series above converge in the norm of $\mathcal H$, and the scalar series converges in $\mathbb R$
 \end{hypo}
 
 \begin{rem}[Scope of the Expansion Hypothesis]{expansion-convergence}
-  The \xref[expansion hypothesis]{hypo:perturbative-expansion-existence} assumes convergence near $\lambda = 0$; matching coefficients alone does not prove convergence. Validity at the physical endpoint $\lambda = 1$ requires separate justification.
+  The \xref[expansion hypothesis]{hypo:perturbative-expansion-existence} assumes convergence near $\lambda = 0$; matching coefficients alone does not prove convergence. Validity at the physical endpoint $\lambda = 1$ requires separate justification
 \end{rem}
 
 \begin{thm}[Perturbation Equation (Summation Form)]{perturbation-equation}
@@ -143,13 +143,13 @@
       &\quad =
       \left(\sum_{0}^{\infty}\left(j \map \lambda^j \cdot E_n(j)\right)\right)
       \cdot
-      \left(\sum_{0}^{\infty}\left(k \map \lambda^k \cdot \psi_n(k)\right)\right).
+      \left(\sum_{0}^{\infty}\left(k \map \lambda^k \cdot \psi_n(k)\right)\right)
     \end{aligned}
   \]
 \end{thm}
 
 \begin{proof}
-  Substitute $\hat H_{\mathrm{fam}}(\lambda) = \hat H_0 + \lambda \cdot \hat H'$ and the \xref[assumed expansions]{hypo:perturbative-expansion-existence} into the TISE.
+  Substitute $\hat H_{\mathrm{fam}}(\lambda) = \hat H_0 + \lambda \cdot \hat H'$ and the \xref[assumed expansions]{hypo:perturbative-expansion-existence} into the TISE
 \end{proof}
 
 \begin{conv}[Perturbation Order Notation]{order-k-correction}
@@ -163,7 +163,7 @@
   \[
     \psi_n^{\porder{0}} = \phi_n(0),
     \qquad
-    E_n^{\porder{0}} = \varepsilon_n(0).
+    E_n^{\porder{0}} = \varepsilon_n(0)
   \]
 \end{conv}
 
@@ -175,12 +175,12 @@
   and, for every $k \in \mathbb N_{>0}$,
   \[
     \hat H_0\bigl(\psi_n(k)\bigr) + \hat H'\bigl(\psi_n(k-1)\bigr)
-    = \sum_{0}^{k}\left(j \map E_n(j) \cdot \psi_n(k-j)\right).
+    = \sum_{0}^{k}\left(j \map E_n(j) \cdot \psi_n(k-j)\right)
   \]
 \end{dfn}
 
 \begin{thm}[Equivalence of Perturbation Equations]{order-matched-equations}
-  Under the \xref[expansion hypothesis]{hypo:perturbative-expansion-existence}, the sequences $\psi_n \defeq i \map \psi_n^{\porder{i}}$ and $E_n \defeq i \map E_n^{\porder{i}}$ satisfy all equations of the \xref[order-by-order system]{def:order-matched-system} if and only if $(\phi_n,\varepsilon_n)$ solves the \xref[summation-form equation]{thm:perturbation-equation} for every $\lambda \in I$ sufficiently close to $0$.
+  Under the \xref[expansion hypothesis]{hypo:perturbative-expansion-existence}, the sequences $\psi_n \defeq i \map \psi_n^{\porder{i}}$ and $E_n \defeq i \map E_n^{\porder{i}}$ satisfy all equations of the \xref[order-by-order system]{def:order-matched-system} if and only if $(\phi_n,\varepsilon_n)$ solves the \xref[summation-form equation]{thm:perturbation-equation} for every $\lambda \in I$ sufficiently close to $0$
 \end{thm}
 
 \begin{proof}
@@ -196,7 +196,7 @@
   and the summed right-hand side becomes $\varepsilon_n(\lambda) \cdot \phi_n(\lambda)$. Thus
   \[
     \left(\hat H_0 + \lambda \cdot \hat H'\right)\bigl(\phi_n(\lambda)\bigr)
-    = \varepsilon_n(\lambda) \cdot \phi_n(\lambda).
+    = \varepsilon_n(\lambda) \cdot \phi_n(\lambda)
   \]
 \end{rem}
 
@@ -209,28 +209,28 @@
       &= E_n^{\porder{0}} \cdot \psi_n^{\porder{1}} + E_n^{\porder{1}} \cdot \psi_n^{\porder{0}}, \\
       \hat H_0\bigl(\psi_n^{\porder{2}}\bigr) + \hat H'\bigl(\psi_n^{\porder{1}}\bigr)
       &= E_n^{\porder{0}} \cdot \psi_n^{\porder{2}} + E_n^{\porder{1}} \cdot \psi_n^{\porder{1}}
-      + E_n^{\porder{2}} \cdot \psi_n^{\porder{0}}.
+      + E_n^{\porder{2}} \cdot \psi_n^{\porder{0}}
     \end{aligned}
   \]
 \end{cor}
 
 \begin{proof}
-  Take orders $0,1,2$ in the \xref[order-by-order system]{def:order-matched-system}.
+  Take orders $0,1,2$ in the \xref[order-by-order system]{def:order-matched-system}
 \end{proof}
 
 \begin{dfn}[$k$-th-Order Approximation]{perturbative-approximation}
-  Let $\psi_n^{\porder{k}}$ and $E_n^{\porder{k}}$ be the solution for the \xref[order-by-order system]{def:order-matched-system} at order $k$.
+  Let $\psi_n^{\porder{k}}$ and $E_n^{\porder{k}}$ be the solution for the \xref[order-by-order system]{def:order-matched-system} at order $k$
 
   The \emph{$k$-th-order perturbative approximation} to the eigenpair $(\phi_n(\lambda),\varepsilon_n(\lambda))$ is
   \[
     \phi_n^{\porder{k}} \defeq \sum_{0}^{k}\left(i \map \psi_n^{\porder{i}}\right),
     \qquad
-    \varepsilon_n^{\porder{k}} \defeq \sum_{0}^{k}\left(i \map E_n^{\porder{i}}\right).
+    \varepsilon_n^{\porder{k}} \defeq \sum_{0}^{k}\left(i \map E_n^{\porder{i}}\right)
   \] 
 \end{dfn}
 
 \begin{rem}[Validity of the Approximation]{perturbative-validity}
-  Since the equation works at $\lambda$ sufficiently close to $0$, the $k$-th-order approximation shall be significant small when $k$ is bigger. 
+  Since the equation works at $\lambda$ sufficiently close to $0$, the $k$-th-order approximation shall be significant small when $k$ is bigger
 \end{rem}
 
 \section{First-Order Perturbation Theory} 
@@ -238,7 +238,7 @@
 \begin{thm}[First Order Energy Correction]{first-order-energy-correction}
   Under the \xref[expansion hypothesis]{hypo:perturbative-expansion-existence}, let the \xref[reference eigenstate]{def:reference-eigenpair} be normalized: $\braket{\psi_n^{\porder{0}}|\psi_n^{\porder{0}}} = 1$. Then
   \[
-    E_n^{\porder{1}} = \bra{\psi_n^{\porder{0}}}\hat H'\ket{\psi_n^{\porder{0}}}.
+    E_n^{\porder{1}} = \bra{\psi_n^{\porder{0}}}\hat H'\ket{\psi_n^{\porder{0}}}
   \]
 \end{thm} 
 
@@ -271,7 +271,7 @@
       {E_n^{\porder{0}}-E_m^{\porder{0}}}
       \cdot\psi_m^{\porder{0}}\right),
   \]
-  where the sum runs over $m\in\mathbb N_1$ with $m\ne n$.
+  where the sum runs over $m\in\mathbb N_1$ with $m\ne n$
 \end{thm} 
 
 \begin{proof}
@@ -281,7 +281,7 @@
       &\bra{\psi_m^{\porder{0}}}\hat H_0\ket{\psi_n^{\porder{1}}}
       + \bra{\psi_m^{\porder{0}}}\hat H'\ket{\psi_n^{\porder{0}}} \\
       &\quad = \bra{\psi_m^{\porder{0}}}E_n^{\porder{0}}\ket{\psi_n^{\porder{1}}}
-      + \bra{\psi_m^{\porder{0}}}E_n^{\porder{1}}\ket{\psi_n^{\porder{0}}}.
+      + \bra{\psi_m^{\porder{0}}}E_n^{\porder{1}}\ket{\psi_n^{\porder{0}}}
     \end{aligned}
   \]
 
@@ -314,7 +314,7 @@
        = E_n^{\porder{1}}\cdot \delta_{n, m}
       - \bra{\psi_m^{\porder{0}}}\hat H'\ket{\psi_n^{\porder{0}}}\] 
 
-  Choose $c_n(n)=0$. \todo: justify this normalization and phase choice.
+  Choose $c_n(n)=0$. \todo: justify this normalization and phase choice
 
     For $m\ne n$ with $E_m^{\porder{0}}\ne E_n^{\porder{0}}$, solve for $c_m$, we have
     \[c_m = \frac{E_n^{\porder{1}}\cdot \delta_{n, m} - \bra{\psi_m^{\porder{0}}}\hat H'\ket{\psi_n^{\porder{0}}}}{E_m^{\porder{0}} - E_n^{\porder{0}}} \] 
@@ -333,7 +333,7 @@
     = \sum_{m\ne n}\left(m \map
       \frac{\bra{\psi_m^{\porder{0}}}\hat H'\ket{\psi_n^{\porder{0}}}}
       {E_n^{\porder{0}}-E_m^{\porder{0}}}
-      \cdot\psi_m^{\porder{0}}\right).
+      \cdot\psi_m^{\porder{0}}\right)
   \]
 \end{proof}
 
@@ -343,7 +343,7 @@
     \widetilde\phi_n : I \to \mathcal H \defeq \lambda \map c(\lambda) \cdot \phi_n(\lambda)
   \]
   has the same starting vector and \xref[eigenvalue branch]{def:eigenvalue-branch} by linearity.
-  Unit normalization leaves a parameter-dependent phase undetermined.
+  Unit normalization leaves a parameter-dependent phase undetermined
 \end{rem}
 
 \section{Second-Order Perturbation Theory} 
@@ -356,7 +356,7 @@
       \frac{\left\lvert\bra{\psi_m^{\porder{0}}}\hat H'\ket{\psi_n^{\porder{0}}}\right\rvert^2}
       {E_n^{\porder{0}}-E_m^{\porder{0}}}\right) 
   \]
-  where the sum runs over $m\in\mathbb N_1$ with $m\ne n$.
+  where the sum runs over $m\in\mathbb N_1$ with $m\ne n$
 \end{thm}
 
 \begin{proof}
@@ -374,12 +374,12 @@
   A \emph{good basis} is an orthonormal basis $B=\{\chi_r^{\porder{0}} : r\in\{1,\ldots,d\}\}$ of $V_{E_0}$, where for each $r$ there exists an \xref[eigenvector branch]{def:eigenvector-branch} $\phi_r$, satisfying the \xref[expansion hypothesis]{hypo:perturbative-expansion-existence}, with corresponding \xref[eigenvalue branch]{def:eigenvalue-branch} $\varepsilon_r$ such that
   \[
     \phi_r(0)=\chi_r^{\porder{0}},
-    \qquad \varepsilon_r(0)=E_0.
+    \qquad \varepsilon_r(0)=E_0
   \]
 \end{dfn}
 
 \begin{dfn}[Good States]{good-states}
-  The \emph{good states} are the states in a \xref[good basis]{def:good-basis} $B$, ie, each $\chi_r^{\porder{0}}\in B$ is a good state.
+  The \emph{good states} are the states in a \xref[good basis]{def:good-basis} $B$, ie, each $\chi_r^{\porder{0}}\in B$ is a good state
 \end{dfn}
 
 \begin{cor}[Common Unperturbed Energy]{good-states-common-energy}
@@ -391,7 +391,7 @@
   \[
     \hat H_0(\psi)=E_0\cdot\psi.
   \]
-  Thus all good states and their nonzero linear combinations have the same unperturbed energy.
+  Thus all good states and their nonzero linear combinations have the same unperturbed energy
 \end{cor}
 
 \begin{proof}
@@ -401,17 +401,17 @@
       \hat H_0(\psi)
       &= \sum_1^d\left(r \map c(r)\cdot\hat H_0(\chi_r^{\porder{0}})\right) \\
       &= E_0\cdot\sum_1^d\left(r \map c(r)\cdot\chi_r^{\porder{0}}\right)
-      = E_0\cdot\psi.
+      = E_0\cdot\psi
     \end{aligned}
   \]
 \end{proof}
 
 \begin{thm}[Existence of a Good Basis]{good-basis-existence}
-  Suppose $\mathcal H$ is finite-dimensional and $\hat H_0,\hat H'$ are \xref[Hermitian]{ch03::def:hermitian-operator}. Then every degenerate eigenspace $V_{E_0}$ of $\hat H_0$ has a \xref[good basis]{def:good-basis} for the \xref[perturbation family]{def:perturbation-family}.
+  Suppose $\mathcal H$ is finite-dimensional and $\hat H_0,\hat H'$ are \xref[Hermitian]{ch03::def:hermitian-operator}. Then every degenerate eigenspace $V_{E_0}$ of $\hat H_0$ has a \xref[good basis]{def:good-basis} for the \xref[perturbation family]{def:perturbation-family}
 \end{thm}
 
 \begin{proof}
-  \todo\quad\missingprereq{Rellich's theorem for analytic Hermitian matrix families, operator theory}.
+  \todo\quad\missingprereq{Rellich's theorem for analytic Hermitian matrix families, operator theory}
 \end{proof}
 
 \missingprereq{Infinite-dimensional extension: state the additional spectral and operator-domain assumptions and justify existence of the branches, functional-analysis}. \todo
@@ -425,14 +425,14 @@
     \defeq A\map
     \left(\bra{A(r)}\hat H'\ket{A(s)}\right)_{r,s=1}^d.
   \]
-  The input basis need not be a \xref[good basis]{def:good-basis}.
+  The input basis need not be a \xref[good basis]{def:good-basis}
 \end{dfn}
 
 \begin{dfn}[Perturbation Matrix]{perturbation-matrix}
   For $A\in\mathcal B(V_{E_0})$, its \emph{perturbation matrix} is the matrix
   generated by the \xref[perturbation matrix constructor]{def:perturbation-matrix-constructor}:
   \[
-    W\defeq\pertmat(A).
+    W\defeq\pertmat(A)
   \]
 \end{dfn}
 
@@ -453,12 +453,12 @@
   In particular, giving the good basis $B$ to the constructor yields
   \[
     [\pertmat(B)]_{ri}=E_i^{\porder{1}}\cdot\delta_{r,i},
-    \qquad r,i\in\{1,\ldots,d\}.
+    \qquad r,i\in\{1,\ldots,d\}
   \]
 \end{thm}
 
 \begin{proof}
-Given a degenerate eigenspace $V_{E_0}$ of dimension $d\geq2$, we have the unperturbed orthonormal degenerate eigenstates $\{\psi_s^{\porder{0}} : s\in\{1,\ldots,d\}\}$ with the same eigenvalue $E_0$. 
+Given a degenerate eigenspace $V_{E_0}$ of dimension $d\geq2$, we have the unperturbed orthonormal degenerate eigenstates $\{\psi_s^{\porder{0}} : s\in\{1,\ldots,d\}\}$ with the same eigenvalue $E_0$
 
 Given an orthonormal basis $A$, for the chosen good state $\chi_i^{\porder{0}}$, there exists a coefficient function $c : \{1,\ldots,d\}\to\mathbb C$ such that
 \[\chi_i^{\porder{0}} = \sum_1^d\left(s \map c(s)\cdot\psi_s^{\porder{0}}\right)\] 
@@ -529,7 +529,7 @@ Then the linear system becomes
   W\mathbf c=E_i^{\porder{1}}\cdot\mathbf c.
 \]
 Since $\chi_i^{\porder{0}}\ne0$, $\mathbf c\ne0$. Thus $E_i^{\porder{1}}$ is an eigenvalue of $W$, and $\mathbf c$ is a corresponding eigenvector.
-Finding $\mathbf c$ is equivalent to finding $c$, since its $r$-th entry is $c(r)$.
+Finding $\mathbf c$ is equivalent to finding $c$, since its $r$-th entry is $c(r)$
 
 Giving the ordered good basis $B(r)=\chi_r^{\porder{0}}$ to the constructor
 instead, the projected equation above gives
@@ -541,7 +541,7 @@ instead, the projected equation above gives
   =E_i^{\porder{1}}\cdot\delta_{r,i}.
 \]
 Thus $W_B\defeq\pertmat(B)$ is diagonal. It is the matrix in basis $B$;
-$W=\pertmat(A)$ is the matrix in basis $A$.
+$W=\pertmat(A)$ is the matrix in basis $A$
 \end{proof}
 
 \begin{thm}[First-Order Converse]{degenerate-first-order-converse}
@@ -550,7 +550,7 @@ $W=\pertmat(A)$ is the matrix in basis $A$.
     \chi^{\porder{0}}\defeq\sum_1^d\left(s\map c(s)\cdot\psi_s^{\porder{0}}\right),
     \qquad \sum_1^d\left(s\map\lvert c(s)\rvert^2\right)=1.
   \]
-  If $W\mathbf c=e\cdot\mathbf c$, then $\chi^{\porder{0}}$ is a \xref[good state]{def:good-states}, with first-order energy correction $e$.
+  If $W\mathbf c=e\cdot\mathbf c$, then $\chi^{\porder{0}}$ is a \xref[good state]{def:good-states}, with first-order energy correction $e$
 \end{thm}
 
 \begin{proof}
@@ -571,7 +571,7 @@ $W=\pertmat(A)$ is the matrix in basis $A$.
 \end{proof}
 
 \begin{rem}[Why the Converse Needs a Proof]{converse-not-automatic}
-  The converse does not follow just by reversing the \xref[previous implication]{thm:degenerate-first-order-equation}, since that proof already assumed the $\chi_i^{\porder{0}}$ were good states.
+  The converse does not follow just by reversing the \xref[previous implication]{thm:degenerate-first-order-equation}, since that proof already assumed the $\chi_i^{\porder{0}}$ were good states
 \end{rem}
 
 \begin{thm}[Constructing a Good Basis]{good-basis-from-perturbation-matrix}
@@ -598,7 +598,7 @@ $W=\pertmat(A)$ is the matrix in basis $A$.
   Its perturbation matrix satisfies
   \[
     [\pertmat(B)]_{ij}=e_i\cdot\delta_{i,j},
-    \qquad i,j\in\{1,\ldots,d\}.
+    \qquad i,j\in\{1,\ldots,d\}
   \]
 \end{thm}
 
@@ -612,7 +612,7 @@ $W=\pertmat(A)$ is the matrix in basis $A$.
   \]
   Thus the $d$ states form an orthonormal basis of the $d$-dimensional space $V_{E_0}$, hence a good basis.
   The \xref[degenerate first-order equation]{thm:degenerate-first-order-equation}
-  applied in this good basis shows that $\pertmat(B)$ has diagonal entries $e_i$.
+  applied in this good basis shows that $\pertmat(B)$ has diagonal entries $e_i$
 \end{proof}
 
 % \begin{rem}[Choice of Degenerate Reference States]{degenerate-reference-states}
