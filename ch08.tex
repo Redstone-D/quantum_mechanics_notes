@@ -22,6 +22,20 @@
   For fixed $E$ and $V$, the positions $x$ satisfying $E < V(x)$ form the \emph{classically forbidden region}
 \end{conv}
 
+\begin{dfn}[Turning Point]{turning-point}
+  For fixed $E$ and $V$, a \emph{turning point} is a position $x_1$ satisfying
+  \[
+    V(x_1)=E
+  \]
+\end{dfn}
+
+\begin{dfn}[Simple Turning Point]{simple-turning-point}
+  A \xref[turning point]{def:turning-point} $x_1$ is \emph{simple} if
+  \[
+    \DiffOp(V)(x_1)\ne0
+  \]
+\end{dfn}
+
 \begin{dfn}[Transmission Coefficient]{transmission-coefficient}
   \todo
 \end{dfn}
@@ -37,7 +51,13 @@
 \end{hypo}
 
 \begin{thm}[Allowed-Region WKB Form]{wkb-allowed-region}
-  \todo
+  On an \xref[allowed interval]{conv:allowed-region} $I$, let $p(x)=\sqrt{2m\cdot(E-V(x))}$ and fix $x_0\in I$; for slowly varying amplitude, the WKB branches are
+  \[
+    \psi_{\pm}:\mathbb R\to(I\to\mathbb C),\qquad
+    A\map\left(x\map\frac{A}{\sqrt{p(x)}}\cdot
+    \exp\left(\pm\frac{i}{\hbar}\cdot
+    \left[\DiffOp^{-1}(p)\right]_{x_0}^{x}\right)\right)
+  \]
 \end{thm}
 
 \begin{proof}
@@ -63,7 +83,13 @@
 \end{dfn}
 
 \begin{thm}[Forbidden-Region WKB Form]{wkb-forbidden-region}
-  \todo
+  On a \xref[forbidden interval]{conv:forbidden-region} $[0,a]$, let $q(x)=\sqrt{2m\cdot(V(x)-E)}$; neglecting the growing term, the WKB family is
+  \[
+    \psi_{\mathrm{dec}}:\mathbb R\to([0,a]\to\mathbb R),\qquad
+    D\map\left(x\map\frac{D}{\sqrt{q(x)}}\cdot
+    \exp\left(-\frac{1}{\hbar}\cdot
+    \left[\DiffOp^{-1}(q)\right]_{0}^{x}\right)\right)
+  \]
 \end{thm}
 
 \begin{proof}
@@ -112,11 +138,73 @@
   \todo
 \end{proof}
 
-\section{Turning Points and Connection Formulas}
+\section{Airy Equation}
 
-\begin{dfn}[Simple Turning Point]{simple-turning-point}
-  \todo
+% Integral representations and leading forms from WKB lecture slide 20.
+The endpoint $\infty$ denotes an \missingprereq{improper integral, real-analysis}
+
+\begin{dfn}[Airy Function Ai]{airy-ai}
+  \[
+    \AiryAi:\mathbb R\to\mathbb R\defeq z\map
+    \frac1\pi\cdot\left[\DiffOp^{-1}\left(s\map
+      \cos\left(\frac{s^3}{3}+s\cdot z\right)
+    \right)\right]_0^\infty
+  \]
 \end{dfn}
+
+\begin{dfn}[Airy Function Bi]{airy-bi}
+  \[
+    \AiryBi:\mathbb R\to\mathbb R\defeq z\map
+    \frac1\pi\cdot\left[\DiffOp^{-1}\left(s\map
+      \exp\left(-\frac{s^3}{3}+s\cdot z\right)
+      +\sin\left(\frac{s^3}{3}+s\cdot z\right)
+    \right)\right]_0^\infty
+  \]
+\end{dfn}
+
+\begin{thm}[Airy Equation and Solutions]{airy-equation-solution}
+  For twice-differentiable $y:\mathbb R\to\mathbb C$, the \emph{Airy equation}
+  \[
+    \DiffOp^2(y)(z)=z\cdot y(z)\qquad(z\in\mathbb R)
+  \]
+  has general solution
+  \[
+    y:\mathbb R\to\mathbb C\defeq z\map
+    a\cdot\AiryAi(z)+b\cdot\AiryBi(z),
+    \qquad a,b\in\mathbb C
+  \]
+\end{thm}
+
+\begin{proof}
+  \todo
+\end{proof}
+
+\begin{thm}[Airy Asymptotic Forms]{airy-asymptotics}
+  For $z\gg0$,
+  \[
+    \begin{aligned}
+      \AiryAi(z)&\approx\frac1{2\sqrt\pi\cdot z^{1/4}}\cdot
+        \exp\left(-\frac23\cdot z^{3/2}\right),\\
+      \AiryBi(z)&\approx\frac1{\sqrt\pi\cdot z^{1/4}}\cdot
+        \exp\left(\frac23\cdot z^{3/2}\right)
+    \end{aligned}
+  \]
+  For $z\ll0$,
+  \[
+    \begin{aligned}
+      \AiryAi(z)&\approx\frac1{\sqrt\pi\cdot(-z)^{1/4}}\cdot
+        \sin\left(\frac23\cdot(-z)^{3/2}+\frac\pi4\right),\\
+      \AiryBi(z)&\approx\frac1{\sqrt\pi\cdot(-z)^{1/4}}\cdot
+        \cos\left(\frac23\cdot(-z)^{3/2}+\frac\pi4\right)
+    \end{aligned}
+  \]
+\end{thm}
+
+\begin{proof}
+  \todo
+\end{proof}
+
+\section{Turning Points and Connection Formulas}
 
 \begin{rem}[Airy Functions and Overlap Matching]{airy-matching}
   \todo
@@ -131,11 +219,225 @@
 \end{proof}
 
 \begin{thm}[Downward-Sloping Connection Formula]{downward-connection-formula}
-  \todo
+  Let $V$ be smooth near $x_1$, with
+  \[
+    V(x_1)=E,\qquad \DiffOp(V)(x_1)<0
+  \]
+  Sufficiently close to $x_1$, the \xref[forbidden]{conv:forbidden-region} and \xref[allowed]{conv:allowed-region} regions are
+  \[
+    \begin{aligned}
+      x<x_1&:\quad V(x)>E\quad\text{(forbidden)},\\
+      x>x_1&:\quad V(x)<E\quad\text{(allowed)}
+    \end{aligned}
+  \]
+  Write $q(x)=\sqrt{2m\cdot(V(x)-E)}$ on the forbidden side and $p(x)=\sqrt{2m\cdot(E-V(x))}$ on the allowed side. On an interval $I$ about $x_1$ with these regions, the connected WKB approximation is, for $D\in\mathbb C$,
+  \[
+    \begin{aligned}
+      \psi'&:I\setminus\{x_1\}\to\mathbb C\\
+      &\defeq x\map\begin{cases}
+        \dfrac{D}{\sqrt{q(x)}}\cdot\exp\left(-\dfrac1\hbar\cdot
+          \left[\DiffOp^{-1}(q)\right]_x^{x_1}\right),&x<x_1,\\[1em]
+        \dfrac{2D}{\sqrt{p(x)}}\cdot\sin\left(\dfrac1\hbar\cdot
+          \left[\DiffOp^{-1}(p)\right]_{x_1}^{x}+\dfrac\pi4\right),&x>x_1
+      \end{cases}
+    \end{aligned}
+  \]
+  The prime labels the approximation; these WKB forms apply away from the turning point
 \end{thm}
 
 \begin{proof}
-  \todo
+  Choose $\delta>0$ so the forbidden and allowed intervals are
+  \[
+    I_F\defeq[x_1-\delta,x_1),\qquad
+    I_A\defeq(x_1,x_1+\delta]
+  \]
+  Write $q(x)=\sqrt{2m\cdot(V(x)-E)}$ on $I_F$ and $p(x)=\sqrt{2m\cdot(E-V(x))}$ on $I_A$, with $B,C,D\in\mathbb C$
+
+  Choose the WKB branch that decays towards the left in the \xref[forbidden region]{conv:forbidden-region}:
+  \[
+    \psi_F:I_F\to\mathbb C\defeq x\map
+    \frac{D}{\sqrt{q(x)}}\cdot
+    \exp\left(-\frac1\hbar\cdot
+      \left[\DiffOp^{-1}(q)\right]_{x}^{x_1}\right)
+  \]
+  In the \xref[allowed region]{conv:allowed-region}, use both WKB branches:
+  \[
+    \begin{aligned}
+      \psi_A:I_A\to\mathbb C\defeq x\map
+      \frac1{\sqrt{p(x)}}\cdot\Biggl(&
+        B\cdot\exp\left(\frac{i}{\hbar}\cdot
+          \left[\DiffOp^{-1}(p)\right]_{x_1}^{x}\right)\\
+        &+C\cdot\exp\left(-\frac{i}{\hbar}\cdot
+          \left[\DiffOp^{-1}(p)\right]_{x_1}^{x}\right)\Biggr)
+    \end{aligned}
+  \]
+
+  {\color{notesmissingprereq}The factors $1/\sqrt{q(x)}$ and $1/\sqrt{p(x)}$ diverge as $x$ approaches $x_1$ from their sides, so these WKB forms fail near the turning point; a local matching solution is needed}
+
+  Seek a local patch
+  \[
+    \psi_P:[x_1-\delta,x_1+\delta]\to\mathbb C
+  \]
+  Choose $x_1\pm\delta$ in the overlap regions; to match the wavefunction and its one-sided first derivatives, require
+  \[
+    \begin{cases}
+      \psi_P(x_1-\delta)\approx\psi_F(x_1-\delta)\\
+      \DiffOp(\psi_P)(x_1-\delta)\approx\DiffOp(\psi_F)(x_1-\delta)\\
+      \psi_P(x_1+\delta)\approx\psi_A(x_1+\delta)\\
+      \DiffOp(\psi_P)(x_1+\delta)\approx\DiffOp(\psi_A)(x_1+\delta)
+    \end{cases}
+  \]
+
+  According to TISE, for $x\in(x_1-\delta,x_1+\delta)$,
+  \[
+    -\frac{\hbar^2}{2m}\cdot\DiffOp^2(\psi_P)(x)
+    +V(x)\cdot\psi_P(x)=E\cdot\psi_P(x)
+  \]
+  First-order \missingprereq{Taylor expansion} about the \xref[turning point]{def:turning-point} gives
+  \[
+    V(x)\approx V(x_1)+\DiffOp(V)(x_1)\cdot(x-x_1)
+    =E+\DiffOp(V)(x_1)\cdot(x-x_1)
+  \]
+
+  Substitute into TISE and cancel $E\cdot\psi_P(x)$:
+  \[
+    -\frac{\hbar^2}{2m}\cdot\DiffOp^2(\psi_P)(x)
+    +\bigl(E+\DiffOp(V)(x_1)\cdot(x-x_1)\bigr)\cdot\psi_P(x)
+    \approx E\cdot\psi_P(x)
+  \]
+  \[
+    -\frac{\hbar^2}{2m}\cdot\DiffOp^2(\psi_P)(x)
+    +\DiffOp(V)(x_1)\cdot(x-x_1)\cdot\psi_P(x)\approx0
+  \]
+
+  Since $\DiffOp(V)(x_1)<0$, define
+  \[
+    \alpha\defeq\left(-\frac{2m}{\hbar^2}\cdot\DiffOp(V)(x_1)\right)^{1/3}>0
+  \]
+  Then
+  \[
+    \DiffOp^2(\psi_P)(x)+\alpha^3\cdot(x-x_1)\cdot\psi_P(x)\approx0
+  \]
+  \[
+    \DiffOp^2(\psi_P)(x)\approx-\alpha^3\cdot(x-x_1)\cdot\psi_P(x)
+  \]
+
+  Set $z=-\alpha\cdot(x-x_1)$ and write $\psi_P(x)=y(z)$; the chain rule gives
+  \[
+    \DiffOp^2(\psi_P)(x)=\alpha^2\cdot\DiffOp^2(y)(z)
+  \]
+  \[
+    \alpha^2\cdot\DiffOp^2(y)(z)
+    \approx\alpha^2\cdot z\cdot y(z)
+    \quad\Longrightarrow\quad
+    \DiffOp^2(y)(z)\approx z\cdot y(z)
+  \]
+  By the \xref[Airy general solution]{thm:airy-equation-solution}, the local approximation is
+  \[
+    \psi_P(x)\approx
+    a\cdot\AiryAi\bigl(-\alpha\cdot(x-x_1)\bigr)
+    +b\cdot\AiryBi\bigl(-\alpha\cdot(x-x_1)\bigr),
+    \qquad a,b\in\mathbb C
+  \]
+
+  Use the \xref[Airy asymptotic forms]{thm:airy-asymptotics} in overlap regions where $|z|\gg1$ while the linear approximation to $V$ remains valid
+
+  On the forbidden side, $x<x_1$ and $z\gg0$:
+  \[
+    q(x)\approx\hbar\cdot\alpha\cdot\sqrt z,
+    \qquad
+    \frac1\hbar\cdot\left[\DiffOp^{-1}(q)\right]_x^{x_1}
+    \approx\frac23\cdot z^{3/2}
+  \]
+  \[
+    \begin{aligned}
+      \psi_P(x)&\approx\frac1{z^{1/4}}\cdot\left[
+        \frac{a}{2\sqrt\pi}\cdot e^{-\frac23 z^{3/2}}
+        +\frac{b}{\sqrt\pi}\cdot e^{\frac23 z^{3/2}}\right],\\
+      \psi_F(x)&\approx\frac1{z^{1/4}}\cdot
+        \frac{D}{\sqrt{\hbar\cdot\alpha}}\cdot e^{-\frac23 z^{3/2}}
+    \end{aligned}
+  \]
+  Matching the decaying and growing coefficients gives
+  \[
+    \begin{cases}
+      \dfrac{a}{2\sqrt\pi}=\dfrac{D}{\sqrt{\hbar\cdot\alpha}}\\[0.5em]
+      \dfrac{b}{\sqrt\pi}=0
+    \end{cases}
+  \]
+  Hence
+  \[
+    a=\frac{2\sqrt\pi\cdot D}{\sqrt{\hbar\cdot\alpha}},\qquad b=0
+  \]
+
+  On the allowed side, $x>x_1$ and $z\ll0$:
+  \[
+    p(x)\approx\hbar\cdot\alpha\cdot\sqrt{-z},
+    \qquad
+    \frac1\hbar\cdot\left[\DiffOp^{-1}(p)\right]_{x_1}^{x}
+    \approx\frac23\cdot(-z)^{3/2}
+  \]
+  \[
+    \begin{aligned}
+      \psi_P(x)&\approx\frac1{\sqrt\pi\cdot(-z)^{1/4}}\cdot\Biggl[
+        a\cdot\sin\left(\frac23\cdot(-z)^{3/2}+\frac\pi4\right)\\
+        &\hspace{7em}+b\cdot\cos\left(\frac23\cdot(-z)^{3/2}+\frac\pi4\right)\Biggr],\\
+      \psi_A(x)&\approx\frac1{\sqrt{\hbar\cdot\alpha}\cdot(-z)^{1/4}}\cdot\left[
+        B\cdot e^{i\frac23(-z)^{3/2}}+C\cdot e^{-i\frac23(-z)^{3/2}}\right]
+    \end{aligned}
+  \]
+  Using
+  \[
+    a\cdot\sin\theta+b\cdot\cos\theta
+    =\frac{b-ia}{2}\cdot e^{i\theta}
+    +\frac{b+ia}{2}\cdot e^{-i\theta}
+  \]
+  and matching the two oscillatory coefficients gives
+  \[
+    \begin{cases}
+      \dfrac{B}{\sqrt{\hbar\cdot\alpha}}
+        =\dfrac{b-ia}{2\sqrt\pi}\cdot e^{i\pi/4}\\[0.5em]
+      \dfrac{C}{\sqrt{\hbar\cdot\alpha}}
+        =\dfrac{b+ia}{2\sqrt\pi}\cdot e^{-i\pi/4}
+    \end{cases}
+  \]
+  Substituting $a,b$ gives
+  \[
+    \begin{aligned}
+      B&=\sqrt{\hbar\cdot\alpha}\cdot\frac{-i}{2\sqrt\pi}
+        \cdot\frac{2\sqrt\pi\cdot D}{\sqrt{\hbar\cdot\alpha}}
+        \cdot e^{i\pi/4}\\
+       &=-i\cdot D\cdot e^{i\pi/4}=D\cdot e^{-i\pi/4},\\[0.5em]
+      C&=\sqrt{\hbar\cdot\alpha}\cdot\frac{i}{2\sqrt\pi}
+        \cdot\frac{2\sqrt\pi\cdot D}{\sqrt{\hbar\cdot\alpha}}
+        \cdot e^{-i\pi/4}\\
+       &=i\cdot D\cdot e^{-i\pi/4}=D\cdot e^{i\pi/4}
+    \end{aligned}
+  \]
+
+  Substituting back into the local patch gives
+  \[
+    \psi_P\approx\left(x\map
+      \frac{2\sqrt\pi\cdot D}{\sqrt{\hbar\cdot\alpha}}
+      \cdot\AiryAi\bigl(-\alpha\cdot(x-x_1)\bigr)\right)
+  \]
+  Substituting $B,C$ into the allowed-region form gives
+  \[
+    \begin{aligned}
+      \psi_A(x)&\approx\frac{D}{\sqrt{p(x)}}\cdot\Biggl[
+        e^{-i\pi/4}\cdot\exp\left(\frac{i}{\hbar}\cdot
+          \left[\DiffOp^{-1}(p)\right]_{x_1}^{x}\right)\\
+        &\hspace{5em}+e^{i\pi/4}\cdot\exp\left(-\frac{i}{\hbar}\cdot
+          \left[\DiffOp^{-1}(p)\right]_{x_1}^{x}\right)\Biggr]\\
+      &=\frac{2D}{\sqrt{p(x)}}\cdot\cos\left(
+        \frac1\hbar\cdot\left[\DiffOp^{-1}(p)\right]_{x_1}^{x}
+        -\frac\pi4\right)\\
+      &=\frac{2D}{\sqrt{p(x)}}\cdot\sin\left(
+        \frac1\hbar\cdot\left[\DiffOp^{-1}(p)\right]_{x_1}^{x}
+        +\frac\pi4\right)
+    \end{aligned}
+  \]
+  Combining $\psi_F$ and $\psi_A$ gives the stated $\psi'$
 \end{proof}
 
 \end{document}
