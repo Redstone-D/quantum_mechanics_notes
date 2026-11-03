@@ -10,6 +10,19 @@
 \usepackage{appendix} 
 \usepackage{listings}
 \usepackage{xcolor} 
+\usepackage{hyperref}
+\usepackage{rs-notes}
+% This legacy sheet uses fully project-qualified references only.
+% Bridge them to the same named destinations used by the course packages.
+\newcommand{\xref}[2][]{%
+  \begingroup
+  \edef\cheatRefTarget{#2}%
+  \expandafter\cheatResolveRef\cheatRefTarget\cheatEndRef{#1}%
+  \endgroup}
+\def\cheatResolveRef#1::#2::#3:#4\cheatEndRef#5{%
+  \href{https://notes.rua.rs/#1/#2.pdf\#nameddest=notes.#3.#4}{#5}}
+\newcommand{\missingprereq}[1]{\textcolor{purple}{#1}}
+\usepackage{qm-notations}
 \usepackage{tikz} % Draw picture
 \usetikzlibrary{patterns,decorations.pathmorphing}
 \usepackage{tikz-3dplot} 
@@ -363,5 +376,162 @@ B_1 &= \frac{i\beta}{1-i\beta} A_1, \quad A_2 = \frac{1}{1-i\beta} A_1, \quad T 
 \end{cases} \quad k = \sqrt{\frac{2mE}{\hbar^2}}, \quad \beta = \frac{m\alpha}{\hbar^2 k} \\
 B_1 &= \frac{-i\beta}{1+i\beta} A_1, \quad A_2 = \frac{1}{1+i\beta} A_1, \quad T = \frac{1}{1+\beta^2}, \quad R = \frac{\beta^2}{1+\beta^2}
 \end{align}
+
+\clearpage
+\section{WKB Approximation (Chapter 8)}
+
+\subsection{WKB Results}
+
+\textbf{Regions and momentum functions:}
+\[
+  \begin{aligned}
+    E>V(x)&:\quad p(x)=\sqrt{2m\cdot(E-V(x))}\quad\text{(allowed)},\\
+    E<V(x)&:\quad q(x)=\sqrt{2m\cdot(V(x)-E)}\quad\text{(forbidden)}
+  \end{aligned}
+\]
+The WKB forms below assume a slowly varying potential away from turning points
+
+\textbf{\xref[Allowed-region WKB form]{quantum-mechanics::ch08::thm:wkb-allowed-region}:}
+For an allowed interval $I$, fixed $x_0\in I$, and $A,B\in\CC$,
+\[
+  \psi\approx x\map\frac1{\sqrt{p(x)}}\cdot\left[
+    A\cdot\exp\left(\frac{i}{\hbar}\cdot
+      \left[\DiffOp^{-1}(p)\right]_{x_0}^{x}\right)
+    +B\cdot\exp\left(-\frac{i}{\hbar}\cdot
+      \left[\DiffOp^{-1}(p)\right]_{x_0}^{x}\right)\right]
+\]
+
+\textbf{\xref[Forbidden-region WKB form]{quantum-mechanics::ch08::thm:wkb-forbidden-region}:}
+For a forbidden interval $I$, fixed $x_0\in I$, and $C,D\in\CC$,
+\[
+  \psi\approx x\map\frac1{\sqrt{q(x)}}\cdot\left[
+    C\cdot\exp\left(\frac1\hbar\cdot
+      \left[\DiffOp^{-1}(q)\right]_{x_0}^{x}\right)
+    +D\cdot\exp\left(-\frac1\hbar\cdot
+      \left[\DiffOp^{-1}(q)\right]_{x_0}^{x}\right)\right]
+\]
+Neglect the growing term only when the physical boundary or matching conditions justify it
+
+\textbf{\xref[Quantization between two infinite walls]{quantum-mechanics::ch08::thm:hard-wall-quantization}:}
+For walls at $0,a$ with an allowed interior,
+\[
+  \psi(0)=\psi(a)=0
+  \quad\Longrightarrow\quad
+  \left[\DiffOp^{-1}(p)\right]_0^a=n\pi\hbar,
+  \qquad n\in\NNOne
+\]
+
+\textbf{\xref[Leading WKB tunneling probability]{quantum-mechanics::ch08::thm:wkb-transmission}:}
+For a forbidden barrier between $x_L$ and $x_R$,
+\[
+  \gamma\defeq\frac1\hbar\cdot\left[\DiffOp^{-1}(q)\right]_{x_L}^{x_R},
+  \qquad T\approx e^{-2\gamma}\qquad(\gamma\gg1)
+\]
+For a rectangular barrier of width $L$, $\kappa=\sqrt{2m\cdot(V_0-E)}/\hbar$ gives
+\[
+  T_{\mathrm{WKB}}\approx e^{-2\kappa L},\qquad
+  T_{\mathrm{exact}}\approx\frac{16E\cdot(V_0-E)}{V_0^2}\cdot e^{-2\kappa L}
+  \quad(\kappa L\gg1)
+\]
+The leading exponential agrees; the abrupt barrier edges give a prefactor that WKB's leading exponential omits
+
+\textbf{Gamow's alpha-decay estimate:}
+For escape attempts at rate $v/(2R)$ from a nuclear well of radius $R$,
+\[
+  \tau\approx\frac{2R}{v\cdot T}
+  \approx\frac{2R}{v}\cdot e^{2\gamma}
+\]
+
+\newpage
+\subsection{Airy Functions}
+
+\textbf{\xref[Airy equation and general solution]{quantum-mechanics::ch08::thm:airy-equation-solution}:}
+\[
+  \DiffOp^2(y)(z)=z\cdot y(z),\qquad
+  y:\RR\to\CC\defeq z\map
+    a\cdot\AiryAi(z)+b\cdot\AiryBi(z),\quad a,b\in\CC
+\]
+
+\textbf{Integral representations:}
+The endpoint $\infty$ denotes an improper integral
+\[
+  \AiryAi:\RR\to\RR\defeq z\map
+  \frac1\pi\cdot\left[\DiffOp^{-1}\left(s\map
+    \cos\left(\frac{s^3}{3}+s\cdot z\right)\right)\right]_0^\infty
+\]
+\[
+  \AiryBi:\RR\to\RR\defeq z\map
+  \frac1\pi\cdot\left[\DiffOp^{-1}\left(s\map
+    e^{-s^3/3+s\cdot z}+\sin\left(\frac{s^3}{3}+s\cdot z\right)
+    \right)\right]_0^\infty
+\]
+
+\subsection{Approximate Forms and Turning-Point Connections}
+
+\textbf{\xref[Airy asymptotic forms]{quantum-mechanics::ch08::thm:airy-asymptotics}:}
+For $z\gg0$,
+\[
+  \begin{aligned}
+    \AiryAi(z)&\approx\frac{e^{-2z^{3/2}/3}}{2\sqrt\pi\cdot z^{1/4}},\\
+    \AiryBi(z)&\approx\frac{e^{2z^{3/2}/3}}{\sqrt\pi\cdot z^{1/4}}
+  \end{aligned}
+\]
+For $z\ll0$,
+\[
+  \begin{aligned}
+    \AiryAi(z)&\approx\frac1{\sqrt\pi\cdot(-z)^{1/4}}\cdot
+      \sin\left(\frac23\cdot(-z)^{3/2}+\frac\pi4\right),\\
+    \AiryBi(z)&\approx\frac1{\sqrt\pi\cdot(-z)^{1/4}}\cdot
+      \cos\left(\frac23\cdot(-z)^{3/2}+\frac\pi4\right)
+  \end{aligned}
+\]
+
+\textbf{Local Airy patch:}
+At a simple turning point $x_t$, let $s=\DiffOp(V)(x_t)\ne0$ and $V(x_t)=E$
+\[
+  V(x)\approx E+s\cdot(x-x_t),\qquad
+  \alpha\defeq\left(\frac{2m\cdot|s|}{\hbar^2}\right)^{1/3},\qquad
+  z=\operatorname{sgn}(s)\cdot\alpha\cdot(x-x_t)
+\]
+\[
+  \psi_P\approx x\map
+    a\cdot\AiryAi\bigl(\operatorname{sgn}(s)\cdot\alpha\cdot(x-x_t)\bigr)
+    +b\cdot\AiryBi\bigl(\operatorname{sgn}(s)\cdot\alpha\cdot(x-x_t)\bigr)
+\]
+For a decaying forbidden-side solution of amplitude $D$, matching gives
+\[
+  a=\frac{2\sqrt\pi\cdot D}{\sqrt{\hbar\cdot\alpha}},\qquad b=0
+\]
+
+\newpage
+\textbf{\xref[Upward-sloping connection]{quantum-mechanics::ch08::thm:upward-connection-formula}:}
+$s>0$: left allowed, right forbidden
+\[
+  \psi\approx x\map\begin{cases}
+    \dfrac{2D}{\sqrt{p(x)}}\cdot\sin\left(
+      \dfrac1\hbar\cdot\left[\DiffOp^{-1}(p)\right]_{x}^{x_t}
+      +\dfrac\pi4\right),&x<x_t,\\[1em]
+    \dfrac{D}{\sqrt{q(x)}}\cdot\exp\left(
+      -\dfrac1\hbar\cdot\left[\DiffOp^{-1}(q)\right]_{x_t}^{x}\right),&x>x_t
+  \end{cases}
+\]
+
+\textbf{\xref[Downward-sloping connection]{quantum-mechanics::ch08::thm:downward-connection-formula}:}
+$s<0$: left forbidden, right allowed
+\[
+  \psi\approx x\map\begin{cases}
+    \dfrac{D}{\sqrt{q(x)}}\cdot\exp\left(
+      -\dfrac1\hbar\cdot\left[\DiffOp^{-1}(q)\right]_{x}^{x_t}\right),&x<x_t,\\[1em]
+    \dfrac{2D}{\sqrt{p(x)}}\cdot\sin\left(
+      \dfrac1\hbar\cdot\left[\DiffOp^{-1}(p)\right]_{x_t}^{x}
+      +\dfrac\pi4\right),&x>x_t
+  \end{cases}
+\]
+These WKB expressions apply away from $x_t$; use the Airy patch near $x_t$
+
+\textbf{Equivalent phase convention:}
+\[
+  \sin\left(\theta+\frac\pi4\right)=\cos\left(\theta-\frac\pi4\right)
+\]
 
 \end{document}

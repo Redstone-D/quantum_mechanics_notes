@@ -4,12 +4,273 @@
 \begin{document}
 
 \begin{center}
-  {\LARGE\bfseries Chapter 1: The Schr\"odinger Equation}\\[0.25em]
+  {\LARGE\bfseries Chapter 1: Foundations of Spinless Quantum Mechanics}\\[0.25em]
   {\large Quantum Mechanics}\\[0.15em]
 \end{center}
 
-\begin{dfn}[Wave]{wave}
-    A \emph{wave} is a function 
+\section{The Newtonian Picture}
+
+\begin{dfn}[Configuration Space]{configuration-space}
+  \todo
 \end{dfn}
+
+Fix $N\in\NNOne$, a \xref[configuration space]{def:configuration-space}
+$X\subseteq\RR^N$, and a nonempty \xref[open time interval]{real-analysis::lec02::def:open-interval}
+$I\subseteq\RR$
+
+\begin{dfn}[Position]{position}
+  A \emph{position} is a point $r\in X$ of the
+  \xref[configuration space]{def:configuration-space}
+\end{dfn}
+
+\begin{dfn}[Position Function]{position-function}
+  A \emph{position function} is a map
+  \[
+    x:I\to X
+  \]
+  which, regarded as a map into $\RR^N$, is
+  \missingprereq{twice continuously differentiable, real-analysis}.
+  At time $t\in I$, the \xref[position]{def:position} is $x(t)\in X$
+\end{dfn}
+
+\begin{dfn}[Mass]{mass}
+  In the massive-particle model of this chapter, a particle's \emph{mass} has type
+  \[
+    m\in\apos{\RR}
+  \]
+  In this chapter's model, we assume $m$ is constant throughout $I$
+\end{dfn}
+
+\begin{dfn}[Electric Charge]{electric-charge}
+  A particle's \emph{electric charge} has type
+  \[
+    e\in\RR
+  \]
+  In this chapter's model, we assume $e$ is constant throughout $I$
+\end{dfn}
+
+\begin{dfn}[Newtonian Point-Particle Model]{classical-particle}
+  A \emph{Newtonian point particle with a specified motion} is a triple
+  $(x,e,m)$ consisting of a \xref[position function]{def:position-function} $x$,
+  an \xref[electric charge]{def:electric-charge} $e$, and a \xref[mass]{def:mass} $m$
+\end{dfn}
+
+\begin{dfn}[Velocity]{velocity}
+  For a \xref[position function]{def:position-function} $x$, the
+  \emph{velocity} is
+  \[
+    v:I\to\RR^N \defeq t\map\DiffOp(x)(t)
+  \]
+  Here $\DiffOp$ denotes \missingprereq{differentiation, real-analysis},
+  applied to the trajectory in the ambient space $\RR^N$
+\end{dfn}
+
+\begin{dfn}[Acceleration]{acceleration}
+  The \emph{acceleration} is the derivative of the \xref[velocity]{def:velocity}
+  \[
+    a:I\to\RR^N \defeq t\map\DiffOp(v)(t)
+  \]
+  The differentiability required in \xref{def:position-function} ensures
+  that both $v$ and $a$ exist
+\end{dfn}
+
+% Reference: David Tong, Classical Dynamics, section 1.1.
+% https://www.damtp.cam.ac.uk/user/tong/dynamics/dynhtml/S1.html
+
+\section{Hilbert Space}
+
+\begin{dfn}[Complex Hilbert Space]{hilbert-space}
+  \todo
+\end{dfn}
+
+\begin{dfn}[Square-Integrable Function Space]{square-integrable-space}
+  \todo
+\end{dfn}
+
+\section{Naive Modelling of a Quantum Particle}
+
+Assume the \xref[configuration space]{def:configuration-space}
+$X\subseteq\RR^N$ is \missingprereq{Lebesgue measurable, real-analysis}
+with positive \missingprereq{Lebesgue measure, real-analysis}.
+For this section, choose the \xref[Hilbert space]{def:hilbert-space}
+\[
+  \HS\defeq\LTwo(X;\CC)
+\]
+All integrals below use \missingprereq{Lebesgue integration, real-analysis};
+the modulus bars denote \missingprereq{complex modulus, mathematical-methods}
+
+\begin{dfn}[Spatial Wavefunction]{spatial-wavefunction}
+  A nonzero element $\phi\in\HS$ is a \emph{spatial wavefunction}, with a
+  function representative
+  \[
+    \phi:X\to\CC
+  \]
+  Representatives that agree \missingprereq{almost everywhere, real-analysis}
+  represent the same element of $\HS$
+\end{dfn}
+
+% Reference: David Tong, Quantum Mechanics, sections 1.1 and 3.1.
+% https://www.damtp.cam.ac.uk/user/tong/qm/qm1.pdf
+\begin{axm}[Pure-State Representation]{pure-state-representation}
+  In this chapter's pure-state model, the classical
+  \xref[position function]{def:position-function} $x:I\to X$ is replaced
+  by a state function
+  \[
+    \psi:I\to\HS,\qquad
+    \psi(t)\ne0\quad(t\in I)
+  \]
+  This map is the \emph{time-dependent wavefunction}.
+  Write $\psi_t\defeq\psi(t)$; at each time $t\in I$, $\psi_t$ is a
+  \xref[spatial wavefunction]{def:spatial-wavefunction} representing the
+  particle's state at that time
+\end{axm}
+
+\begin{conv}[Normalized Representatives]{normalized-representatives}
+  We choose representatives of the
+  \xref[time-dependent wavefunction]{axm:pure-state-representation} satisfying
+  \[
+    \int_X\cabs{\psi_t(r)}^2\,d^N r=1\qquad(t\in I)
+  \]
+  Such representatives are called \emph{normalized}
+\end{conv}
+
+\begin{axm}[Position Born Rule]{position-born-rule}
+  For a \xref[normalized representative]{conv:normalized-representatives}
+  $\psi$ and a \missingprereq{measurable region, real-analysis}
+  $A\subseteq X$, the \missingprereq{probability, probability theory} of
+  finding the particle in $A$ on a position measurement at time $t\in I$ is
+  \[
+    \PositionProb_t(A)=\int_A\cabs{\psi_t(r)}^2\,d^N r
+  \]
+\end{axm}
+
+\begin{dfn}[Quantum Particle Model]{quantum-particle}
+  A \emph{spinless quantum particle with a specified state history} is a triple
+  \[
+    (\psi,m,q),\qquad m\in\apos{\RR},\quad q\in\RR
+  \]
+  consisting of a \xref[state function]{axm:pure-state-representation} $\psi$
+  chosen according to the \xref[normalization convention]{conv:normalized-representatives},
+  a constant \xref[mass]{def:mass} $m$, and a constant
+  \xref[electric charge]{def:electric-charge} $q$.
+  Its position probabilities are given by the
+  \xref[Born rule]{axm:position-born-rule}
+\end{dfn}
+
+\begin{rem}[Overall Phase]{overall-phase}
+  \todo
+\end{rem}
+
+\begin{conv}[Normalization]
+
+\end{conv}
+
+\section{Operators and Observables}
+
+\begin{dfn}[Operator Type]{operator-type}
+  \todo
+\end{dfn}
+
+\begin{dfn}[Hermition Conjugate]{hermition-conjugate}
+  The \emph{Hermitian conjugate} of an operator $\hat{O}$ is denoted $\hat{O}^{\dagger}$ and is defined by the property
+  \[\forall f, g, \braket{f|\hat{O}g} = \braket{\hat{O}^{\dagger}f|g}\]
+\end{dfn}
+
+\begin{rem}[Hermitian Conjugate as Matrix Transpose]{hermitian-conjugate-as-matrix-transpose}
+  If $\hat{O}$ is represented as a matrix, then the Hermitian conjugate is the complex conjugate transpose of that matrix. ie,
+  \[H^\dagger = \left(H^{\text{T}}\right)^{*}\]
+\end{rem}
+
+\begin{dfn}[Hermitian Operator]{hermitian-operator}
+  An operator $\hat{O}$ is \emph{Hermitian} if it is equal to its Hermitian conjugate, i.e. $\hat{O}^{\dagger} = \hat{O}$.
+\end{dfn}
+
+\begin{dfn}[Observable]{observable}
+  \todo
+\end{dfn}
+
+\begin{dfn}[Position Operator]{position-operator}
+  \todo
+\end{dfn}
+
+\begin{dfn}[Momentum Operator (Position Representation)]{momentum-operator-position}
+  In one dimension, the momentum operator $\hat{p}$ acts on a position-space wavefunction $\psi(x)$ as
+  \[
+    \hat{p}\,\psi(x) \;=\; -i\hbar\,\frac{d\psi}{dx}(x),
+  \]
+  or equivalently, as a differential operator,
+  \[
+    \hat{p} \;=\; -i\hbar\,\frac{d}{dx}.
+  \]
+  In three dimensions, $\hat{\vec{p}} = -i\hbar\,\nabla$.
+\end{dfn}
+
+\begin{dfn}[Hamiltonian in 1D]{hamiltonian-1d}
+  For a particle of mass $m$ in a potential $V(x)$, the Hamiltonian is
+  \[
+    \hat{H} \;=\; \frac{\hat{p}^2}{2m} + V(\hat{x}).
+  \]
+\end{dfn}
+
+\section{Commutators}
+
+\begin{dfn}[Commutator]{commutator}
+  $\comm{\hat{A}}{\hat{B}} := \hat{A}\hat{B} - \hat{B}\hat{A}$.
+\end{dfn}
+
+\begin{rem}[Notation]{commutator-notation}
+  Others usually write commutators as $[\hat{A}, \hat{B}]$.
+\end{rem}
+
+\begin{thm}[Distributive Law for Commutators]{commutator-distributive}
+  For any operators $\hat{A}, \hat{B}, \hat{C}$,
+  \[
+    \comm{\hat{A} + \hat{B}}{\hat{C}} = \comm{\hat{A}}{\hat{C}} + \comm{\hat{B}}{\hat{C}}.
+  \]
+\end{thm}
+
+\begin{proof}
+  {\color{blue}\textbf{TODO}}
+\end{proof}
+
+\begin{thm}[Leibniz Rule for the Commutator]{commutator-leibniz}
+  For any operators $\hat{A}, \hat{B}, \hat{C}$,
+  \[
+    \comm{\hat{A}\hat{B}}{\hat{C}} = \hat{A}\,\comm{\hat{B}}{\hat{C}} + \comm{\hat{A}}{\hat{C}}\,\hat{B}.
+  \]
+\end{thm}
+
+\begin{proof}
+  {\color{blue}\textbf{TODO}}
+\end{proof}
+
+\begin{thm}[Canonical Commutation Relation]{canonical-commutation}
+  For the position and momentum operators,
+  \[
+    \comm{\hat{x}}{\hat{p}} = i\hbar.
+  \]
+\end{thm}
+
+\begin{proof}
+  {\color{blue}\textbf{TODO}}
+\end{proof}
+
+\begin{thm}[Hamiltonian Commutators]{hamiltonian-commutators}
+  For a 1D Hamiltonian $\hat{H} = \dfrac{\hat{p}^2}{2m} + V(\hat{x})$ (\xref{def:hamiltonian-1d}),
+  \[
+    \comm{\hat{H}}{\hat{x}} = -\frac{i\hbar}{m}\,\hat{p}, \qquad
+    \comm{\hat{H}}{\hat{p}} = i\hbar\, V'(\hat{x}).
+  \]
+\end{thm}
+
+\begin{proof}
+  {\color{blue}\textbf{TODO}}
+\end{proof}
+
+\section{Schr\"odinger Equation}
+
+\section{Probability Current}
+
+\section{TISE}
 
 \end{document}

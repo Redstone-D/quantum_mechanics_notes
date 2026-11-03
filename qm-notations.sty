@@ -3,10 +3,80 @@
 
 \RequirePackage{mathrsfs}
 
+% Linked scalar notation shared with Real Analysis and Mathematical Methods.
+% Load their complete notation packages first if additional notation is needed.
+\providecommand*{\positiveNaturalNumbersRef}{real-analysis::lec01::conv:positive-natural-numbers}
+\providecommand*{\realNumbersRef}{real-analysis::lec01::rem:number-sets-inclusions-real}
+\providecommand*{\complexNumbersRef}{math-methods::ch01::def:complex-number}
+\providecommand*{\signSubsetsRef}{real-analysis::lec01::conv:sign-subsets}
+\providecommand*{\NNOne}{%
+  \ensuremath{\xref[\mathbb{N}_{1}]{\positiveNaturalNumbersRef}}%
+}
+\providecommand*{\RR}{%
+  \ensuremath{\xref[\mathbb{R}]{\realNumbersRef}}%
+}
+\providecommand*{\CC}{%
+  \ensuremath{\xref[\mathbb{C}]{\complexNumbersRef}}%
+}
+% Link the restriction separately so the carrier retains its own link.
+\providecommand*{\apos}[1]{%
+  \ensuremath{{#1}_{\xref[+]{\signSubsetsRef}}}%
+}
+
+% State-space notation. Link only the head, leaving arguments outside links.
+\providecommand*{\hilbertSpaceRef}{quantum-mechanics::ch01::def:hilbert-space}
+\providecommand*{\squareIntegrableSpaceRef}{quantum-mechanics::ch01::def:square-integrable-space}
+\providecommand*{\positionProbabilityRef}{quantum-mechanics::ch01::axm:position-born-rule}
+\ExplSyntaxOn
+\cs_new_protected:Npn \__qm_notation_link:nnn #1#2#3
+  {
+    \str_if_eq:eeTF {#3} { \notesProjectName :: \jobname :: #2 }
+      { \xref[#1]{#2} }
+      { \xref[#1]{#3} }
+  }
+\NewDocumentCommand{\HS}{}
+  {
+    \ensuremath
+      {
+        \__qm_notation_link:nnn
+          { \mathcal H } { def:hilbert-space } { \hilbertSpaceRef }
+      }
+  }
+\NewDocumentCommand{\LTwo}{}
+  {
+    \ensuremath
+      {
+        \__qm_notation_link:nnn
+          { L^2 } { def:square-integrable-space } { \squareIntegrableSpaceRef }
+      }
+  }
+\NewDocumentCommand{\PositionProb}{}
+  {
+    \ensuremath
+      {
+        \mathop
+          {
+            \__qm_notation_link:nnn
+              { \mathrm P } { axm:position-born-rule } { \positionProbabilityRef }
+          }
+        \nolimits
+      }
+  }
+\cs_new_eq:NN \qm@notationLink \__qm_notation_link:nnn
+\ExplSyntaxOff
+
+% Complex-modulus notation is still owed by Mathematical Methods. Mark the
+% bars rather than guessing a semantic target or linking to real absolute value.
+\providecommand*{\cabs}[1]{%
+  \ensuremath{%
+    \mathopen{\missingprereq{\lvert}}#1\mathclose{\missingprereq{\rvert}}%
+  }%
+}
+
 % Operator type; the domain and codomain are supplied by the surrounding setup.
-\providecommand*{\operatorTypeRef}{quantum-mechanics::ch03::def:operator-type}
+\providecommand*{\operatorTypeRef}{quantum-mechanics::ch01::def:operator-type}
 \newcommand*{\OP}{%
-  \ensuremath{\xref[\mathscr{O}]{\operatorTypeRef}}%
+  \ensuremath{\qm@notationLink{\mathscr{O}}{def:operator-type}{\operatorTypeRef}}%
 }
 
 % Perturbation-order superscript; differentiation uses the D operator.
@@ -35,14 +105,14 @@
 % We use a function-style macro instead of the raw [ ] brackets to avoid
 % overloading the ambiguous [ , ] notation (intervals, floor, lists, etc.).
 % Clicking the operator name jumps to the definition target set by
-% \commutatorRef (default: quantum-mechanics::ch03::def:commutator). Override
+% \commutatorRef (default: quantum-mechanics::ch01::def:commutator). Override
 % it in the calling project's notes-project.sty before loading this package if
 % the definition lives elsewhere. Only the operator name is linked so
 % arguments may safely contain other linked notation.
 % =============================================================================
-\providecommand*{\commutatorRef}{quantum-mechanics::ch03::def:commutator}
+\providecommand*{\commutatorRef}{quantum-mechanics::ch01::def:commutator}
 \newcommand{\comm}[2]{%
   \ensuremath{%
-    \xref[\operatorname{comm}]{\commutatorRef}\!\left(#1,\, #2\right)%
+    \qm@notationLink{\operatorname{comm}}{def:commutator}{\commutatorRef}\!\left(#1,\, #2\right)%
   }%
 }

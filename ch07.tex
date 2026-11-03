@@ -14,7 +14,7 @@
 \begingroup
 \color{notesmissingprereq}
 \begin{rem}[Working Treatment of Operator Domains]{operator-domain-convention}
-  Fix a \xref[Hilbert space]{ch03::def:hilbert-space} $\mathcal H$. Throughout this chapter, formally write $A : \mathcal H \to \mathcal H$ for an operator $A \in \OP$.
+  Fix a \xref[Hilbert space]{ch01::def:hilbert-space} $\mathcal H$. Throughout this chapter, formally write $A : \mathcal H \to \mathcal H$ for an operator $A \in \OP$.
   This notation is literal for finite-dimensional matrix operators. For differential operators, it suppresses domain restrictions: all expressions are understood on a suitable common domain where the indicated operations are defined.
   Detailed operator domains and self-adjointness will be addressed when revising Chapters 2 and 3 rigorously
 \end{rem}
@@ -37,7 +37,7 @@
   \[
     \hat H_{\mathrm{fam}} : I \to \OP \defeq \lambda \map \hat H_0 + \lambda \cdot \hat H'.
   \]
-  Require each $\hat H_{\mathrm{fam}}(\lambda)$ to be \xref[Hermitian]{ch03::def:hermitian-operator}, with domain restrictions suppressed as in the \xref[working treatment of operator domains]{rem:operator-domain-convention}
+  Require each $\hat H_{\mathrm{fam}}(\lambda)$ to be \xref[Hermitian]{ch01::def:hermitian-operator}, with domain restrictions suppressed as in the \xref[working treatment of operator domains]{rem:operator-domain-convention}
 \end{dfn}
 
 \begin{conv}[Perturbation Terminology]{perturbation-terminology}
@@ -349,7 +349,7 @@
 \section{Second-Order Perturbation Theory} 
 
 \begin{thm}[Second Order Energy Correction]{second-order-energy-correction}
-  Under the assumptions and normalization choice of the \xref[first-order state correction]{thm:first-order-state-correction}, with $\hat H'$ \xref[Hermitian]{ch03::def:hermitian-operator},
+  Under the assumptions and normalization choice of the \xref[first-order state correction]{thm:first-order-state-correction}, with $\hat H'$ \xref[Hermitian]{ch01::def:hermitian-operator},
   \[
     E_n^{\porder{2}}
     = \sum_{m\ne n}\left(m \map
@@ -407,7 +407,7 @@
 \end{proof}
 
 \begin{thm}[Existence of a Good Basis]{good-basis-existence}
-  Suppose $\mathcal H$ is finite-dimensional and $\hat H_0,\hat H'$ are \xref[Hermitian]{ch03::def:hermitian-operator}. Then every degenerate eigenspace $V_{E_0}$ of $\hat H_0$ has a \xref[good basis]{def:good-basis} for the \xref[perturbation family]{def:perturbation-family}
+  Suppose $\mathcal H$ is finite-dimensional and $\hat H_0,\hat H'$ are \xref[Hermitian]{ch01::def:hermitian-operator}. Then every degenerate eigenspace $V_{E_0}$ of $\hat H_0$ has a \xref[good basis]{def:good-basis} for the \xref[perturbation family]{def:perturbation-family}
 \end{thm}
 
 \begin{proof}

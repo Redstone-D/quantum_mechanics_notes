@@ -5,100 +5,22 @@
 \begin{document}
 
 \begin{center}
-  {\LARGE\bfseries Chapter 3: Formalism}\\[0.25em]
+  {\LARGE\bfseries Chapter 3: State Spaces, Representations, and Dynamics}\\[0.25em]
   {\large Quantum Mechanics}\\[0.15em]
 \end{center}
 
 % Key definitions from Griffiths Ch. 3 typed as needed for cross-references.
 
-\section{Operators}
-
-\begin{dfn}[Hilbert Space]{hilbert-space}
-  \todo
-\end{dfn}
-
-\begin{dfn}[Operator Type]{operator-type}
-  \todo
-\end{dfn}
-
 \section{Commutators}
 
-\begin{dfn}[Commutator]{commutator}
-  $\comm{\hat{A}}{\hat{B}} := \hat{A}\hat{B} - \hat{B}\hat{A}$.
-\end{dfn}
-
-\begin{rem}[Notation]{commutator-notation}
-  Others usually write commutators as $[\hat{A}, \hat{B}]$.
-\end{rem}
-
 \begin{thm}[Commuting Operators Share Eigenvectors]{commuting-share-eigenvectors}
+  \leavevmode\par
   If $\comm{\hat{A}}{\hat{B}} = 0$, then $\hat{A}$ and $\hat{B}$ share a common eigenbasis.
 \end{thm}
 
 \begin{proof}
   {\color{blue}\textbf{TODO}}
 \end{proof}
-
-\begin{thm}[Distributive Law for Commutators]{commutator-distributive}
-  For any operators $\hat{A}, \hat{B}, \hat{C}$,
-  \[
-    \comm{\hat{A} + \hat{B}}{\hat{C}} = \comm{\hat{A}}{\hat{C}} + \comm{\hat{B}}{\hat{C}}.
-  \]
-\end{thm}
-
-\begin{proof}
-  {\color{blue}\textbf{TODO}}
-\end{proof}
-
-\begin{thm}[Leibniz Rule for the Commutator]{commutator-leibniz}
-  For any operators $\hat{A}, \hat{B}, \hat{C}$,
-  \[
-    \comm{\hat{A}\hat{B}}{\hat{C}} = \hat{A}\,\comm{\hat{B}}{\hat{C}} + \comm{\hat{A}}{\hat{C}}\,\hat{B}.
-  \]
-\end{thm}
-
-\begin{proof}
-  {\color{blue}\textbf{TODO}}
-\end{proof}
-
-\begin{thm}[Canonical Commutation Relation]{canonical-commutation}
-  For the position and momentum operators,
-  \[
-    \comm{\hat{x}}{\hat{p}} = i\hbar.
-  \]
-\end{thm}
-
-\begin{proof}
-  {\color{blue}\textbf{TODO}}
-\end{proof}
-
-\begin{thm}[Hamiltonian Commutators]{hamiltonian-commutators}
-  For a 1D Hamiltonian $\hat{H} = \dfrac{\hat{p}^2}{2m} + V(\hat{x})$ (\xref{ch02::def:hamiltonian-1d}),
-  \[
-    \comm{\hat{H}}{\hat{x}} = -\frac{i\hbar}{m}\,\hat{p}, \qquad
-    \comm{\hat{H}}{\hat{p}} = i\hbar\, V'(\hat{x}).
-  \]
-\end{thm}
-
-\begin{proof}
-  {\color{blue}\textbf{TODO}}
-\end{proof}
-
-\section{Hermitian Operators}
-
-\begin{dfn}[Hermition Conjugate] 
-  The \emph{Hermitian conjugate} of an operator $\hat{O}$ is denoted $\hat{O}^{\dagger}$ and is defined by the property
-  \[\forall f, g, \braket{f|\hat{O}g} = \braket{\hat{O}^{\dagger}f|g}\]
-\end{dfn} 
-
-\begin{rem}[Hermitian Conjugate as Matrix Transpose] 
-  If $\hat{O}$ is represented as a matrix, then the Hermitian conjugate is the complex conjugate transpose of that matrix. ie, 
-  \[H^\dagger = \left(H^{\text{T}}\right)^{*}\]
-\end{rem}
-
-\begin{dfn}[Hermitian Operator] 
-  An operator $\hat{O}$ is \emph{Hermitian} if it is equal to its Hermitian conjugate, i.e. $\hat{O}^{\dagger} = \hat{O}$.
-\end{dfn} 
 
 \section{Unitary Operators} 
 

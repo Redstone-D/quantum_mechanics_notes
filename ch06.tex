@@ -152,7 +152,7 @@
   \hat{T}(a) &= e^{-i a \hat{p}/\hbar} = \sum_{n=0}^{\infty} \frac{(-ia/\hbar)^n}{n!} \cdot \hat{p}^n = \sum_{n=0}^{\infty} \frac{(-i a \hat{p})^n}{n! \hbar^{n}}
   \end{align*} 
 
-  According to the \xref[definition of the momentum operator]{ch02::def:momentum-operator-position}, $\hat{p} = -i\hbar \frac{d}{dx}$, so we can substitute this into the series expansion:
+  According to the \xref[definition of the momentum operator]{ch01::def:momentum-operator-position}, $\hat{p} = -i\hbar \frac{d}{dx}$, so we can substitute this into the series expansion:
   \begin{align*}
   \hat{T}(a) &= \sum_{n=0}^{\infty} \frac{(-i a (-i\hbar \frac{d}{dx}))^n}{n! \hbar^{n}} = \sum_{n=0}^{\infty} \frac{(- a ( \frac{d}{dx}))^n}{n!} 
   \end{align*}
@@ -219,7 +219,7 @@
   Define $\hat{p}' := \hat{T}(a)^{\dagger}\,\hat{p}\,\hat{T}(a)$, and consider its action on a wavefunction $\psi(x)$: 
   \[\hat{p}' \psi(x) = \hat{T}(a)^{\dagger}\,\hat{p}\,\hat{T}(a) \, \psi(x) = \hat{T}(a)^{\dagger}\,\hat{p}\,\psi(x-a)\]
 
-  According to the definition of \xref{ch02::def:momentum-operator-position}, $\hat p = -i \hbar d/dx $, plug in:
+  According to the definition of \xref{ch01::def:momentum-operator-position}, $\hat p = -i \hbar d/dx $, plug in:
   \[\hat{p}' \psi(x) = - \hat{T}(a)^{\dagger}\,i \hbar \, \frac{d\psi(x-a)}{dx}\]
 
   Use $\hat{T}(a)^{\dagger} = \hat T(-a)$,
@@ -235,7 +235,7 @@ For all operator, which only consists of $\hat x$ and $\hat p$, the conjugation 
 \end{thm}
 
 \begin{thm}[Translation Symmetry Condition on the Potential]{translation-condition-potential}
-  Let $\hat{H}$ be a \xref[1D Hamiltonian]{ch02::def:hamiltonian-1d}. If $\hat{T}(a)$ is a \xref[symmetry operator]{def:symmetry-qm} of $\hat{H}$, then the potential is invariant under translation by $a$:
+  Let $\hat{H}$ be a \xref[1D Hamiltonian]{ch01::def:hamiltonian-1d}. If $\hat{T}(a)$ is a \xref[symmetry operator]{def:symmetry-qm} of $\hat{H}$, then the potential is invariant under translation by $a$:
   \[
     V(x + a) = V(x) \qquad \text{for all } x.
   \]
@@ -334,13 +334,13 @@ TODO
   Do taylor's expansion on the exponential function:
   \[\hat{R}_z(\varphi) = \sum_{n=0}^{\infty} \frac{1}{n!} \left(-\frac{i\varphi}{\hbar}\,\hat{L}_z\right)^n\]
 
-  According to \xref{ch04::def:angular-momentum}, the angular momentum operator about the $z$-axis is defined as
+  According to \xref{ch02::def:angular-momentum}, the angular momentum operator about the $z$-axis is defined as
   \[\hat{L}_z = \hat x \hat p_y - \hat y \hat p_x\]. 
 
   Which means that $\hat{R}_z(\varphi) \psi(r, \theta, \phi)$ is 
 \[\hat{R}_z(\varphi) \psi(r, \theta, \phi) = \sum_{n=0}^{\infty} \frac{1}{n!} \left(-\frac{i\varphi}{\hbar}\,(\hat x \hat p_y - \hat y \hat p_x)\right)^n \psi(r, \theta, \phi)\] 
 
-  Plug in the definition of $\hat p_x$ and $\hat p_y$ from \xref{ch02::def:momentum-operator-position}, we have
+  Plug in the definition of $\hat p_x$ and $\hat p_y$ from \xref{ch01::def:momentum-operator-position}, we have
   \begin{align*}
     \hat{R}_z(\varphi) \psi(r, \theta, \phi) &= \sum_{n=0}^{\infty} \frac{1}{n!} \left(-\frac{i\varphi}{\hbar}\bigl(\hat x (-i\hbar \tfrac{\partial}{\partial y}) - \hat y (-i\hbar \tfrac{\partial}{\partial x})\bigr)\right)^n \psi(r, \theta, \phi)\\
     &= \sum_{n=0}^{\infty} \frac{1}{n!} \bigl(-\varphi\,(\hat x \tfrac{\partial}{\partial y} - \hat y \tfrac{\partial}{\partial x})\bigr)^n \psi(r, \theta, \phi).
@@ -468,7 +468,7 @@ TODO
 \end{proof}
 
 \begin{thm}[Parity of Atomic Eigenstates]{parity-atomic-eigenstates}
-  For an \xref{ch04::def:atomic-eigenstate} $\ket{\psi_{n\ell m}}$,
+  For an \xref{ch02::def:atomic-eigenstate} $\ket{\psi_{n\ell m}}$,
   \[
     \Pi \ket{\psi_{n\ell m}} = (-1)^\ell \ket{\psi_{n\ell m}}.
   \]
@@ -479,7 +479,7 @@ TODO
 \end{proof}
 
 \begin{thm}[Laporte's Rule]{laporte-rule}
-  For \xref[atomic eigenstates]{ch04::def:atomic-eigenstate}, the electric-dipole matrix element vanishes when $\ell' + \ell$ is even:
+  For \xref[atomic eigenstates]{ch02::def:atomic-eigenstate}, the electric-dipole matrix element vanishes when $\ell' + \ell$ is even:
   \[
     \braket{n'\ell'm' | \vec{r} | n\ell m} = 0 \quad \text{if } \ell' + \ell \text{ is even}.
   \]
@@ -577,7 +577,7 @@ Since $\delta$ is small, we may do taylor's expansion and only keep the first or
 Expand and omitting the second order term, we have
 \[x_H(\delta) \approx \hat x + \frac{i}{\hbar} \comm{\hat H}{\hat x} \delta\]
 
-Apply \xref[Hamiltonian Commutators]{ch03::thm:hamiltonian-commutators} to substitute $\comm{\hat H}{\hat x} = -\dfrac{i\hbar}{m}\hat p$:
+Apply \xref[Hamiltonian Commutators]{ch01::thm:hamiltonian-commutators} to substitute $\comm{\hat H}{\hat x} = -\dfrac{i\hbar}{m}\hat p$:
 \[
   x_H(\delta) \approx \hat x + \frac{i}{\hbar}\cdot\left(-\frac{i\hbar}{m}\hat p\right)\delta = \hat x + \frac{\hat p}{m}\,\delta.
 \]
