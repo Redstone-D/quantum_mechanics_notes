@@ -22,6 +22,10 @@
 # Teacher's lecture slides — local reference only, not committed
 /lecture_slides/
 
+# Private midterm practice and regenerated PDF exports
+/practice/
+/latex_target/midterm-*.pdf
+
 # Manifest is not required by the notes server (deployment works without it)
 /latex_target/manifest.json
 

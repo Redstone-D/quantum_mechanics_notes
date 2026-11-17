@@ -10,19 +10,6 @@
 \usepackage{appendix} 
 \usepackage{listings}
 \usepackage{xcolor} 
-\usepackage{hyperref}
-\usepackage{rs-notes}
-% This legacy sheet uses fully project-qualified references only.
-% Bridge them to the same named destinations used by the course packages.
-\newcommand{\xref}[2][]{%
-  \begingroup
-  \edef\cheatRefTarget{#2}%
-  \expandafter\cheatResolveRef\cheatRefTarget\cheatEndRef{#1}%
-  \endgroup}
-\def\cheatResolveRef#1::#2::#3:#4\cheatEndRef#5{%
-  \href{https://notes.rua.rs/#1/#2.pdf\#nameddest=notes.#3.#4}{#5}}
-\newcommand{\missingprereq}[1]{\textcolor{purple}{#1}}
-\usepackage{qm-notations}
 \usepackage{tikz} % Draw picture
 \usetikzlibrary{patterns,decorations.pathmorphing}
 \usepackage{tikz-3dplot} 
@@ -31,7 +18,7 @@
     numberstyle= \tiny, 
     keywordstyle= \color{ blue!70},
     commentstyle= \color{red!50!green!50!blue!50}, 
-    frame=shadowbox, 
+    frame=shadowbox,
     rulesepcolor= \color{ red!20!green!20!blue!20} ,
     escapeinside=``, 
     xleftmargin=2em,xrightmargin=2em, aboveskip=1em,
@@ -105,16 +92,6 @@
     \langle O \rangle = \langle \Psi | O \Psi \rangle, \quad \sigma_O = \sqrt{\langle O^2 \rangle - \langle O \rangle^2}, \quad O \in \text{observable}
 \end{align} 
 
-\textbf{Commutator: } 
-\begin{align}
-    \textbf{comm}(A,B) = [A,B] = AB - BA \text{ Use test function}
-\end{align}  
-
-\textbf{Uncertainty Principle: }
-\begin{align}
-    \sigma_A \sigma_B \geq \frac{1}{2} |\langle \textbf{comm}(A,B) \rangle| \implies \sigma_x \sigma_p \geq \frac{\hbar}{2} 
-\end{align} 
-
 \subsection{Probability Current } 
 
 \textbf{Probability Density: }
@@ -137,6 +114,37 @@
 \begin{align}
     T = \frac{|J_{transmitted}|}{|J_{incident}|}, \quad R = \frac{|J_{reflected}|}{|J_{incident}|} 
 \end{align} 
+
+\subsection{Commutator}
+
+\textbf{Definition:}
+\[
+    \left[A,\,B\right]=AB-BA,\qquad \left[B,\,A\right]=-\left[A,\,B\right]
+\]
+To verify an operator identity, act on an arbitrary test function
+
+\textbf{Position, momentum, and Hamiltonian:}
+\[
+    \left[\hat x,\,\hat p\right]=i\hbar\cdot\hat I
+\]
+For $\hat H=\hat p^2/(2m)+V(\hat x)$,
+\[
+    \left[\hat H,\,\hat x\right]=-\frac{i\hbar}{m}\cdot\hat p,
+    \qquad \left[\hat H,\,\hat p\right]=i\hbar\cdot V'(\hat x)
+\]
+For the harmonic oscillator, $V(x)=m\omega^2x^2/2$, so
+\[
+    \left[\hat H,\,\hat p\right]=i\hbar\cdot m\cdot\omega^2\cdot\hat x
+\]
+Here $\hat I$ is the identity operator
+
+\subsection{Uncertainty Principle}
+
+For observables $A,B$ in a normalized state,
+\[
+    \sigma_A\sigma_B\geq\frac12\left|\left\langle\left[A,\,B\right]\right\rangle\right|,
+    \qquad \sigma_x\sigma_p\geq\frac{\hbar}{2}
+\]
 
 \section{Solving Schrodinger Equation } 
 
@@ -206,7 +214,7 @@ $E > V_{max}$ will cause $\psi$ to oscillate, so it is called scattering state. 
 
 \textbf{Ladder Operators: }
 \begin{align}
-    a_\pm = \frac{1}{\sqrt{2\hbar m \omega}} \left( \mp i \hat{p} + m \omega x \right) \implies \hat{H} = \hbar \omega \left( a_+ a_- + \frac{1}{2} \right), \textbf{comm}(a_-, a_+) = 1 
+    a_\pm = \frac{1}{\sqrt{2\hbar m \omega}} \left( \mp i \hat{p} + m \omega x \right) \implies \hat{H} = \hbar \omega \left( a_+ a_- + \frac{1}{2} \right), [a_-,a_+] = 1
 \end{align} 
 
 \textbf{Induction: } (We assume $\psi_n(x)$ is an solution - base case. Similar for $a_-$)
@@ -230,6 +238,15 @@ $E > V_{max}$ will cause $\psi$ to oscillate, so it is called scattering state. 
     x = \sqrt{\frac{\hbar}{2m\omega}}\,(a_+ + a_-), \quad \hat{p} = i\sqrt{\frac{\hbar m\omega}{2}}\,(a_+ - a_-)
 \end{align}
 
+\textbf{Ladder-Operator Commutators:}
+For the ladder-operator convention above,
+\begin{align*}
+    \left[a_-,\,a_+\right]&=\hat I,
+    &\left[\hat H,\,a_\pm\right]&=\pm\hbar\cdot\omega\cdot a_\pm,\\
+    \left[\hat x,\,a_\pm\right]&=\pm\sqrt{\frac{\hbar}{2m\omega}}\cdot\hat I,
+    &\left[\hat p,\,a_\pm\right]&=-i\sqrt{\frac{m\hbar\omega}{2}}\cdot\hat I
+\end{align*}
+
 \textbf{Expectation Values: }
 \begin{align}
     \langle x \rangle = 0, \quad \langle x^2 \rangle = \frac{\hbar}{2m\omega}(2n+1), \quad \langle p \rangle = 0, \quad \langle p^2 \rangle = \frac{\hbar m\omega}{2}(2n+1)
@@ -246,6 +263,31 @@ $E > V_{max}$ will cause $\psi$ to oscillate, so it is called scattering state. 
 \begin{align}
     \psi(x) = A e^{ikx} + B e^{-ikx} \implies \psi(x) = C \sin(kx) + D \cos(kx) 
 \end{align} 
+
+\section{3D}
+
+\textbf{Momentum operator:}
+With $\boldsymbol r=(x,y,z)$,
+\[
+  \hat{\boldsymbol p}=(\hat p_x,\hat p_y,\hat p_z),\qquad
+  \hat{\boldsymbol p}\psi=-i\hbar\cdot\nabla\psi
+\]
+\[
+  \hat p_j\psi=-i\hbar\cdot\frac{\partial\psi}{\partial j},\qquad j\in\{x,y,z\}
+\]
+Here $j$ denotes the corresponding Cartesian coordinate
+
+\textbf{Orbital angular momentum:}
+\[
+  \hat{\boldsymbol L}=\hat{\boldsymbol r}\times\hat{\boldsymbol p}
+\]
+\[
+  \begin{aligned}
+    \hat L_x&=\hat y\cdot\hat p_z-\hat z\cdot\hat p_y,\\
+    \hat L_y&=\hat z\cdot\hat p_x-\hat x\cdot\hat p_z,\\
+    \hat L_z&=\hat x\cdot\hat p_y-\hat y\cdot\hat p_x
+  \end{aligned}
+\]
 
 \section{Continuous and Fourier Transform }
 
@@ -377,7 +419,293 @@ B_1 &= \frac{i\beta}{1-i\beta} A_1, \quad A_2 = \frac{1}{1-i\beta} A_1, \quad T 
 B_1 &= \frac{-i\beta}{1+i\beta} A_1, \quad A_2 = \frac{1}{1+i\beta} A_1, \quad T = \frac{1}{1+\beta^2}, \quad R = \frac{\beta^2}{1+\beta^2}
 \end{align}
 
-\clearpage
+\section{Symmetry}
+
+\subsection{Translation Symmetry}
+
+\textbf{Definition:}
+\[
+  (\hat T(a)\psi)(x)=\psi(x-a),\qquad
+  \hat T(a)=\exp\left(-\frac{ia\hat p}{\hbar}\right)
+\]
+\[
+  (\hat T(\boldsymbol a)\psi)(\boldsymbol r)=\psi(\boldsymbol r-\boldsymbol a),
+  \qquad
+  \hat T(\boldsymbol a)=\exp\left(-\frac{i}{\hbar}\boldsymbol a\cdot\hat{\boldsymbol p}\right)
+\]
+\textbf{Theorem (Unitarity):}
+\[
+  \hat T(\boldsymbol a)^\dagger=\hat T(\boldsymbol a)^{-1}=\hat T(-\boldsymbol a),
+  \qquad \hat T^\dagger\hat T=\hat I
+\]
+\textbf{Symmetry:} $\hat T^{-1}\hat H\hat T=\hat H$;
+all translations $\Rightarrow[\hat H,\hat p_j]=0$ (momentum conserved)
+
+\textbf{Operator transformation (1D):}
+\[
+  \hat T(a)^\dagger\hat x\hat T(a)=\hat x+a\hat I,\qquad
+  \hat T(a)^\dagger\hat p\hat T(a)=\hat p
+\]
+\textbf{Bloch theorem:} $V(x+a)=V(x)$; choose simultaneous $\hat H,\hat T(a)$ eigenstates
+\[
+  \psi_q(x)=e^{iqx}u_q(x),\qquad u_q(x+a)=u_q(x),\qquad
+  \hat T(a)\psi_q=e^{-iqa}\psi_q
+\]
+
+\subsection{Rotational Symmetry}
+
+\textbf{Definition:} Spinless particle, $|\boldsymbol n|=1$
+\[
+  \hat R_{\boldsymbol n}(\theta)
+  =\exp\left(-\frac{i\theta}{\hbar}\boldsymbol n\cdot\hat{\boldsymbol L}\right),
+  \qquad (\hat R\psi)(\boldsymbol r)=\psi(R^{-1}\boldsymbol r)
+\]
+$R$: spatial rotation matrix; about $z$,
+\[
+  (\hat R_z(\theta)\psi)(r,\vartheta,\varphi)
+  =\psi(r,\vartheta,\varphi-\theta),\qquad
+  \hat L_z=-i\hbar\frac{\partial}{\partial\varphi}
+\]
+\textbf{Theorem (Unitarity):}
+\[
+  \hat R_{\boldsymbol n}(\theta)^\dagger
+  =\hat R_{\boldsymbol n}(\theta)^{-1}
+  =\hat R_{\boldsymbol n}(-\theta),\qquad \hat R^\dagger\hat R=\hat I
+\]
+\textbf{Symmetry:} $\hat R^{-1}\hat H\hat R=\hat H$;
+all angles about $\boldsymbol n\Rightarrow[\hat H,\boldsymbol n\cdot\hat{\boldsymbol L}]=0$
+
+\subsection{Parity Symmetry}
+
+\textbf{Definition:}
+\[
+  (\hat\Pi\psi)(\boldsymbol r)=\psi(-\boldsymbol r)
+\]
+\textbf{Theorem (Hermitian and unitary):}
+\[
+  \hat\Pi^2=\hat I,\qquad \hat\Pi^{-1}=\hat\Pi^\dagger=\hat\Pi
+\]
+\[
+  \hat\Pi\psi=\pm\psi
+  \quad\Longleftrightarrow\quad
+  \psi(-\boldsymbol r)=\pm\psi(\boldsymbol r)
+  \quad\text{(even / odd)}
+\]
+\[
+  \hat\Pi^{-1}\hat{\boldsymbol r}\hat\Pi=-\hat{\boldsymbol r},\qquad
+  \hat\Pi^{-1}\hat{\boldsymbol p}\hat\Pi=-\hat{\boldsymbol p},\qquad
+  \hat\Pi^{-1}\hat{\boldsymbol L}\hat\Pi=\hat{\boldsymbol L}
+\]
+\textbf{Symmetry:} $[\hat H,\hat\Pi]=0$;
+for $\hat H=\hat{\boldsymbol p}^{\,2}/(2m)+V(\boldsymbol r)$, require $V(-\boldsymbol r)=V(\boldsymbol r)$
+
+\textbf{Central-potential states:}
+\[
+  \hat\Pi\lvert n\ell m\rangle=(-1)^\ell\lvert n\ell m\rangle
+\]
+\textbf{Parity selection rule:} $\hat\Pi^\dagger\hat O\hat\Pi=\eta_O\hat O$, $\eta_O=\pm1$
+\[
+  M=\langle n'\ell'm'\lvert\hat O\rvert n\ell m\rangle
+  =\eta_O(-1)^{\ell+\ell'}M
+\]
+\[
+  M=0\quad\text{if}\quad
+  \begin{cases}
+    \ell+\ell'\text{ odd},&\hat O=\hat L_j\quad(\eta_O=+1),\\
+    \ell+\ell'\text{ even},&\hat O=\hat r_j\quad(\eta_O=-1)
+  \end{cases}
+\]
+
+\subsection{Time-Translation Symmetry}
+
+\textbf{Definition:} Time-independent $\hat H$; forward evolution by $\tau$
+\[
+  \hat U(\tau)=\exp\left(-\frac{i\tau\hat H}{\hbar}\right),\qquad
+  \Psi(\boldsymbol r,t+\tau)=(\hat U(\tau)\Psi(t))(\boldsymbol r)
+\]
+\textbf{Theorem (Unitarity):}
+\[
+  \hat U(\tau)^\dagger=\hat U(\tau)^{-1}=\hat U(-\tau),\qquad
+  \hat U^\dagger\hat U=\hat I
+\]
+\[
+  \hat H\psi_E=E\psi_E
+  \ \Longrightarrow\ \hat U(\tau)\psi_E=e^{-iE\tau/\hbar}\psi_E
+\]
+\textbf{Symmetry:} Time-origin invariance; $\partial\hat H/\partial t=0\Rightarrow$ energy conserved
+
+\textbf{Heisenberg picture:}
+\[
+  \hat Q_H(t)=\hat U(t)^\dagger\hat Q(t)\hat U(t),\qquad
+  \lvert\psi_H\rangle=\lvert\psi_S(0)\rangle
+\]
+\[
+  \frac{d\hat Q_H}{dt}
+  =\frac{i}{\hbar}[\hat H,\hat Q_H]
+   +\hat U^\dagger\frac{\partial\hat Q}{\partial t}\hat U
+\]
+For $\hat H=\hat p^2/(2m)+V(\hat x)$,
+\[
+  \dot{\hat x}_H=\frac{\hat p_H}{m},\qquad
+  \dot{\hat p}_H=-V'(\hat x_H)
+\]
+\textbf{Harmonic oscillator:} $V(x)=m\omega^2x^2/2$; $\hat x_H(0)=\hat x$, $\hat p_H(0)=\hat p$
+\[
+  \begin{aligned}
+    \hat x_H(t)&=\hat x\cos(\omega t)+\frac{\hat p}{m\omega}\sin(\omega t),\\
+    \hat p_H(t)&=\hat p\cos(\omega t)-m\omega\hat x\sin(\omega t)
+  \end{aligned}
+\]
+
+\subsection{Time-Reversal Symmetry}
+
+\textbf{Definition:} Spinless particle; $\hat\Theta=K$ (complex conjugation)
+\[
+  (\hat\Theta\psi)(\boldsymbol r)=\psi^*(\boldsymbol r),\qquad
+  \Psi_{\mathrm{rev}}(\boldsymbol r,t)=\Psi^*(\boldsymbol r,-t)
+\]
+\textbf{Theorem (Antiunitarity):}
+\[
+  \hat\Theta(a\psi+b\phi)=a^*\hat\Theta\psi+b^*\hat\Theta\phi,
+  \qquad \hat\Theta^2=\hat I
+\]
+\[
+  \langle\hat\Theta\phi\mid\hat\Theta\psi\rangle=\langle\phi\mid\psi\rangle^*
+\]
+\[
+  \hat\Theta^{-1}\hat{\boldsymbol r}\hat\Theta=\hat{\boldsymbol r},\qquad
+  \hat\Theta^{-1}\hat{\boldsymbol p}\hat\Theta=-\hat{\boldsymbol p},\qquad
+  \hat\Theta^{-1}\hat{\boldsymbol L}\hat\Theta=-\hat{\boldsymbol L}
+\]
+\textbf{Symmetry:} $\hat\Theta^{-1}\hat H\hat\Theta=\hat H$ (time-independent $\hat H$);
+$\Psi_{\mathrm{rev}}$ solves the same equation, with unchanged energy
+
+\textbf{Unitary transformations:} $S\in\{\hat T,\hat R,\hat\Pi,\hat U\}$
+\[
+  \langle S\phi\mid S\psi\rangle=\langle\phi\mid\psi\rangle,\qquad
+  \langle S\psi\mid Q\mid S\psi\rangle
+  =\langle\psi\mid S^\dagger Q S\mid\psi\rangle
+\]
+
+\subsection{Ehrenfest's Theorem and Energy--Time Uncertainty}
+
+\textbf{Generalized Ehrenfest theorem:}
+\[
+  \frac{d\langle\hat Q\rangle}{dt}
+  =\frac{i}{\hbar}\langle[\hat H,\hat Q]\rangle
+   +\left\langle\frac{\partial\hat Q}{\partial t}\right\rangle
+\]
+\[
+  \frac{\partial\hat Q}{\partial t}=0,\quad[\hat H,\hat Q]=0
+  \quad\Longrightarrow\quad\frac{d\langle\hat Q\rangle}{dt}=0
+\]
+\textbf{Energy--time uncertainty:} Time-independent $\hat Q$; $d\langle\hat Q\rangle/dt\ne0$
+\[
+  \Delta E=\sigma_H,\qquad
+  \Delta t_Q=\frac{\sigma_Q}{\left|d\langle\hat Q\rangle/dt\right|},\qquad
+  \Delta E\,\Delta t_Q\geq\frac{\hbar}{2}
+\]
+$\Delta t_Q$: characteristic time for $\langle\hat Q\rangle$ to change by $\sigma_Q$
+
+\section{Perturbation Theory (Chapter 7)}
+
+\subsection{Setup and Perturbation Equations}
+
+$\hat H(\lambda)=\hat H_0+\lambda\hat H'$, $\hat H_0\lvert\psi_n^{(0)}\rangle=E_n^{(0)}\lvert\psi_n^{(0)}\rangle$;
+$\hat H_0,\hat H'$ Hermitian
+
+\textbf{Full summation equation:}
+\[
+  (\hat H_0+\lambda\hat H')
+  \sum_{k=0}^{\infty}\lambda^k\lvert\psi_n^{(k)}\rangle
+  =\left(\sum_{j=0}^{\infty}\lambda^j E_n^{(j)}\right)
+   \left(\sum_{k=0}^{\infty}\lambda^k\lvert\psi_n^{(k)}\rangle\right)
+\]
+\textbf{First order:}
+\[
+  (\hat H_0-E_n^{(0)}\hat I)\lvert\psi_n^{(1)}\rangle
+  =(E_n^{(1)}\hat I-\hat H')\lvert\psi_n^{(0)}\rangle
+\]
+\textbf{Second order:}
+\[
+  (\hat H_0-E_n^{(0)}\hat I)\lvert\psi_n^{(2)}\rangle
+  =(E_n^{(1)}\hat I-\hat H')\lvert\psi_n^{(1)}\rangle
+   +E_n^{(2)}\lvert\psi_n^{(0)}\rangle
+\]
+
+\subsection{Nondegenerate Corrections}
+
+Orthonormal unperturbed eigenbasis $\lvert\psi_m^{(0)}\rangle$;
+$E_n^{(0)}$ nondegenerate
+\par Intermediate normalization: $\langle\psi_n^{(0)}\mid\psi_n(\lambda)\rangle=1$
+(rescale afterward for unit norm)
+
+\textbf{First-order energy:}
+\[
+  E_n^{(1)}=\langle\psi_n^{(0)}\lvert\hat H'\rvert\psi_n^{(0)}\rangle
+\]
+\textbf{First-order wavefunction:}
+\[
+  \lvert\psi_n^{(1)}\rangle
+  =\sum_{m\ne n}\frac{\langle\psi_m^{(0)}\lvert\hat H'\rvert\psi_n^{(0)}\rangle}
+    {E_n^{(0)}-E_m^{(0)}}\lvert\psi_m^{(0)}\rangle
+\]
+\textbf{Second-order energy:}
+\[
+  E_n^{(2)}=\sum_{m\ne n}
+  \frac{\left|\langle\psi_m^{(0)}\lvert\hat H'\rvert\psi_n^{(0)}\rangle\right|^2}
+    {E_n^{(0)}-E_m^{(0)}}
+\]
+\textbf{Second-order wavefunction:}
+\[
+  \lvert\psi_n^{(2)}\rangle
+  =\sum_{m\ne n}\left(
+    \begin{aligned}
+      &\sum_{\ell\ne n}
+      \frac{\langle\psi_m^{(0)}\lvert\hat H'\rvert\psi_\ell^{(0)}\rangle
+            \langle\psi_\ell^{(0)}\lvert\hat H'\rvert\psi_n^{(0)}\rangle}
+        {(E_n^{(0)}-E_m^{(0)})(E_n^{(0)}-E_\ell^{(0)})}
+      \\[0.5em]
+      &\quad-
+      \frac{\langle\psi_n^{(0)}\lvert\hat H'\rvert\psi_n^{(0)}\rangle
+            \langle\psi_m^{(0)}\lvert\hat H'\rvert\psi_n^{(0)}\rangle}
+        {(E_n^{(0)}-E_m^{(0)})^2}
+    \end{aligned}
+  \right)\lvert\psi_m^{(0)}\rangle
+\]
+
+\subsection{Degenerate Perturbation Matrix}
+
+Any orthonormal unperturbed basis $\{\lvert\psi_1^{(0)}\rangle,\ldots,\lvert\psi_d^{(0)}\rangle\}$
+of the full $\hat H_0$ eigenspace with energy $E_0$
+
+\textbf{Definition:}
+\[
+  W_{ij}=\langle\psi_i^{(0)}\lvert\hat H'\rvert\psi_j^{(0)}\rangle,\qquad
+  W=\begin{pmatrix}
+    W_{11}&\cdots&W_{1d}\\
+    \vdots&\ddots&\vdots\\
+    W_{d1}&\cdots&W_{dd}
+  \end{pmatrix},\qquad W^\dagger=W
+\]
+\textbf{First-order system:}
+\[
+  \sum_{j=1}^{d}W_{ij}c_j=e c_i\quad(i=1,\ldots,d)
+  \quad\Longleftrightarrow\quad
+  (W-eI_d)\boldsymbol c=0,\qquad\boldsymbol c\ne0
+\]
+\[
+  \det(W-eI_d)=0,\qquad
+  \boldsymbol c_a=(c_{a1},\ldots,c_{ad})^{\mathsf T},\qquad
+  \boldsymbol c_a^\dagger\boldsymbol c_a=1
+\]
+\[
+  \lvert\chi_a^{(0)}\rangle=\sum_{j=1}^{d}c_{aj}\lvert\psi_j^{(0)}\rangle,\qquad
+  E_a^{(1)}=e_a,\qquad E_a(\lambda)=E_0+\lambda e_a+O(\lambda^2)
+\]
+Distinct $e_a$: corresponding good states;
+repeated $e_a$: higher-order diagonalization may be needed
+
 \section{WKB Approximation (Chapter 8)}
 
 \subsection{WKB Results}
@@ -391,40 +719,40 @@ B_1 &= \frac{-i\beta}{1+i\beta} A_1, \quad A_2 = \frac{1}{1+i\beta} A_1, \quad T
 \]
 The WKB forms below assume a slowly varying potential away from turning points
 
-\textbf{\xref[Allowed-region WKB form]{quantum-mechanics::ch08::thm:wkb-allowed-region}:}
-For an allowed interval $I$, fixed $x_0\in I$, and $A,B\in\CC$,
+\textbf{Allowed-region WKB form:}
+For an allowed interval $I$, fixed $x_0\in I$, and $A,B\in\mathbb C$,
 \[
-  \psi\approx x\map\frac1{\sqrt{p(x)}}\cdot\left[
+  \psi(x)\approx\frac1{\sqrt{p(x)}}\cdot\left[
     A\cdot\exp\left(\frac{i}{\hbar}\cdot
-      \left[\DiffOp^{-1}(p)\right]_{x_0}^{x}\right)
+      \int_{x_0}^{x}p(x')\,dx'\right)
     +B\cdot\exp\left(-\frac{i}{\hbar}\cdot
-      \left[\DiffOp^{-1}(p)\right]_{x_0}^{x}\right)\right]
+      \int_{x_0}^{x}p(x')\,dx'\right)\right]
 \]
 
-\textbf{\xref[Forbidden-region WKB form]{quantum-mechanics::ch08::thm:wkb-forbidden-region}:}
-For a forbidden interval $I$, fixed $x_0\in I$, and $C,D\in\CC$,
+\textbf{Forbidden-region WKB form:}
+For a forbidden interval $I$, fixed $x_0\in I$, and $C,D\in\mathbb C$,
 \[
-  \psi\approx x\map\frac1{\sqrt{q(x)}}\cdot\left[
+  \psi(x)\approx\frac1{\sqrt{q(x)}}\cdot\left[
     C\cdot\exp\left(\frac1\hbar\cdot
-      \left[\DiffOp^{-1}(q)\right]_{x_0}^{x}\right)
+      \int_{x_0}^{x}q(x')\,dx'\right)
     +D\cdot\exp\left(-\frac1\hbar\cdot
-      \left[\DiffOp^{-1}(q)\right]_{x_0}^{x}\right)\right]
+      \int_{x_0}^{x}q(x')\,dx'\right)\right]
 \]
 Neglect the growing term only when the physical boundary or matching conditions justify it
 
-\textbf{\xref[Quantization between two infinite walls]{quantum-mechanics::ch08::thm:hard-wall-quantization}:}
+\textbf{Quantization between two infinite walls:}
 For walls at $0,a$ with an allowed interior,
 \[
   \psi(0)=\psi(a)=0
   \quad\Longrightarrow\quad
-  \left[\DiffOp^{-1}(p)\right]_0^a=n\pi\hbar,
-  \qquad n\in\NNOne
+  \int_0^a p(x)\,dx=n\pi\hbar,
+  \qquad n\in\mathbb N_1
 \]
 
-\textbf{\xref[Leading WKB tunneling probability]{quantum-mechanics::ch08::thm:wkb-transmission}:}
+\textbf{Leading WKB tunneling probability:}
 For a forbidden barrier between $x_L$ and $x_R$,
 \[
-  \gamma\defeq\frac1\hbar\cdot\left[\DiffOp^{-1}(q)\right]_{x_L}^{x_R},
+  \gamma=\frac1\hbar\cdot\int_{x_L}^{x_R}q(x')\,dx',
   \qquad T\approx e^{-2\gamma}\qquad(\gamma\gg1)
 \]
 For a rectangular barrier of width $L$, $\kappa=\sqrt{2m\cdot(V_0-E)}/\hbar$ gives
@@ -442,88 +770,82 @@ For escape attempts at rate $v/(2R)$ from a nuclear well of radius $R$,
   \approx\frac{2R}{v}\cdot e^{2\gamma}
 \]
 
-\newpage
 \subsection{Airy Functions}
 
-\textbf{\xref[Airy equation and general solution]{quantum-mechanics::ch08::thm:airy-equation-solution}:}
+\textbf{Airy equation and general solution:}
 \[
-  \DiffOp^2(y)(z)=z\cdot y(z),\qquad
-  y:\RR\to\CC\defeq z\map
-    a\cdot\AiryAi(z)+b\cdot\AiryBi(z),\quad a,b\in\CC
+  \frac{d^2y}{dz^2}=zy,\qquad
+  y(z)=a\operatorname{Ai}(z)+b\operatorname{Bi}(z),\quad a,b\in\mathbb C
 \]
 
 \textbf{Integral representations:}
 The endpoint $\infty$ denotes an improper integral
 \[
-  \AiryAi:\RR\to\RR\defeq z\map
-  \frac1\pi\cdot\left[\DiffOp^{-1}\left(s\map
-    \cos\left(\frac{s^3}{3}+s\cdot z\right)\right)\right]_0^\infty
+  \operatorname{Ai}(z)=\frac1\pi\int_0^\infty
+    \cos\left(\frac{s^3}{3}+sz\right)\,ds
 \]
 \[
-  \AiryBi:\RR\to\RR\defeq z\map
-  \frac1\pi\cdot\left[\DiffOp^{-1}\left(s\map
-    e^{-s^3/3+s\cdot z}+\sin\left(\frac{s^3}{3}+s\cdot z\right)
-    \right)\right]_0^\infty
+  \operatorname{Bi}(z)=\frac1\pi\int_0^\infty
+    \left[e^{-s^3/3+sz}+\sin\left(\frac{s^3}{3}+sz\right)\right]\,ds
 \]
 
 \subsection{Approximate Forms and Turning-Point Connections}
 
-\textbf{\xref[Airy asymptotic forms]{quantum-mechanics::ch08::thm:airy-asymptotics}:}
+\textbf{Airy asymptotic forms:}
 For $z\gg0$,
 \[
   \begin{aligned}
-    \AiryAi(z)&\approx\frac{e^{-2z^{3/2}/3}}{2\sqrt\pi\cdot z^{1/4}},\\
-    \AiryBi(z)&\approx\frac{e^{2z^{3/2}/3}}{\sqrt\pi\cdot z^{1/4}}
+    \operatorname{Ai}(z)&\approx\frac{e^{-2z^{3/2}/3}}{2\sqrt\pi\cdot z^{1/4}},\\
+    \operatorname{Bi}(z)&\approx\frac{e^{2z^{3/2}/3}}{\sqrt\pi\cdot z^{1/4}}
   \end{aligned}
 \]
 For $z\ll0$,
 \[
   \begin{aligned}
-    \AiryAi(z)&\approx\frac1{\sqrt\pi\cdot(-z)^{1/4}}\cdot
+    \operatorname{Ai}(z)&\approx\frac1{\sqrt\pi\cdot(-z)^{1/4}}\cdot
       \sin\left(\frac23\cdot(-z)^{3/2}+\frac\pi4\right),\\
-    \AiryBi(z)&\approx\frac1{\sqrt\pi\cdot(-z)^{1/4}}\cdot
+    \operatorname{Bi}(z)&\approx\frac1{\sqrt\pi\cdot(-z)^{1/4}}\cdot
       \cos\left(\frac23\cdot(-z)^{3/2}+\frac\pi4\right)
   \end{aligned}
 \]
 
 \textbf{Local Airy patch:}
-At a simple turning point $x_t$, let $s=\DiffOp(V)(x_t)\ne0$ and $V(x_t)=E$
+At a simple turning point $x_t$, let $s=V'(x_t)\ne0$ and $V(x_t)=E$
 \[
   V(x)\approx E+s\cdot(x-x_t),\qquad
-  \alpha\defeq\left(\frac{2m\cdot|s|}{\hbar^2}\right)^{1/3},\qquad
+  \alpha=\left(\frac{2m\cdot|s|}{\hbar^2}\right)^{1/3},\qquad
   z=\operatorname{sgn}(s)\cdot\alpha\cdot(x-x_t)
 \]
 \[
-  \psi_P\approx x\map
-    a\cdot\AiryAi\bigl(\operatorname{sgn}(s)\cdot\alpha\cdot(x-x_t)\bigr)
-    +b\cdot\AiryBi\bigl(\operatorname{sgn}(s)\cdot\alpha\cdot(x-x_t)\bigr)
+  \psi_P(x)\approx
+    a\cdot\operatorname{Ai}\bigl(\operatorname{sgn}(s)\cdot\alpha\cdot(x-x_t)\bigr)
+    +b\cdot\operatorname{Bi}\bigl(\operatorname{sgn}(s)\cdot\alpha\cdot(x-x_t)\bigr)
 \]
 For a decaying forbidden-side solution of amplitude $D$, matching gives
 \[
   a=\frac{2\sqrt\pi\cdot D}{\sqrt{\hbar\cdot\alpha}},\qquad b=0
 \]
 
-\newpage
-\textbf{\xref[Upward-sloping connection]{quantum-mechanics::ch08::thm:upward-connection-formula}:}
+\textbf{Upward-sloping connection:}
 $s>0$: left allowed, right forbidden
 \[
-  \psi\approx x\map\begin{cases}
+  \psi(x)\approx\begin{cases}
     \dfrac{2D}{\sqrt{p(x)}}\cdot\sin\left(
-      \dfrac1\hbar\cdot\left[\DiffOp^{-1}(p)\right]_{x}^{x_t}
+      \dfrac1\hbar\cdot\int_{x}^{x_t}p(x')\,dx'
       +\dfrac\pi4\right),&x<x_t,\\[1em]
     \dfrac{D}{\sqrt{q(x)}}\cdot\exp\left(
-      -\dfrac1\hbar\cdot\left[\DiffOp^{-1}(q)\right]_{x_t}^{x}\right),&x>x_t
+      -\dfrac1\hbar\cdot\int_{x_t}^{x}q(x')\,dx'\right),&x>x_t
   \end{cases}
 \]
 
-\textbf{\xref[Downward-sloping connection]{quantum-mechanics::ch08::thm:downward-connection-formula}:}
+\textbf{Downward-sloping connection:}
 $s<0$: left forbidden, right allowed
 \[
-  \psi\approx x\map\begin{cases}
+  \psi(x)\approx\begin{cases}
     \dfrac{D}{\sqrt{q(x)}}\cdot\exp\left(
-      -\dfrac1\hbar\cdot\left[\DiffOp^{-1}(q)\right]_{x}^{x_t}\right),&x<x_t,\\[1em]
+      -\dfrac1\hbar\cdot\int_{x}^{x_t}q(x')\,dx'\right),&x<x_t,\\[1em]
     \dfrac{2D}{\sqrt{p(x)}}\cdot\sin\left(
-      \dfrac1\hbar\cdot\left[\DiffOp^{-1}(p)\right]_{x_t}^{x}
+      \dfrac1\hbar\cdot\int_{x_t}^{x}p(x')\,dx'
       +\dfrac\pi4\right),&x>x_t
   \end{cases}
 \]

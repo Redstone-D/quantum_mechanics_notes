@@ -223,14 +223,16 @@
 
   The \emph{$k$-th-order perturbative approximation} to the eigenpair $(\phi_n(\lambda),\varepsilon_n(\lambda))$ is
   \[
-    \phi_n^{\porder{k}} \defeq \sum_{0}^{k}\left(i \map \psi_n^{\porder{i}}\right),
+    \phi_n^{\porder{k}} : I\to\mathcal H
+    \defeq \lambda\map\sum_{0}^{k}\left(i \map \lambda^i\cdot\psi_n^{\porder{i}}\right),
     \qquad
-    \varepsilon_n^{\porder{k}} \defeq \sum_{0}^{k}\left(i \map E_n^{\porder{i}}\right)
+    \varepsilon_n^{\porder{k}} : I\to\mathbb R
+    \defeq \lambda\map\sum_{0}^{k}\left(i \map \lambda^i\cdot E_n^{\porder{i}}\right)
   \] 
 \end{dfn}
 
 \begin{rem}[Validity of the Approximation]{perturbative-validity}
-  Since the equation works at $\lambda$ sufficiently close to $0$, the $k$-th-order approximation shall be significant small when $k$ is bigger
+  Under the \xref[expansion hypothesis]{hypo:perturbative-expansion-existence}, for fixed $\lambda\in J$, the truncation errors tend to zero as $k\to\infty$. This need not be monotone and does not establish validity at $\lambda=1$
 \end{rem}
 
 \section{First-Order Perturbation Theory} 
@@ -252,13 +254,13 @@
   Notice $E_n^{\porder{0}}$ is an real number, and according to the normalization axiom, 
   \[\bra{\psi_n^{\porder{0}}} E_n^{\porder{1}} \ket{\psi_n^{\porder{0}}} = E_n^{\porder{1}} \braket{\psi_n^{\porder{0}} \mid \psi_n^{\porder{0}}} = E_n^{\porder{1}} \] 
 
-  According to the TISE, $H \ket{\psi} = E \ket{\psi}$, we subsitute that relationship into $\bra{\psi_n^{\porder{0}}} \hat H_0$ 
-  \[\bra{\psi_n^{\porder{0}}} \hat H_0 \ket{\psi_n^{\porder{1}}} = \bra{\psi_n^{\porder{0}}} \hat E_0 \ket{\psi_n^{\porder{1}}} = E_0 \braket{\psi_n^{\porder{0}} \mid \psi_n^{\porder{1}}} \]
+  Using Hermiticity and the reference eigenvalue equation, we substitute into $\bra{\psi_n^{\porder{0}}}\hat H_0$
+  \[\bra{\psi_n^{\porder{0}}} \hat H_0 \ket{\psi_n^{\porder{1}}} = \bra{\psi_n^{\porder{0}}} E_n^{\porder{0}} \ket{\psi_n^{\porder{1}}} = E_n^{\porder{0}} \braket{\psi_n^{\porder{0}} \mid \psi_n^{\porder{1}}} \]
 
   Subsitute back, we can get 
-  \[E_0 \braket{\psi_n^{\porder{0}} \mid \psi_n^{\porder{1}}} + \bra{\psi_n^{\porder{0}}} \hat H' \ket{\psi_n^{\porder{0}}} = \bra{\psi_n^{\porder{0}}} E_n^{\porder{0}} \ket{\psi_n^{\porder{1}}} + E_n^{\porder{1}} \]
+  \[E_n^{\porder{0}} \braket{\psi_n^{\porder{0}} \mid \psi_n^{\porder{1}}} + \bra{\psi_n^{\porder{0}}} \hat H' \ket{\psi_n^{\porder{0}}} = \bra{\psi_n^{\porder{0}}} E_n^{\porder{0}} \ket{\psi_n^{\porder{1}}} + E_n^{\porder{1}} \]
 
-  Notice that $E_0 \braket{\psi_n^{\porder{0}} \mid \psi_n^{\porder{1}}} = \bra{\psi_n^{\porder{0}}} E_n^{\porder{0}} \ket{\psi_n^{\porder{1}}} $, cancel out the term, 
+  Notice that $E_n^{\porder{0}} \braket{\psi_n^{\porder{0}} \mid \psi_n^{\porder{1}}} = \bra{\psi_n^{\porder{0}}} E_n^{\porder{0}} \ket{\psi_n^{\porder{1}}} $, cancel out the term,
   \[E_n^{\porder{1}}  = \bra{\psi_n^{\porder{0}}} \hat H' \ket{\psi_n^{\porder{0}}} \] 
 \end{proof}
 
